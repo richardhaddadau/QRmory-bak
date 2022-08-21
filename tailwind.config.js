@@ -18,7 +18,10 @@ module.exports = {
                 "hot-pink": "#ef476f",
             },
             height: {
-                "main-card": "570px",
+                "main-card": "576px",
+            },
+            maxHeight: {
+                "selector-window": "504px",
             },
             maxWidth: {
                 "main-card": "1200px",

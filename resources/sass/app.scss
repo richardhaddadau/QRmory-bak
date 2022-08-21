@@ -3,3 +3,19 @@ $primary-colour: #ef476f;
 .qr-selector:hover * {
     color: $primary-colour !important;
 }
+
+.qr-selector.active {
+    background-color: $primary-colour;
+
+    transition: all 0.3s ease;
+}
+
+.qr-selector.active * {
+    color: white !important;
+
+    transition: all 0.3s ease;
+}
+
+.qr-selector.active #selector-descriptor {
+    display: none;
+}
