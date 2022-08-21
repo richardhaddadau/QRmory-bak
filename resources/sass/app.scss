@@ -19,3 +19,9 @@ $primary-colour: #ef476f;
 .qr-selector.active #selector-descriptor {
     display: none;
 }
+
+#selector-content {
+    top: 0;
+
+    transition: all 0.3s ease;
+}
