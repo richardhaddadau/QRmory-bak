@@ -3,6 +3,7 @@ import { Link, Head } from "@inertiajs/inertia-react";
 import { QRCodeSVG } from "qrcode.react";
 
 import { FaChevronDown, FaChevronUp } from "react-icons/fa";
+import { WebsiteQR } from "@/Components/Controls/WebsiteQR";
 
 let selectorTop = 0;
 let selectorBottom = 0;
@@ -56,6 +57,30 @@ const Welcome = (props) => {
         downloadLink.remove();
     };
 
+    const addStyle = (el, styleClass) => {
+        if (!el.classList.contains(styleClass)) el.classList.add(styleClass);
+    };
+
+    const removeStyle = (el, styleClass) => {
+        if (el.classList.contains(styleClass)) el.classList.remove(styleClass);
+    };
+
+    const checkPage = () => {
+        const scrollUp = document.querySelector("#selector-block-head");
+        const scrollDown = document.querySelector("#selector-block-foot");
+
+        if (selectorPage === 1) {
+            addStyle(scrollUp, "disabled");
+            removeStyle(scrollDown, "disabled");
+        } else if (selectorPage === totalSelectorPages) {
+            addStyle(scrollDown, "disabled");
+            removeStyle(scrollUp, "disabled");
+        } else {
+            removeStyle(scrollDown, "disabled");
+            removeStyle(scrollUp, "disabled");
+        }
+    };
+
     useEffect(() => {
         const qrSelectors = document.querySelectorAll(".qr-selector");
         const qrWindow = document.querySelector("#selector-window");
@@ -66,6 +91,9 @@ const Welcome = (props) => {
         pageHeight = qrWindow.offsetHeight;
         totalSelectorPages = Math.ceil(qrContent.offsetHeight / pageHeight);
 
+        qrSelectors[0].classList.add("active");
+        checkPage();
+
         scrollDown.addEventListener("click", () => {
             if (selectorPage < totalSelectorPages) {
                 selectorPage++;
@@ -74,6 +102,8 @@ const Welcome = (props) => {
                 selectorTop = newTop;
                 qrContent.style.top = newTop + "px";
             }
+
+            checkPage();
         });
 
         scrollUp.addEventListener("click", () => {
@@ -84,6 +114,8 @@ const Welcome = (props) => {
                 selectorTop = newTop;
                 qrContent.style.top = newTop + "px";
             }
+
+            checkPage();
         });
 
         setTimeout(() => {
@@ -139,7 +171,7 @@ const Welcome = (props) => {
                                 id="selector-block"
                             >
                                 <div
-                                    className="flex flex-row justify-center items-center h-9"
+                                    className="flex flex-row justify-center items-center h-9 text-hot-pink-500 cursor-pointer"
                                     id="selector-block-head"
                                 >
                                     <FaChevronUp />
@@ -156,7 +188,7 @@ const Welcome = (props) => {
                                             (key, index) => {
                                                 return (
                                                     <div
-                                                        className="flex flex-col justify-center hover:transition-all hover:text-hot-pink px-2.5 h-16 qr-selector hover:cursor-pointer"
+                                                        className="flex flex-col justify-center hover:transition-all hover:text-hot-pink-500 px-2.5 h-16 qr-selector hover:cursor-pointer"
                                                         key={index}
                                                     >
                                                         <div
@@ -171,6 +203,7 @@ const Welcome = (props) => {
                                                         >
                                                             {qrTypes[key][1]}
                                                         </div>
+                                                        <div className="absolute block h-2.5 w-2.5 rounded-xl bg-hot-pink-500 left-0 -translate-x-2/4"></div>
                                                     </div>
                                                 );
                                             }
@@ -178,14 +211,14 @@ const Welcome = (props) => {
                                     </div>
                                 </div>
                                 <div
-                                    className="flex flex-row justify-center items-center h-9"
+                                    className="flex flex-row justify-center items-center h-9 text-hot-pink-500 cursor-pointer"
                                     id="selector-block-foot"
                                 >
                                     <FaChevronDown />
                                 </div>
                             </div>
 
-                            <div className="p-6 bg-hot-pink col-span-7 shadow-lg shadow-stone-800">
+                            <div className="p-6 bg-hot-pink-500 col-span-7 shadow-lg shadow-stone-800">
                                 <div className="ml-12">
                                     <div className="mt-2 text-gray-600 dark:text-gray-400 text-sm">
                                         <div className="">
