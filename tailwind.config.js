@@ -25,6 +25,9 @@ module.exports = {
                 "hot-pink-800": "#7F0C4B",
                 "hot-pink-900": "#690747",
             },
+            spacing: {
+                4.5: "18px",
+            },
             height: {
                 "main-card": "584px",
             },

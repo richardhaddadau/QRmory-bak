@@ -3,18 +3,40 @@ import { Link, Head } from "@inertiajs/inertia-react";
 import { QRCodeSVG } from "qrcode.react";
 
 import { FaChevronDown, FaChevronUp } from "react-icons/fa";
-import { WebsiteQR } from "@/Components/Controls/WebsiteQR";
+import WebsiteQR from "@/Components/Controls/WebsiteQR";
+import EmailQR from "@/Components/Controls/EmailQR";
+import FacebookQR from "@/Components/Controls/FacebookQR";
+import YoutubeQR from "@/Components/Controls/YoutubeQR";
+import PhoneQR from "@/Components/Controls/PhoneQR";
+import SmsQR from "@/Components/Controls/SmsQR";
+import TextQR from "@/Components/Controls/TextQR";
+import TwitterQR from "@/Components/Controls/TwitterQR";
 
 let selectorTop = 0;
-let selectorBottom = 0;
 let selectorPage = 1;
 let totalSelectorPages = 0;
 let pageHeight = 0;
 
 const Welcome = (props) => {
+    // States
+    const [selectorPosition, setSelectorPosition] = useState(0);
+    const [qrValue, setQrValue] = useState("Hi =)");
+    const [qrTitle, setQrTitle] = useState("Awesome QR");
+    const [textValue, setTextValue] = useState("test");
+    const [qrControl, setQrControl] = useState(null);
+    const [qrChanged, setQrChanged] = useState(true);
+
     const qrTypes = {
-        website: ["Website", "Link to a page or site"],
-        email: ["Email", "Preset an email"],
+        website: [
+            "Website",
+            "Link to a page or site",
+            <WebsiteQR setText={setTextValue} setChanged={setQrChanged} />,
+        ],
+        email: [
+            "Email",
+            "Preset an email",
+            <EmailQR setText={setTextValue} setChanged={setQrChanged} />,
+        ],
         socialMedia: ["Social Media", "Share your profiles"],
         eBusinessCard: ["E-Business Card", "The modern business card"],
         poll: ["Poll", "Run a quick poll"],
@@ -23,23 +45,41 @@ const Welcome = (props) => {
         document: ["Document", "Share a PDF document"],
         audio: ["Audio", "Share an sound file"],
         video: ["Video", "Share a quick video"],
-        phone: ["Phone", "Set up an easy call"],
-        sms: ["SMS", "Preset an SMS"],
-        text: ["Text", "Display a text message"],
-        wifi: ["WiFi", "Share WiFi details"],
-        location: ["Location", "Share a map address"],
-        facebook: ["Facebook", "Facebook page/group"],
-        twitter: ["Twitter", "Twitter account"],
-        youTube: ["YouTube", "YouTube video"],
+        phone: [
+            "Phone",
+            "Set up an easy call",
+            <PhoneQR setText={setTextValue} setChanged={setQrChanged} />,
+        ],
+        sms: [
+            "SMS",
+            "Preset an SMS",
+            <SmsQR setText={setTextValue} setChanged={setQrChanged} />,
+        ],
+        text: [
+            "Text",
+            "Display a text message",
+            <TextQR setText={setTextValue} setChanged={setQrChanged} />,
+        ],
+        // wifi: ["WiFi", "Share WiFi details"],
+        // location: ["Location", "Share a map address"],
+        facebook: [
+            "Facebook",
+            "Facebook page/group",
+            <FacebookQR setText={setTextValue} setChanged={setQrChanged} />,
+        ],
+        twitter: [
+            "Twitter",
+            "Twitter account",
+            <TwitterQR setText={setTextValue} setChanged={setQrChanged} />,
+        ],
+        youTube: [
+            "YouTube",
+            "YouTube video",
+            <YoutubeQR setText={setTextValue} setChanged={setQrChanged} />,
+        ],
         bitcoin: ["Bitcoin", "Quick Bitcoin payments"],
         ethereum: ["Ethereum", "Quick Ethereum payments"],
     };
-
-    // States
-    const [selectorPosition, setSelectorPosition] = useState(0);
-    const [qrValue, setQrValue] = useState("Hi =)");
-    const [qrTitle, setQrTitle] = useState("Awesome QR");
-    const [textValue, setTextValue] = useState("test");
 
     const handleDownload = () => {
         const svgData = document.querySelector("#final-qr").outerHTML;
@@ -92,7 +132,17 @@ const Welcome = (props) => {
         totalSelectorPages = Math.ceil(qrContent.offsetHeight / pageHeight);
 
         qrSelectors[0].classList.add("active");
+        setQrControl(qrTypes["website"][2]);
         checkPage();
+
+        window.addEventListener("resize", () => {
+            selectorTop = 0;
+            selectorPage = 1;
+
+            pageHeight = qrWindow.offsetHeight;
+            totalSelectorPages = Math.ceil(qrContent.offsetHeight / pageHeight);
+            checkPage();
+        });
 
         scrollDown.addEventListener("click", () => {
             if (selectorPage < totalSelectorPages) {
@@ -126,6 +176,10 @@ const Welcome = (props) => {
                     }
 
                     selector.classList.add("active");
+
+                    const selectorIndex =
+                        selector.getAttribute("data-selector");
+                    setQrControl(qrTypes[selectorIndex][2]);
                 });
             }
         }, 0);
@@ -164,14 +218,14 @@ const Welcome = (props) => {
                 </div>
 
                 <div className="mx-auto w-full max-w-7xl">
-                    <div className="mt-8 bg-stone-50 overflow-hidden shadow sm:rounded-3xl h-main-card">
+                    <div className="mt-8 bg-stone-50 overflow-hidden shadow sm:rounded-3xl md:h-main-card">
                         <div className="grid grid-cols-1 md:grid-cols-12 h-full">
                             <div
                                 className="relative col-span-2 flex flex-col h-full"
                                 id="selector-block"
                             >
                                 <div
-                                    className="flex flex-row justify-center items-center h-9 text-hot-pink-500 cursor-pointer"
+                                    className="hidden md:flex flex-row justify-center items-center h-9 text-hot-pink-500 cursor-pointer"
                                     id="selector-block-head"
                                 >
                                     <FaChevronUp />
@@ -181,15 +235,16 @@ const Welcome = (props) => {
                                     id="selector-window"
                                 >
                                     <div
-                                        className="absolute w-full"
+                                        className="md:absolute w-full flex flex-row flex-wrap md:flex-col md:flex-nowrap"
                                         id="selector-content"
                                     >
                                         {Object.keys(qrTypes).map(
                                             (key, index) => {
                                                 return (
                                                     <div
-                                                        className="flex flex-col justify-center hover:transition-all hover:text-hot-pink-500 px-2.5 h-16 qr-selector hover:cursor-pointer"
-                                                        key={index}
+                                                        className="relative flex flex-col justify-center transition-all duration-300 hover:text-hot-pink-500 px-2.5 h-16 mx-1 md:mx-0 qr-selector hover:cursor-pointer"
+                                                        key={`${key}-${index}`}
+                                                        data-selector={key}
                                                     >
                                                         <div
                                                             className="text-base leading-4 text-stone-900 font-bold"
@@ -198,12 +253,12 @@ const Welcome = (props) => {
                                                             {qrTypes[key][0]}
                                                         </div>
                                                         <div
-                                                            className="text-sm text-stone-400"
+                                                            className="hidden md:block text-sm text-stone-400"
                                                             id="selector-descriptor"
                                                         >
                                                             {qrTypes[key][1]}
                                                         </div>
-                                                        <div className="absolute block h-2.5 w-2.5 rounded-xl bg-hot-pink-500 left-0 -translate-x-2/4"></div>
+                                                        <div className="absolute hidden md:block h-1.5 w-1.5 rounded-xl bg-hot-pink-500 top-4.5 left-0"></div>
                                                     </div>
                                                 );
                                             }
@@ -211,7 +266,7 @@ const Welcome = (props) => {
                                     </div>
                                 </div>
                                 <div
-                                    className="flex flex-row justify-center items-center h-9 text-hot-pink-500 cursor-pointer"
+                                    className="hidden md:flex flex-row justify-center items-center h-9 text-hot-pink-500 cursor-pointer"
                                     id="selector-block-foot"
                                 >
                                     <FaChevronDown />
@@ -219,35 +274,37 @@ const Welcome = (props) => {
                             </div>
 
                             <div className="p-6 bg-hot-pink-500 col-span-7 shadow-lg shadow-stone-800">
-                                <div className="ml-12">
-                                    <div className="mt-2 text-gray-600 dark:text-gray-400 text-sm">
-                                        <div className="">
-                                            <input
-                                                type="text"
-                                                placeholder="Awesome QR"
-                                                onChange={(el) => {
-                                                    setQrTitle(el.target.value);
-                                                }}
-                                            />
+                                <div className="mt-2 text-gray-600 dark:text-gray-400 text-sm">
+                                    {/* QR Title */}
+                                    <div className="flex flex-col justify-center">
+                                        <div className="w-full max-w-md mt-4 mb-8 mx-auto flex justify-center">
+                                            <div className="relative w-full">
+                                                <label className="text-hot-pink-200">
+                                                    Enter Title:
+                                                    <input
+                                                        type="text"
+                                                        className="w-full text-white bg-transparent border-hot-pink-200 focus:bg-hot-pink-800 transition-all duration-300"
+                                                        onChange={(el) => {
+                                                            setQrTitle(
+                                                                el.target.value
+                                                            );
+                                                        }}
+                                                    />
+                                                </label>
+                                            </div>
                                         </div>
 
-                                        <div className="">
-                                            <input
-                                                type="text"
-                                                onChange={(el) => {
-                                                    setTextValue(
-                                                        el.target.value
-                                                    );
-                                                }}
-                                            />
-                                            <button
-                                                onClick={() =>
-                                                    setQrValue(textValue)
-                                                }
-                                            >
-                                                Generate QR
-                                            </button>
-                                        </div>
+                                        {qrControl}
+
+                                        <button
+                                            onClick={() => {
+                                                setQrValue(textValue);
+                                                setQrChanged(false);
+                                            }}
+                                            className="mx-auto mt-8 py-2.5 px-8 bg-stone-50 text-hot-pink-500 rounded-3xl uppercase font-bold shadow-md shadow-hot-pink-700 hover:bg-hot-pink-300 hover:text-white hover:shadow-lg hover:shadow-hot-pink-800 transition-all duration-300"
+                                        >
+                                            Generate QR
+                                        </button>
                                     </div>
                                 </div>
                             </div>
@@ -256,7 +313,12 @@ const Welcome = (props) => {
                                 <div className="mt-2 text-gray-600 dark:text-gray-400 text-sm">
                                     <QRCodeSVG value={qrValue} id="final-qr" />
                                 </div>
-                                <button onClick={handleDownload}>
+                                <button
+                                    className="mx-auto mt-8 py-2.5 px-8 text-stone-50 bg-hot-pink-500 rounded-3xl uppercase font-bold shadow-md shadow-hot-pink-700 hover:bg-hot-pink-400 hover:text-stone-50 hover:shadow-lg hover:shadow-hot-pink-200 transition-all duration-300"
+                                    id="download-button"
+                                    onClick={handleDownload}
+                                    disabled={qrChanged}
+                                >
                                     Download
                                 </button>
                             </div>
