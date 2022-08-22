@@ -11,6 +11,8 @@ import PhoneQR from "@/Components/Controls/PhoneQR";
 import SmsQR from "@/Components/Controls/SmsQR";
 import TextQR from "@/Components/Controls/TextQR";
 import TwitterQR from "@/Components/Controls/TwitterQR";
+import SocialMediaQR from "@/Components/Controls/SocialMediaQR";
+import NavLogo from "@/Components/NavLogo";
 
 let selectorTop = 0;
 let selectorPage = 1;
@@ -37,7 +39,11 @@ const Welcome = (props) => {
             "Preset an email",
             <EmailQR setText={setTextValue} setChanged={setQrChanged} />,
         ],
-        socialMedia: ["Social Media", "Share your profiles"],
+        // socialMedia: [
+        //     "Social Media",
+        //     "Share your profiles",
+        //     <SocialMediaQR setText={setTextValue} setChanged={setQrChanged} />,
+        // ],
         eBusinessCard: ["E-Business Card", "The modern business card"],
         poll: ["Poll", "Run a quick poll"],
         reviews: ["Reviews", "Collect customer reviews"],
@@ -190,35 +196,72 @@ const Welcome = (props) => {
             <Head title="Welcome" />
 
             <div className="relative flex items-top justify-center min-h-screen bg-stone-900 sm:items-center sm:pt-0">
-                <div className="fixed top-0 right-0 px-6 py-4 sm:block">
-                    {props.auth.user ? (
-                        <Link
-                            href={route("dashboard")}
-                            className="text-sm text-gray-500 underline"
-                        >
-                            Dashboard
-                        </Link>
-                    ) : (
-                        <>
-                            <Link
-                                href={route("login")}
-                                className="text-sm text-gray-500 underline"
-                            >
-                                Log in
-                            </Link>
+                {/*<div className="fixed top-0 right-0 px-6 py-4 sm:block">*/}
+                {/*    {props.auth.user ? (*/}
+                {/*        <Link*/}
+                {/*            href={route("dashboard")}*/}
+                {/*            className="text-sm text-gray-500 underline"*/}
+                {/*        >*/}
+                {/*            Dashboard*/}
+                {/*        </Link>*/}
+                {/*    ) : (*/}
+                {/*        <>*/}
+                {/*            <Link*/}
+                {/*                href={route("login")}*/}
+                {/*                className="text-sm text-gray-500 underline"*/}
+                {/*            >*/}
+                {/*                Log in*/}
+                {/*            </Link>*/}
 
-                            <Link
-                                href={route("register")}
-                                className="ml-4 text-sm text-gray-500 underline"
-                            >
-                                Register
-                            </Link>
-                        </>
-                    )}
-                </div>
+                {/*            <Link*/}
+                {/*                href={route("register")}*/}
+                {/*                className="ml-4 text-sm text-gray-500 underline"*/}
+                {/*            >*/}
+                {/*                Register*/}
+                {/*            </Link>*/}
+                {/*        </>*/}
+                {/*    )}*/}
+                {/*</div>*/}
 
                 <div className="mx-auto w-full max-w-7xl">
-                    <div className="mt-8 bg-stone-50 overflow-hidden shadow sm:rounded-3xl md:h-main-card">
+                    <div className="flex flex-row justify-center items-end space-x-12">
+                        <div className="text-xs text-stone-500 uppercase hover:text-hot-pink-300">
+                            About
+                        </div>
+                        <div className="text-xs text-stone-500 uppercase hover:text-hot-pink-300">
+                            Features
+                        </div>
+                        <div className="text-xs text-stone-500 uppercase hover:text-hot-pink-300">
+                            Pricing
+                        </div>
+                        <div className="w-28">
+                            <a href="/">
+                                <NavLogo color={"#fff"} />
+                            </a>
+                        </div>
+                        <div className="text-xs text-stone-500 uppercase hover:text-hot-pink-300">
+                            Blog
+                        </div>
+                        <div className="text-xs text-stone-500 uppercase hover:text-hot-pink-300">
+                            Support
+                        </div>
+                        <div className="text-xs text-stone-500 uppercase">
+                            <a
+                                className="hover:text-hot-pink-300"
+                                href={route("login")}
+                            >
+                                Login
+                            </a>{" "}
+                            /{" "}
+                            <a
+                                className="hover:text-hot-pink-300"
+                                href={route("register")}
+                            >
+                                Register
+                            </a>
+                        </div>
+                    </div>
+                    <div className="mt-4 bg-stone-50 overflow-hidden shadow sm:rounded-3xl md:h-main-card">
                         <div className="grid grid-cols-1 md:grid-cols-12 h-full">
                             <div
                                 className="relative col-span-2 flex flex-col h-full"
@@ -280,7 +323,7 @@ const Welcome = (props) => {
                                         <div className="w-full max-w-md mt-4 mb-8 mx-auto flex justify-center">
                                             <div className="relative w-full">
                                                 <label className="text-hot-pink-200">
-                                                    Enter Title:
+                                                    Enter QR Name (optional):
                                                     <input
                                                         type="text"
                                                         className="w-full text-white bg-transparent border-hot-pink-200 focus:bg-hot-pink-800 transition-all duration-300"
@@ -298,6 +341,7 @@ const Welcome = (props) => {
 
                                         <button
                                             onClick={() => {
+                                                console.log(textValue.length);
                                                 setQrValue(textValue);
                                                 setQrChanged(false);
                                             }}
@@ -311,7 +355,13 @@ const Welcome = (props) => {
 
                             <div className="flex flex-col items-center p-6 col-span-3">
                                 <div className="mt-2 text-gray-600 dark:text-gray-400 text-sm">
-                                    <QRCodeSVG value={qrValue} id="final-qr" />
+                                    <QRCodeSVG
+                                        value={qrValue}
+                                        id="final-qr"
+                                        fgColor={
+                                            qrChanged ? "#d6d3d1" : "#1c1917"
+                                        }
+                                    />
                                 </div>
                                 <button
                                     className="mx-auto mt-8 py-2.5 px-8 text-stone-50 bg-hot-pink-500 rounded-3xl uppercase font-bold shadow-md shadow-hot-pink-700 hover:bg-hot-pink-400 hover:text-stone-50 hover:shadow-lg hover:shadow-hot-pink-200 transition-all duration-300"
