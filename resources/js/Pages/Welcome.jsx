@@ -32,8 +32,8 @@ let pageHeight = 0;
 const Welcome = (props) => {
     // States
     const [selectorPosition, setSelectorPosition] = useState(0);
-    const [qrValue, setQrValue] = useState("Hi =)");
-    const [qrTitle, setQrTitle] = useState("Awesome QR");
+    const [qrValue, setQrValue] = useState("Welcome to QRmory!");
+    const [qrTitle, setQrTitle] = useState("new-qrmory-code");
     const [textValue, setTextValue] = useState("test");
     const [qrControl, setQrControl] = useState(null);
     const [qrChanged, setQrChanged] = useState(true);
