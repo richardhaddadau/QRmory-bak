@@ -2,7 +2,17 @@ import React, { useEffect, useState } from "react";
 import { Link, Head } from "@inertiajs/inertia-react";
 import { QRCodeSVG } from "qrcode.react";
 
-import { FaChevronDown, FaChevronUp } from "react-icons/fa";
+import {
+    FaChevronDown,
+    FaChevronUp,
+    FaEnvelopeOpenText,
+    FaFolderOpen,
+    FaNewspaper,
+    FaPlusCircle,
+    FaQuestionCircle,
+    FaShoppingBasket,
+    FaStar,
+} from "react-icons/fa";
 import WebsiteQR from "@/Components/Controls/WebsiteQR";
 import EmailQR from "@/Components/Controls/EmailQR";
 import FacebookQR from "@/Components/Controls/FacebookQR";
@@ -39,12 +49,12 @@ const Welcome = (props) => {
             "Preset an email",
             <EmailQR setText={setTextValue} setChanged={setQrChanged} />,
         ],
-        // socialMedia: [
-        //     "Social Media",
-        //     "Share your profiles",
-        //     <SocialMediaQR setText={setTextValue} setChanged={setQrChanged} />,
-        // ],
-        eBusinessCard: ["E-Business Card", "The modern business card"],
+        socialMedia: [
+            "Social Media",
+            "Share your profiles",
+            <SocialMediaQR setText={setTextValue} setChanged={setQrChanged} />,
+        ],
+        eBusinessCard: ["E-Biz Card", "The modern business card"],
         poll: ["Poll", "Run a quick poll"],
         reviews: ["Reviews", "Collect customer reviews"],
         event: ["Event", "Promote an event"],
@@ -87,6 +97,16 @@ const Welcome = (props) => {
         ethereum: ["Ethereum", "Quick Ethereum payments"],
     };
 
+    const navItems = {
+        createQR: ["Create QR Code", <FaPlusCircle />],
+        myCodes: ["My Codes", <FaFolderOpen />],
+        about: ["About", <FaQuestionCircle />],
+        features: ["Features", <FaStar />],
+        blog: ["Blog", <FaNewspaper />],
+        pricing: ["Pricing", <FaShoppingBasket />],
+        contact: ["Contact", <FaEnvelopeOpenText />],
+    };
+
     const handleDownload = () => {
         const svgData = document.querySelector("#final-qr").outerHTML;
         const svgBlob = new Blob([svgData], {
@@ -111,82 +131,31 @@ const Welcome = (props) => {
         if (el.classList.contains(styleClass)) el.classList.remove(styleClass);
     };
 
-    const checkPage = () => {
-        const scrollUp = document.querySelector("#selector-block-head");
-        const scrollDown = document.querySelector("#selector-block-foot");
-
-        if (selectorPage === 1) {
-            addStyle(scrollUp, "disabled");
-            removeStyle(scrollDown, "disabled");
-        } else if (selectorPage === totalSelectorPages) {
-            addStyle(scrollDown, "disabled");
-            removeStyle(scrollUp, "disabled");
-        } else {
-            removeStyle(scrollDown, "disabled");
-            removeStyle(scrollUp, "disabled");
-        }
-    };
-
     useEffect(() => {
+        const navItems = document.querySelectorAll(".nav-item");
         const qrSelectors = document.querySelectorAll(".qr-selector");
         const qrWindow = document.querySelector("#selector-window");
         const qrContent = document.querySelector("#selector-content");
-        const scrollUp = document.querySelector("#selector-block-head");
-        const scrollDown = document.querySelector("#selector-block-foot");
-
-        pageHeight = qrWindow.offsetHeight;
-        totalSelectorPages = Math.ceil(qrContent.offsetHeight / pageHeight);
-
-        qrSelectors[0].classList.add("active");
-        setQrControl(qrTypes["website"][2]);
-        checkPage();
-
-        window.addEventListener("resize", () => {
-            selectorTop = 0;
-            selectorPage = 1;
-
-            pageHeight = qrWindow.offsetHeight;
-            totalSelectorPages = Math.ceil(qrContent.offsetHeight / pageHeight);
-            checkPage();
-        });
-
-        scrollDown.addEventListener("click", () => {
-            if (selectorPage < totalSelectorPages) {
-                selectorPage++;
-
-                const newTop = selectorTop - pageHeight;
-                selectorTop = newTop;
-                qrContent.style.top = newTop + "px";
-            }
-
-            checkPage();
-        });
-
-        scrollUp.addEventListener("click", () => {
-            if (selectorPage > 1) {
-                selectorPage--;
-
-                const newTop = selectorTop + pageHeight;
-                selectorTop = newTop;
-                qrContent.style.top = newTop + "px";
-            }
-
-            checkPage();
-        });
 
         setTimeout(() => {
-            for (const selector of qrSelectors) {
-                selector.addEventListener("click", () => {
-                    for (const item of qrSelectors) {
-                        item.classList.remove("active");
-                    }
+            navItems[0].classList.add("active");
+            qrSelectors[0].classList.add("active");
+            setQrControl(qrTypes["website"][2]);
 
-                    selector.classList.add("active");
+            if (qrSelectors.length > 0) {
+                for (const selector of qrSelectors) {
+                    selector.addEventListener("click", () => {
+                        for (const item of qrSelectors) {
+                            item.classList.remove("active");
+                        }
 
-                    const selectorIndex =
-                        selector.getAttribute("data-selector");
-                    setQrControl(qrTypes[selectorIndex][2]);
-                });
+                        selector.classList.add("active");
+
+                        const selectorIndex =
+                            selector.getAttribute("data-selector");
+                        setQrControl(qrTypes[selectorIndex][2]);
+                    });
+                }
             }
         }, 0);
     }, []);
@@ -194,186 +163,113 @@ const Welcome = (props) => {
     return (
         <>
             <Head title="Welcome" />
+            {/*<div className="fixed top-0 right-0 px-6 py-4 sm:block">*/}
+            {/*    {props.auth.user ? (*/}
+            {/*        <Link*/}
+            {/*            href={route("dashboard")}*/}
+            {/*            className="text-sm text-gray-500 underline"*/}
+            {/*        >*/}
+            {/*            Dashboard*/}
+            {/*        </Link>*/}
+            {/*    ) : (*/}
+            {/*        <>*/}
+            {/*            <Link*/}
+            {/*                href={route("login")}*/}
+            {/*                className="text-sm text-gray-500 underline"*/}
+            {/*            >*/}
+            {/*                Log in*/}
+            {/*            </Link>*/}
 
-            <div className="relative flex items-top justify-center min-h-screen bg-stone-900 sm:items-center sm:pt-0">
-                {/*<div className="fixed top-0 right-0 px-6 py-4 sm:block">*/}
-                {/*    {props.auth.user ? (*/}
-                {/*        <Link*/}
-                {/*            href={route("dashboard")}*/}
-                {/*            className="text-sm text-gray-500 underline"*/}
-                {/*        >*/}
-                {/*            Dashboard*/}
-                {/*        </Link>*/}
-                {/*    ) : (*/}
-                {/*        <>*/}
-                {/*            <Link*/}
-                {/*                href={route("login")}*/}
-                {/*                className="text-sm text-gray-500 underline"*/}
-                {/*            >*/}
-                {/*                Log in*/}
-                {/*            </Link>*/}
-
-                {/*            <Link*/}
-                {/*                href={route("register")}*/}
-                {/*                className="ml-4 text-sm text-gray-500 underline"*/}
-                {/*            >*/}
-                {/*                Register*/}
-                {/*            </Link>*/}
-                {/*        </>*/}
-                {/*    )}*/}
-                {/*</div>*/}
-
-                <div className="mx-auto w-full max-w-7xl">
-                    <div className="flex flex-row justify-center items-end space-x-12">
-                        <div className="text-xs text-stone-500 uppercase hover:text-hot-pink-300">
-                            About
-                        </div>
-                        <div className="text-xs text-stone-500 uppercase hover:text-hot-pink-300">
-                            Features
-                        </div>
-                        <div className="text-xs text-stone-500 uppercase hover:text-hot-pink-300">
-                            Pricing
-                        </div>
-                        <div className="w-28">
-                            <a href="/">
-                                <NavLogo color={"#fff"} />
-                            </a>
-                        </div>
-                        <div className="text-xs text-stone-500 uppercase hover:text-hot-pink-300">
-                            Blog
-                        </div>
-                        <div className="text-xs text-stone-500 uppercase hover:text-hot-pink-300">
-                            Support
-                        </div>
-                        <div className="text-xs text-stone-500 uppercase">
-                            <a
-                                className="hover:text-hot-pink-300"
-                                href={route("login")}
-                            >
-                                Login
-                            </a>{" "}
-                            /{" "}
-                            <a
-                                className="hover:text-hot-pink-300"
-                                href={route("register")}
-                            >
-                                Register
-                            </a>
-                        </div>
+            {/*            <Link*/}
+            {/*                href={route("register")}*/}
+            {/*                className="ml-4 text-sm text-gray-500 underline"*/}
+            {/*            >*/}
+            {/*                Register*/}
+            {/*            </Link>*/}
+            {/*        </>*/}
+            {/*    )}*/}
+            {/*</div>*/}
+            <div className="relative grid grid-cols-12 w-full h-screen">
+                <div className="relative flex flex-col col-span-2 h-full z-10">
+                    <div className="mt-6 mb-10 mx-auto w-full aspect-square max-h-32">
+                        <NavLogo color="#DB2857" />
                     </div>
-                    <div className="mt-4 bg-stone-50 overflow-hidden shadow sm:rounded-3xl md:h-main-card">
-                        <div className="grid grid-cols-1 md:grid-cols-12 h-full">
+                    <div className="grow">
+                        {Object.keys(navItems).map((key, index) => (
                             <div
-                                className="relative col-span-2 flex flex-col h-full"
-                                id="selector-block"
+                                className="p-3 flex flex-row items-center gap-2 hover:bg-hot-pink-100 transition-all duration-300 cursor-pointer nav-item"
+                                key={key - index}
                             >
-                                <div
-                                    className="hidden md:flex flex-row justify-center items-center h-9 text-hot-pink-500 cursor-pointer"
-                                    id="selector-block-head"
-                                >
-                                    <FaChevronUp />
-                                </div>
-                                <div
-                                    className="relative block grow overflow-hidden max-h-selector-window"
-                                    id="selector-window"
-                                >
-                                    <div
-                                        className="md:absolute w-full flex flex-row flex-wrap md:flex-col md:flex-nowrap"
-                                        id="selector-content"
-                                    >
-                                        {Object.keys(qrTypes).map(
-                                            (key, index) => {
-                                                return (
-                                                    <div
-                                                        className="relative flex flex-col justify-center transition-all duration-300 hover:text-hot-pink-500 px-2.5 h-16 mx-1 md:mx-0 qr-selector hover:cursor-pointer"
-                                                        key={`${key}-${index}`}
-                                                        data-selector={key}
-                                                    >
-                                                        <div
-                                                            className="text-base leading-4 text-stone-900 font-bold"
-                                                            id="selector-title"
-                                                        >
-                                                            {qrTypes[key][0]}
-                                                        </div>
-                                                        <div
-                                                            className="hidden md:block text-sm text-stone-400"
-                                                            id="selector-descriptor"
-                                                        >
-                                                            {qrTypes[key][1]}
-                                                        </div>
-                                                        <div className="absolute hidden md:block h-1.5 w-1.5 rounded-xl bg-hot-pink-500 top-4.5 left-0"></div>
-                                                    </div>
-                                                );
-                                            }
-                                        )}
-                                    </div>
-                                </div>
-                                <div
-                                    className="hidden md:flex flex-row justify-center items-center h-9 text-hot-pink-500 cursor-pointer"
-                                    id="selector-block-foot"
-                                >
-                                    <FaChevronDown />
-                                </div>
+                                {navItems[key][1] || null} {navItems[key][0]}
                             </div>
-
-                            <div className="p-3 bg-hot-pink-500 col-span-7 shadow-lg shadow-stone-800">
-                                <div className="mt-2 text-gray-600 dark:text-gray-400 text-sm">
-                                    {/* QR Title */}
-                                    <div className="flex flex-col justify-center">
-                                        <div className="w-full max-w-md mt-4 mb-8 mx-auto flex justify-center">
-                                            <div className="relative w-full">
-                                                <label className="text-hot-pink-200">
-                                                    Enter QR Name (optional):
-                                                    <input
-                                                        type="text"
-                                                        className="w-full text-white bg-transparent border-hot-pink-200 focus:bg-hot-pink-800 transition-all duration-300"
-                                                        onChange={(el) => {
-                                                            setQrTitle(
-                                                                el.target.value
-                                                            );
-                                                        }}
-                                                    />
-                                                </label>
-                                            </div>
-                                        </div>
-
-                                        {qrControl}
-
-                                        <button
-                                            onClick={() => {
-                                                console.log(textValue.length);
-                                                setQrValue(textValue);
-                                                setQrChanged(false);
-                                            }}
-                                            className="mx-auto mt-8 py-2.5 px-8 bg-stone-50 text-hot-pink-500 rounded-3xl uppercase font-bold shadow-md shadow-hot-pink-700 hover:bg-hot-pink-300 hover:text-white hover:shadow-lg hover:shadow-hot-pink-800 transition-all duration-300"
-                                        >
-                                            Generate QR
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div className="flex flex-col items-center p-6 col-span-3">
-                                <div className="mt-2 text-gray-600 dark:text-gray-400 text-sm">
-                                    <QRCodeSVG
-                                        value={qrValue}
-                                        id="final-qr"
-                                        fgColor={
-                                            qrChanged ? "#d6d3d1" : "#1c1917"
-                                        }
-                                    />
-                                </div>
-                                <button
-                                    className="mx-auto mt-8 py-2.5 px-8 text-stone-50 bg-hot-pink-500 rounded-3xl uppercase font-bold shadow-md shadow-hot-pink-700 hover:bg-hot-pink-400 hover:text-stone-50 hover:shadow-lg hover:shadow-hot-pink-200 transition-all duration-300"
-                                    id="download-button"
-                                    onClick={handleDownload}
-                                    disabled={qrChanged}
-                                >
-                                    Download
-                                </button>
-                            </div>
-                        </div>
+                        ))}
                     </div>
+                    <div className="p-3 flex flex-row items-center justify-self-end gap-2 hover:bg-hot-pink-100 transition-all duration-300 cursor-pointer nav-item">
+                        Login / Register
+                    </div>
+                </div>
+
+                <div className="grid grid-cols-2 col-span-2 gap-2 h-full p-2">
+                    {Object.keys(qrTypes).map((key, index) => {
+                        return (
+                            <div
+                                className="cursor-pointer flex justify-center items-center py-1 text-sm border-2 border-hot-pink-500 hover:bg-hot-pink-100 qr-selector transition-all duration-300"
+                                key={`${key}-${index}`}
+                                data-selector={key}
+                            >
+                                {qrTypes[key][0]}
+                            </div>
+                        );
+                    })}
+                </div>
+
+                <div className="relative flex items-center justify-center col-span-5 h-full w-full bg-hot-pink-500">
+                    <div className="flex flex-col">
+                        <div className="w-full mt-4 mb-8 flex justify-center">
+                            <label className="text-hot-pink-200">
+                                Enter QR Name (optional):
+                                <input
+                                    type="text"
+                                    className="w-full text-white bg-transparent border-hot-pink-200 focus:bg-hot-pink-800 transition-all duration-300"
+                                    onChange={(el) => {
+                                        setQrTitle(el.target.value);
+                                    }}
+                                />
+                            </label>
+                        </div>
+
+                        {qrControl}
+
+                        <button
+                            onClick={() => {
+                                console.log(textValue.length);
+                                setQrValue(textValue);
+                                setQrChanged(false);
+                            }}
+                            className="mx-auto mt-8 py-2.5 px-8 bg-stone-50 text-hot-pink-500 rounded-3xl uppercase font-bold shadow-md shadow-hot-pink-700 hover:bg-hot-pink-300 hover:text-white hover:shadow-lg hover:shadow-hot-pink-800 transition-all duration-300"
+                        >
+                            Generate QR
+                        </button>
+                    </div>
+                </div>
+
+                <div className="flex flex-col items-center col-span-3">
+                    <div className="mt-6 mx-auto text-gray-600 dark:text-gray-600 text-sm">
+                        <QRCodeSVG
+                            id="final-qr"
+                            value={qrValue}
+                            fgColor={qrChanged ? "#d6d3d1" : "#1c1917"}
+                            size={180}
+                        />
+                    </div>
+                    <button
+                        className="mx-auto mt-8 py-2.5 px-8 text-stone-50 bg-hot-pink-500 rounded-3xl uppercase font-bold shadow-md shadow-hot-pink-700 hover:bg-hot-pink-400 hover:text-stone-50 hover:shadow-lg hover:shadow-hot-pink-200 transition-all duration-300"
+                        id="download-button"
+                        onClick={handleDownload}
+                        disabled={qrChanged}
+                    >
+                        Download
+                    </button>
                 </div>
             </div>
         </>

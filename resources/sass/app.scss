@@ -19,27 +19,22 @@ $stone-700: #44403c;
 $stone-800: #292524;
 $stone-900: #1c1917;
 
+.nav-item.active {
+    background-color: $hot-pink-500 !important;
+
+    color: white;
+    font-weight: bold;
+}
+
 input {
     border-width: 0px !important;
     border-bottom-width: 1px !important;
 }
 
-.qr-selector {
-    transition: all 0.5s ease;
-}
-
-.qr-selector:hover * {
-    color: $hot-pink-500 !important;
-}
-
 .qr-selector.active {
-    background-color: $hot-pink-500;
-}
+    background-color: $hot-pink-500 !important;
 
-.qr-selector.active * {
-    color: white !important;
-
-    transition: all 0.3s ease;
+    color: white;
 }
 
 .qr-selector.active #selector-descriptor {
