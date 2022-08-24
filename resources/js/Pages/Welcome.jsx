@@ -195,34 +195,40 @@ const Welcome = (props) => {
         <>
             <Head title="Welcome" />
 
+            {/*<div className="fixed top-0 right-0 px-6 py-4 sm:block">*/}
+            {/*    {props.auth.user ? (*/}
+            {/*        <Link*/}
+            {/*            href={route("dashboard")}*/}
+            {/*            className="text-sm text-gray-500 underline"*/}
+            {/*        >*/}
+            {/*            Dashboard*/}
+            {/*        </Link>*/}
+            {/*    ) : (*/}
+            {/*        <>*/}
+            {/*            <Link*/}
+            {/*                href={route("login")}*/}
+            {/*                className="text-sm text-gray-500 underline"*/}
+            {/*            >*/}
+            {/*                Log in*/}
+            {/*            </Link>*/}
+
+            {/*            <Link*/}
+            {/*                href={route("register")}*/}
+            {/*                className="ml-4 text-sm text-gray-500 underline"*/}
+            {/*            >*/}
+            {/*                Register*/}
+            {/*            </Link>*/}
+            {/*        </>*/}
+            {/*    )}*/}
+            {/*</div>*/}
+
+            <div className="relative flex grid grid-cols-12 w-full h-screen bg-stone-50 overflow-hidden">
+                <div className="col-span-2 h-full"></div>
+                <div className="col-span-7 h-full bg-hot-pink-500 rounded-3xl"></div>
+                <div className="col-span-3 h-full"></div>
+            </div>
+
             <div className="relative flex items-top justify-center min-h-screen bg-stone-900 sm:items-center sm:pt-0">
-                {/*<div className="fixed top-0 right-0 px-6 py-4 sm:block">*/}
-                {/*    {props.auth.user ? (*/}
-                {/*        <Link*/}
-                {/*            href={route("dashboard")}*/}
-                {/*            className="text-sm text-gray-500 underline"*/}
-                {/*        >*/}
-                {/*            Dashboard*/}
-                {/*        </Link>*/}
-                {/*    ) : (*/}
-                {/*        <>*/}
-                {/*            <Link*/}
-                {/*                href={route("login")}*/}
-                {/*                className="text-sm text-gray-500 underline"*/}
-                {/*            >*/}
-                {/*                Log in*/}
-                {/*            </Link>*/}
-
-                {/*            <Link*/}
-                {/*                href={route("register")}*/}
-                {/*                className="ml-4 text-sm text-gray-500 underline"*/}
-                {/*            >*/}
-                {/*                Register*/}
-                {/*            </Link>*/}
-                {/*        </>*/}
-                {/*    )}*/}
-                {/*</div>*/}
-
                 <div className="mx-auto w-full max-w-7xl">
                     <div className="flex flex-row justify-center items-end space-x-12">
                         <div className="text-xs text-stone-500 uppercase hover:text-hot-pink-300">
