@@ -242,7 +242,6 @@ const Welcome = (props) => {
 
                         <button
                             onClick={() => {
-                                console.log(textValue.length);
                                 setQrValue(textValue);
                                 setQrChanged(false);
                             }}
@@ -258,7 +257,7 @@ const Welcome = (props) => {
                         <QRCodeSVG
                             id="final-qr"
                             value={qrValue}
-                            fgColor={qrChanged ? "#d6d3d1" : "#1c1917"}
+                            fgColor={qrChanged ? "#a8a29e" : "#1c1917"}
                             size={180}
                         />
                     </div>
