@@ -322,7 +322,7 @@ const Welcome = (props) => {
                                 </div>
                             </div>
 
-                            <div className="p-6 bg-hot-pink-500 col-span-7 shadow-lg shadow-stone-800">
+                            <div className="p-3 bg-hot-pink-500 col-span-7 shadow-lg shadow-stone-800">
                                 <div className="mt-2 text-gray-600 dark:text-gray-400 text-sm">
                                     {/* QR Title */}
                                     <div className="flex flex-col justify-center">
