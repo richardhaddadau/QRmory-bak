@@ -34,7 +34,7 @@ const Welcome = (props) => {
     const [selectorPosition, setSelectorPosition] = useState(0);
     const [qrValue, setQrValue] = useState("Welcome to QRmory!");
     const [qrTitle, setQrTitle] = useState("new-qrmory-code");
-    const [textValue, setTextValue] = useState("test");
+    const [textValue, setTextValue] = useState("");
     const [qrControl, setQrControl] = useState(null);
     const [qrChanged, setQrChanged] = useState(true);
 
@@ -145,15 +145,21 @@ const Welcome = (props) => {
             if (qrSelectors.length > 0) {
                 for (const selector of qrSelectors) {
                     selector.addEventListener("click", () => {
-                        for (const item of qrSelectors) {
-                            item.classList.remove("active");
+                        if (!selector.classList.contains("active")) {
+                            setTextValue("");
+
+                            for (const item of qrSelectors) {
+                                item.classList.remove("active");
+                            }
+
+                            selector.classList.add("active");
+
+                            const selectorIndex =
+                                selector.getAttribute("data-selector");
+                            setQrControl(qrTypes[selectorIndex][2]);
                         }
 
-                        selector.classList.add("active");
-
-                        const selectorIndex =
-                            selector.getAttribute("data-selector");
-                        setQrControl(qrTypes[selectorIndex][2]);
+                        setQrChanged(true);
                     });
                 }
             }
@@ -242,8 +248,10 @@ const Welcome = (props) => {
 
                         <button
                             onClick={() => {
-                                setQrValue(textValue);
-                                setQrChanged(false);
+                                if (textValue.length > 0) {
+                                    setQrValue(textValue);
+                                    setQrChanged(false);
+                                }
                             }}
                             className="mx-auto mt-8 py-2.5 px-8 bg-stone-50 text-hot-pink-500 rounded-3xl uppercase font-bold shadow-md shadow-hot-pink-700 hover:bg-hot-pink-300 hover:text-white hover:shadow-lg hover:shadow-hot-pink-800 transition-all duration-300"
                         >
