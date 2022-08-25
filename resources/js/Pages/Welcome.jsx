@@ -277,6 +277,7 @@ const Welcome = (props) => {
                 </div>
 
                 <div className="p-6 flex flex-col justify-center items-center col-span-2">
+                    <p className="text-xs text-stone-400 uppercase">Title</p>
                     <p className="text-base text-hot-pink-500 font-bold text-center">
                         {qrTitle || null}
                     </p>
@@ -294,34 +295,34 @@ const Welcome = (props) => {
                         onClick={handleDownload}
                         disabled={qrChanged}
                     >
-                        Download SVG
+                        Download .SVG
                     </button>
                     <div className="my-2 flex flex-row flex-nowrap justify-between items-center w-full">
                         <button
-                            className="mx-auto py-2.5 px-4 text-stone-50 bg-hot-pink-500 rounded-full uppercase font-bold shadow-md shadow-hot-pink-700 hover:bg-hot-pink-400 hover:text-stone-50 hover:shadow-lg hover:shadow-hot-pink-200 transition-all duration-300"
+                            className="py-2.5 px-4 text-stone-50 bg-hot-pink-500 rounded-full uppercase font-bold shadow-md shadow-hot-pink-700 hover:bg-hot-pink-400 hover:text-stone-50 hover:shadow-lg hover:shadow-hot-pink-200 transition-all duration-300"
                             id="download-button"
                             onClick={handleDownload}
                             disabled={qrChanged}
                         >
-                            png
+                            .png
                         </button>
 
                         <button
-                            className="mx-auto py-2.5 px-4 text-stone-50 bg-hot-pink-500 rounded-full uppercase font-bold shadow-md shadow-hot-pink-700 hover:bg-hot-pink-400 hover:text-stone-50 hover:shadow-lg hover:shadow-hot-pink-200 transition-all duration-300"
+                            className="py-2.5 px-4 text-stone-50 bg-hot-pink-500 rounded-full uppercase font-bold shadow-md shadow-hot-pink-700 hover:bg-hot-pink-400 hover:text-stone-50 hover:shadow-lg hover:shadow-hot-pink-200 transition-all duration-300"
                             id="download-button"
                             onClick={handleDownload}
                             disabled={qrChanged}
                         >
-                            png
+                            .jpg
                         </button>
 
                         <button
-                            className="mx-auto py-2.5 px-4 text-stone-50 bg-hot-pink-500 rounded-full uppercase font-bold shadow-md shadow-hot-pink-700 hover:bg-hot-pink-400 hover:text-stone-50 hover:shadow-lg hover:shadow-hot-pink-200 transition-all duration-300"
+                            className="py-2.5 px-4 text-stone-50 bg-hot-pink-500 rounded-full uppercase font-bold shadow-md shadow-hot-pink-700 hover:bg-hot-pink-400 hover:text-stone-50 hover:shadow-lg hover:shadow-hot-pink-200 transition-all duration-300"
                             id="download-button"
                             onClick={handleDownload}
                             disabled={qrChanged}
                         >
-                            png
+                            .pdf*
                         </button>
                     </div>
                 </div>
