@@ -33,7 +33,7 @@ const Welcome = (props) => {
     // States
     const [selectorPosition, setSelectorPosition] = useState(0);
     const [qrValue, setQrValue] = useState("Welcome to QRmory!");
-    const [qrTitle, setQrTitle] = useState("new-qrmory-code");
+    const [qrTitle, setQrTitle] = useState("New QRmory Code");
     const [textValue, setTextValue] = useState("");
     const [qrControl, setQrControl] = useState(null);
     const [qrChanged, setQrChanged] = useState(true);
@@ -196,87 +196,134 @@ const Welcome = (props) => {
             {/*    )}*/}
             {/*</div>*/}
             <div className="relative grid grid-cols-12 w-full h-screen">
-                <div className="relative flex flex-col col-span-2 h-full z-10">
-                    <div className="mt-6 mb-10 mx-auto w-full aspect-square max-h-32">
-                        <NavLogo color="#DB2857" />
+                <div className="relative pl-4 flex flex-col col-span-2 h-full bg-hot-pink-500 z-10">
+                    <div className="mt-6 mb-12 mx-auto w-full aspect-square max-h-32">
+                        <NavLogo color="white" />
                     </div>
                     <div className="grow">
                         {Object.keys(navItems).map((key, index) => (
                             <div
-                                className="p-3 flex flex-row items-center gap-2 hover:bg-hot-pink-100 transition-all duration-300 cursor-pointer nav-item"
+                                className="p-3 flex flex-row items-center gap-2 rounded-l-full text-hot-pink-100 hover:bg-hot-pink-200 transition-all duration-300 cursor-pointer nav-item"
                                 key={key - index}
                             >
                                 {navItems[key][1] || null} {navItems[key][0]}
                             </div>
                         ))}
                     </div>
-                    <div className="p-3 flex flex-row items-center justify-self-end gap-2 hover:bg-hot-pink-100 transition-all duration-300 cursor-pointer nav-item">
-                        Login / Register
+                    <div className="p-3 mb-6 flex flex-row items-center justify-self-end gap-2 transition-all duration-300 nav-item">
+                        <Link
+                            href={route("login")}
+                            className="text-hot-pink-100 underline-offset-8 hover:text-white hover:underline transition-all duration-300"
+                        >
+                            Login
+                        </Link>{" "}
+                        /{" "}
+                        <Link
+                            href={route("register")}
+                            className="text-hot-pink-100 underline-offset-8 hover:text-white hover:underline transition-all duration-300"
+                        >
+                            Register
+                        </Link>{" "}
                     </div>
                 </div>
 
-                <div className="grid grid-cols-2 col-span-2 gap-2 h-full p-2">
-                    {Object.keys(qrTypes).map((key, index) => {
-                        return (
-                            <div
-                                className="cursor-pointer flex justify-center items-center py-1 text-sm border-2 border-hot-pink-500 hover:bg-hot-pink-100 qr-selector transition-all duration-300"
-                                key={`${key}-${index}`}
-                                data-selector={key}
-                            >
-                                {qrTypes[key][0]}
-                            </div>
-                        );
-                    })}
-                </div>
-
-                <div className="relative flex items-center justify-center col-span-5 h-full w-full bg-hot-pink-500">
-                    <div className="flex flex-col">
-                        <div className="w-full mt-4 mb-8 flex justify-center">
-                            <label className="text-hot-pink-200">
+                <div className="relative pt-8 pb-12 flex items-center justify-center col-span-8 h-full w-full bg-stone-100 rounded-3xl">
+                    <div className="flex flex-col w-11/12 h-full">
+                        <div className="flex flex-row flex-wrap justify-center self-start">
+                            {Object.keys(qrTypes).map((key, index) => {
+                                return (
+                                    <div
+                                        className="cursor-pointer flex justify-center items-center py-2 px-5 m-1 rounded-full border-2 bg-white border-hot-pink-500 text-sm text-hot-pink-500 hover:bg-hot-pink-100 qr-selector transition-all duration-300"
+                                        key={`${key}-${index}`}
+                                        data-selector={key}
+                                    >
+                                        {qrTypes[key][0]}
+                                    </div>
+                                );
+                            })}
+                        </div>
+                        <div className="flex flex-col mx-auto justify-center grow w-full max-w-2xl">
+                            <label className="text-stone-500 mb-8">
                                 Enter QR Name (optional):
                                 <input
                                     type="text"
-                                    className="w-full text-white bg-transparent border-hot-pink-200 focus:bg-hot-pink-800 transition-all duration-300"
+                                    className="w-full text-hot-pink-500 font-bold bg-transparent border-stone-500 focus:bg-stone-300 transition-all duration-300"
                                     onChange={(el) => {
                                         setQrTitle(el.target.value);
                                     }}
+                                    value={qrTitle}
                                 />
                             </label>
+
+                            <div className="w-full flex justify-center">
+                                <div className="relative w-full">
+                                    {qrControl}
+                                </div>
+                            </div>
+
+                            <button
+                                onClick={() => {
+                                    if (textValue.length > 0) {
+                                        setQrValue(textValue);
+                                        setQrChanged(false);
+                                    }
+                                }}
+                                className="mx-auto mt-16 py-2.5 px-8 bg-stone-50 text-hot-pink-500 rounded-3xl uppercase font-bold shadow-md shadow-hot-pink-700 hover:bg-hot-pink-300 hover:text-white hover:shadow-lg hover:shadow-hot-pink-800 transition-all duration-300"
+                            >
+                                Generate QR
+                            </button>
                         </div>
-
-                        {qrControl}
-
-                        <button
-                            onClick={() => {
-                                if (textValue.length > 0) {
-                                    setQrValue(textValue);
-                                    setQrChanged(false);
-                                }
-                            }}
-                            className="mx-auto mt-8 py-2.5 px-8 bg-stone-50 text-hot-pink-500 rounded-3xl uppercase font-bold shadow-md shadow-hot-pink-700 hover:bg-hot-pink-300 hover:text-white hover:shadow-lg hover:shadow-hot-pink-800 transition-all duration-300"
-                        >
-                            Generate QR
-                        </button>
                     </div>
                 </div>
 
-                <div className="flex flex-col items-center col-span-3">
-                    <div className="mt-6 mx-auto text-gray-600 dark:text-gray-600 text-sm">
+                <div className="p-6 flex flex-col justify-center items-center col-span-2">
+                    <p className="text-base text-hot-pink-500 font-bold text-center">
+                        {qrTitle || null}
+                    </p>
+                    <div className="my-16 mx-auto text-gray-600 dark:text-gray-600 text-sm">
                         <QRCodeSVG
                             id="final-qr"
                             value={qrValue}
-                            fgColor={qrChanged ? "#a8a29e" : "#1c1917"}
+                            fgColor={qrChanged ? "#78716c" : "black"}
                             size={180}
                         />
                     </div>
                     <button
-                        className="mx-auto mt-8 py-2.5 px-8 text-stone-50 bg-hot-pink-500 rounded-3xl uppercase font-bold shadow-md shadow-hot-pink-700 hover:bg-hot-pink-400 hover:text-stone-50 hover:shadow-lg hover:shadow-hot-pink-200 transition-all duration-300"
+                        className="mx-auto py-2.5 px-4 w-full bg-hot-pink-500 rounded-full text-stone-50 uppercase font-bold shadow-md shadow-hot-pink-700 hover:bg-hot-pink-400 hover:text-stone-50 hover:shadow-lg hover:shadow-hot-pink-200 transition-all duration-300"
                         id="download-button"
                         onClick={handleDownload}
                         disabled={qrChanged}
                     >
-                        Download
+                        Download SVG
                     </button>
+                    <div className="my-2 flex flex-row flex-nowrap justify-between items-center w-full">
+                        <button
+                            className="mx-auto py-2.5 px-4 text-stone-50 bg-hot-pink-500 rounded-full uppercase font-bold shadow-md shadow-hot-pink-700 hover:bg-hot-pink-400 hover:text-stone-50 hover:shadow-lg hover:shadow-hot-pink-200 transition-all duration-300"
+                            id="download-button"
+                            onClick={handleDownload}
+                            disabled={qrChanged}
+                        >
+                            png
+                        </button>
+
+                        <button
+                            className="mx-auto py-2.5 px-4 text-stone-50 bg-hot-pink-500 rounded-full uppercase font-bold shadow-md shadow-hot-pink-700 hover:bg-hot-pink-400 hover:text-stone-50 hover:shadow-lg hover:shadow-hot-pink-200 transition-all duration-300"
+                            id="download-button"
+                            onClick={handleDownload}
+                            disabled={qrChanged}
+                        >
+                            png
+                        </button>
+
+                        <button
+                            className="mx-auto py-2.5 px-4 text-stone-50 bg-hot-pink-500 rounded-full uppercase font-bold shadow-md shadow-hot-pink-700 hover:bg-hot-pink-400 hover:text-stone-50 hover:shadow-lg hover:shadow-hot-pink-200 transition-all duration-300"
+                            id="download-button"
+                            onClick={handleDownload}
+                            disabled={qrChanged}
+                        >
+                            png
+                        </button>
+                    </div>
                 </div>
             </div>
         </>
