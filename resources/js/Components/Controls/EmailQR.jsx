@@ -1,8 +1,6 @@
 import React, { useState } from "react";
-import Input from "@/Components/Input";
-import Label from "@/Components/Label";
 
-const WebsiteQR = ({ setText, setChanged }) => {
+const EmailQR = ({ setText, setChanged }) => {
     // States
     const [emailTo, setEmailTo] = useState("");
     const [emailSubject, setEmailSubject] = useState("");
@@ -14,36 +12,40 @@ const WebsiteQR = ({ setText, setChanged }) => {
     };
 
     return (
-        <div className="w-full max-w-md mx-auto flex justify-center">
-            <div className="relative w-full">
-                <label className="text-hot-pink-200">
+        <>
+            <div className="mb-8">
+                <label className="text-stone-500">
                     Enter email address to send to:
                     <input
                         type="text"
-                        className="mb-8 w-full text-white bg-transparent border-hot-pink-200 focus:bg-hot-pink-800 transition-all duration-300"
+                        className="w-full text-hot-pink-500 font-bold bg-transparent border-stone-500 focus:bg-stone-300 transition-all duration-300"
                         onChange={(el) => {
                             setEmailTo(el.target.value);
                             updateEmail();
                         }}
                     />
                 </label>
+            </div>
 
-                <label className="text-hot-pink-200">
+            <div className="mb-8">
+                <label className="text-stone-500">
                     Enter email subject:
                     <input
                         type="text"
-                        className="mb-8 w-full text-white bg-transparent border-hot-pink-200 focus:bg-hot-pink-800 transition-all duration-300"
+                        className="w-full text-hot-pink-500 font-bold bg-transparent border-stone-500 focus:bg-stone-300 transition-all duration-300"
                         onChange={(el) => {
                             setEmailSubject(el.target.value);
                             updateEmail();
                         }}
                     />
                 </label>
+            </div>
 
-                <label className="text-hot-pink-200">
+            <div className="mb-8">
+                <label className="text-stone-500">
                     Enter email message:
                     <textarea
-                        className="w-full text-white bg-transparent border-hot-pink-200 focus:bg-hot-pink-800 transition-all duration-300 resize-none"
+                        className="w-full text-hot-pink-500 font-bold bg-transparent border-stone-500 focus:bg-stone-300 transition-all duration-300 resize-none"
                         onChange={(el) => {
                             setEmailBody(el.target.value);
                             updateEmail();
@@ -51,8 +53,8 @@ const WebsiteQR = ({ setText, setChanged }) => {
                     />
                 </label>
             </div>
-        </div>
+        </>
     );
 };
 
-export default WebsiteQR;
+export default EmailQR;
