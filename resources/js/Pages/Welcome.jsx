@@ -21,6 +21,8 @@ import TextQR from "@/Components/Controls/TextQR";
 import TwitterQR from "@/Components/Controls/TwitterQR";
 import SocialMediaQR from "@/Components/Controls/SocialMediaQR";
 import NavLogo from "@/Components/NavLogo";
+import InstagramQR from "@/Components/Controls/InstagramQR";
+import Standard from "@/Layouts/Standard";
 
 let selectorTop = 0;
 let selectorPage = 1;
@@ -47,28 +49,28 @@ const Welcome = (props) => {
             "Preset an email",
             <EmailQR setText={setTextValue} setChanged={setQrChanged} />,
         ],
-        socialMedia: [
-            "Social Media",
-            "Share your profiles",
-            <SocialMediaQR setText={setTextValue} setChanged={setQrChanged} />,
-        ],
-        eBusinessCard: ["E-Biz Card", "The modern business card"],
-        poll: ["Poll", "Run a quick poll"],
-        reviews: ["Reviews", "Collect customer reviews"],
-        event: ["Event", "Promote an event"],
-        document: ["Document", "Share a PDF document"],
-        audio: ["Audio", "Share an sound file"],
-        video: ["Video", "Share a quick video"],
-        phone: [
-            "Phone",
-            "Set up an easy call",
-            <PhoneQR setText={setTextValue} setChanged={setQrChanged} />,
-        ],
-        sms: [
-            "SMS",
-            "Preset an SMS",
-            <SmsQR setText={setTextValue} setChanged={setQrChanged} />,
-        ],
+        // socialMedia: [
+        //     "Social Media",
+        //     "Share your profiles",
+        //     <SocialMediaQR setText={setTextValue} setChanged={setQrChanged} />,
+        // ],
+        // eBusinessCard: ["E-Biz Card", "The modern business card"],
+        // poll: ["Poll", "Run a quick poll"],
+        // reviews: ["Reviews", "Collect customer reviews"],
+        // event: ["Event", "Promote an event"],
+        // document: ["Document", "Share a PDF document"],
+        // audio: ["Audio", "Share an sound file"],
+        // video: ["Video", "Share a quick video"],
+        // phone: [
+        //     "Phone",
+        //     "Set up an easy call",
+        //     <PhoneQR setText={setTextValue} setChanged={setQrChanged} />,
+        // ],
+        // sms: [
+        //     "SMS",
+        //     "Preset an SMS",
+        //     <SmsQR setText={setTextValue} setChanged={setQrChanged} />,
+        // ],
         text: [
             "Text",
             "Display a text message",
@@ -81,6 +83,11 @@ const Welcome = (props) => {
             "Facebook page/group",
             <FacebookQR setText={setTextValue} setChanged={setQrChanged} />,
         ],
+        instagram: [
+            "Instagram",
+            "Instagram account",
+            <InstagramQR setText={setTextValue} setChanged={setQrChanged} />,
+        ],
         twitter: [
             "Twitter",
             "Twitter account",
@@ -91,18 +98,8 @@ const Welcome = (props) => {
             "YouTube video",
             <YoutubeQR setText={setTextValue} setChanged={setQrChanged} />,
         ],
-        bitcoin: ["Bitcoin", "Quick Bitcoin payments"],
-        ethereum: ["Ethereum", "Quick Ethereum payments"],
-    };
-
-    const navItems = {
-        createQR: ["Create QR Code", <FaPlusCircle />],
-        myCodes: ["My Codes", <FaFolderOpen />],
-        about: ["About", <FaQuestionCircle />],
-        features: ["Features", <FaStar />],
-        blog: ["Blog", <FaNewspaper />],
-        pricing: ["Pricing", <FaShoppingBasket />],
-        contact: ["Contact", <FaEnvelopeOpenText />],
+        // bitcoin: ["Bitcoin", "Quick Bitcoin payments"],
+        // ethereum: ["Ethereum", "Quick Ethereum payments"],
     };
 
     const handleDownload = () => {
@@ -119,14 +116,6 @@ const Welcome = (props) => {
         downloadLink.href = svgUrl;
         downloadLink.click();
         downloadLink.remove();
-    };
-
-    const addStyle = (el, styleClass) => {
-        if (!el.classList.contains(styleClass)) el.classList.add(styleClass);
-    };
-
-    const removeStyle = (el, styleClass) => {
-        if (el.classList.contains(styleClass)) el.classList.remove(styleClass);
     };
 
     useEffect(() => {
@@ -191,38 +180,7 @@ const Welcome = (props) => {
             {/*        </>*/}
             {/*    )}*/}
             {/*</div>*/}
-            <div className="relative grid grid-cols-12 w-full h-screen">
-                <div className="relative pl-4 flex flex-col col-span-2 h-full bg-hot-pink-500 z-10">
-                    <div className="mt-6 mb-12 mx-auto w-full aspect-square max-h-32">
-                        <NavLogo color="white" />
-                    </div>
-                    <div className="grow">
-                        {Object.keys(navItems).map((key, index) => (
-                            <div
-                                className="p-3 flex flex-row items-center gap-2 rounded-l-full text-hot-pink-100 hover:bg-hot-pink-200 transition-all duration-300 cursor-pointer nav-item"
-                                key={key - index}
-                            >
-                                {navItems[key][1] || null} {navItems[key][0]}
-                            </div>
-                        ))}
-                    </div>
-                    <div className="p-3 mb-6 flex flex-row items-center justify-self-end gap-2 transition-all duration-300 nav-item">
-                        <Link
-                            href={route("login")}
-                            className="text-hot-pink-100 underline-offset-8 hover:text-white hover:underline transition-all duration-300"
-                        >
-                            Login
-                        </Link>{" "}
-                        /{" "}
-                        <Link
-                            href={route("register")}
-                            className="text-hot-pink-100 underline-offset-8 hover:text-white hover:underline transition-all duration-300"
-                        >
-                            Register
-                        </Link>{" "}
-                    </div>
-                </div>
-
+            <Standard>
                 <div className="relative pt-8 pb-12 flex items-center justify-center col-span-8 h-full w-full bg-stone-100 rounded-3xl">
                     <div className="flex flex-col w-11/12 h-full">
                         <div className="flex flex-row flex-wrap justify-center self-start">
@@ -322,7 +280,7 @@ const Welcome = (props) => {
                         </button>
                     </div>
                 </div>
-            </div>
+            </Standard>
         </>
     );
 };
