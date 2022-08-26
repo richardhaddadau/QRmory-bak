@@ -3,8 +3,6 @@ import { Link, Head } from "@inertiajs/inertia-react";
 import { QRCodeSVG } from "qrcode.react";
 
 import {
-    FaChevronDown,
-    FaChevronUp,
     FaEnvelopeOpenText,
     FaFolderOpen,
     FaNewspaper,
@@ -134,8 +132,6 @@ const Welcome = (props) => {
     useEffect(() => {
         const navItems = document.querySelectorAll(".nav-item");
         const qrSelectors = document.querySelectorAll(".qr-selector");
-        const qrWindow = document.querySelector("#selector-window");
-        const qrContent = document.querySelector("#selector-content");
 
         setTimeout(() => {
             navItems[0].classList.add("active");
