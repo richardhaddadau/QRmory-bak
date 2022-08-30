@@ -11,10 +11,6 @@ module.exports = {
 
     theme: {
         extend: {
-            fontFamily: {
-                sans: ["quatro-slab", ...defaultTheme.fontFamily.serif],
-                header: ["marydale", ...defaultTheme.fontFamily.sans],
-            },
             colors: {
                 "qrmory-purple-100": "#F0D0F7",
                 "qrmory-purple-200": "#DEA4F0",
@@ -26,6 +22,22 @@ module.exports = {
                 "qrmory-purple-800": "#1E073E",
                 "qrmory-purple-900": "#150433",
             },
+            spacing: {
+                4.5: "18px",
+            },
+            height: {
+                hero: "650px",
+                "qr-card": "660px",
+            },
+            width: {
+                "qr-preview": "350px",
+            },
+            maxHeight: {
+                "selector-window": "512px",
+            },
+            maxWidth: {
+                "main-card": "1200px",
+            },
             backgroundImage: {
                 hero: "url('/img/header-bg.webp')",
             },
@@ -35,17 +47,20 @@ module.exports = {
             backgroundPosition: {
                 hero: "center",
             },
-            spacing: {
-                4.5: "18px",
+            fontFamily: {
+                sans: ["europa", ...defaultTheme.fontFamily.sans],
+                header: ["marydale", ...defaultTheme.fontFamily.sans],
             },
-            height: {
-                hero: "650px",
+            fontSize: {
+                "4.5xl": [
+                    "2.5rem",
+                    {
+                        lineHeight: "1",
+                    },
+                ],
             },
-            maxHeight: {
-                "selector-window": "512px",
-            },
-            maxWidth: {
-                "main-card": "1200px",
+            fontWeight: {
+                sans: "300",
             },
         },
     },

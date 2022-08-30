@@ -12,11 +12,11 @@ const Navigation = (props) => {
 
     return (
         <>
-            <ul className="mx-auto flex flex-row items-center justify-between w-full">
+            <ul className="mx-auto flex flex-row items-center justify-evenly w-full">
                 {Object.keys(navItems).map((key) => {
                     return (
                         <li
-                            className="uppercase hover:font-bold transition-all duration-300"
+                            className="text-sm uppercase tracking-widest hover:font-bold hover:transition-all duration-300"
                             key={key}
                         >
                             <Link href={navItems[key][1]}>
