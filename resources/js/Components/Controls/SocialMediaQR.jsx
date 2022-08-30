@@ -12,7 +12,7 @@ import {
     FaYoutube,
 } from "react-icons/all";
 
-const WebsiteQR = ({ setText, setChanged }) => {
+const SocialMediaQR = ({ setText, setChanged }) => {
     // States
     const [facebook, setFacebook] = useState("");
     const [twitter, setTwitter] = useState("");
@@ -155,4 +155,4 @@ const WebsiteQR = ({ setText, setChanged }) => {
     );
 };
 
-export default WebsiteQR;
+export default SocialMediaQR;

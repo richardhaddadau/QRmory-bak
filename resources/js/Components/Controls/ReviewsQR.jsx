@@ -2,7 +2,7 @@ import React from "react";
 import Input from "@/Components/Input";
 import Label from "@/Components/Label";
 
-const WebsiteQR = ({ setText }) => {
+const ReviewsQR = ({ setText }) => {
     return (
         <div className="w-full max-w-md mx-auto flex justify-center">
             <div className="relative w-full">
@@ -21,4 +21,4 @@ const WebsiteQR = ({ setText }) => {
     );
 };
 
-export default WebsiteQR;
+export default ReviewsQR;
