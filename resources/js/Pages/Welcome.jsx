@@ -165,7 +165,7 @@ const Welcome = (props) => {
                         Go on! Give it a go
                     </h3>
 
-                    <div className="pt-16 flex flex-row gap-8 h-qr-card w-full">
+                    <div className="pt-16 flex flex-row gap-8 min-h-qr-card w-full">
                         <div className="p-8 flex flex-col grow bg-white rounded-3xl shadow-2xl">
                             <div className="flex flex-row flex-wrap justify-start items-center content-end self-start transition-all">
                                 {Object.keys(qrTypes).map((key, index) => {

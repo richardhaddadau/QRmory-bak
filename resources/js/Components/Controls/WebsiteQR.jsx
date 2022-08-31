@@ -94,6 +94,8 @@ const WebsiteQR = ({ setText, setChanged }) => {
                                 setErrorMessage(
                                     `You don't need to type in a protocol (eg. http:// or https://).`
                                 );
+                            } else {
+                                setIsError(false);
                             }
 
                             setText(
