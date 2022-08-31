@@ -18,13 +18,13 @@ const NavBar = ({ fixed = false, absolute = false }) => {
                     </a>
                 </div>
                 <div className="flex flex-row items-center col-span-6">
-                    <Navigation />
+                    {/*<Navigation />*/}
                 </div>
                 <div className="flex flex-row items-center justify-end col-span-3">
-                    <NavBarAction
-                        value="Login"
-                        action={() => console.log("Login")}
-                    />
+                    {/*<NavBarAction*/}
+                    {/*    value="Login"*/}
+                    {/*    action={() => console.log("Login")}*/}
+                    {/*/>*/}
                 </div>
             </nav>
         </>

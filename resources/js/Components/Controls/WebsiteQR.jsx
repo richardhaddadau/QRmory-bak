@@ -12,7 +12,7 @@ const WebsiteQR = ({ setText, setChanged }) => {
                 <div>
                     <select
                         id="protocol-selector"
-                        className="rounded-xl"
+                        className="mr-2 mt-1 rounded-xl"
                         onChange={(el) => {
                             const siteInput =
                                 document.getElementById("site-input");
@@ -107,7 +107,6 @@ const WebsiteQR = ({ setText, setChanged }) => {
                             }
 
                             setText(protocolSelector.value + "://" + useSite);
-                            console.log(useSite);
                             setChanged(true);
                         }}
                     />

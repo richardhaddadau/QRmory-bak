@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
-import Standard from "@/Layouts/Standard";
+
 import NavBar from "@/Components/NavBar";
 import QRCodeSVG from "qrcode.react";
-import { FaGripVertical } from "react-icons/all";
 
 import AudioQR from "@/Components/Controls/AudioQR";
 import BitcoinQR from "@/Components/Controls/BitcoinQR";
@@ -25,11 +24,32 @@ import VideoQR from "@/Components/Controls/VideoQR";
 import WebsiteQR from "@/Components/Controls/WebsiteQR";
 import WifiQR from "@/Components/Controls/WifiQR";
 import YoutubeQR from "@/Components/Controls/YoutubeQR";
+import MyFooter from "@/Components/MyFooter";
+
+import {
+    DownloadSVG,
+    DownloadPNG,
+    DownloadPDF,
+    DownloadJPG,
+} from "@/Helpers/DownloadQR";
 
 const Welcome = (props) => {
+    const randomTitles = [
+        "New QRmory Code",
+        "Made with QRmory",
+        "QRmory is Awesome",
+        "QRmory Code",
+        "My New QR Code",
+        "QR Codes are fun",
+        "Na-na-na-na-na-na-na-na-QRmory man",
+        "I Love QRmory",
+    ];
+
     // States
     const [qrValue, setQrValue] = useState("Welcome to QRmory!");
-    const [qrTitle, setQrTitle] = useState("New QRmory Code");
+    const [qrTitle, setQrTitle] = useState(
+        randomTitles[Math.floor(Math.random() * randomTitles.length)]
+    );
     const [textValue, setTextValue] = useState("");
     const [qrControl, setQrControl] = useState(null);
     const [qrOptionsOpen, setQrOptionsOpen] = useState(false);
@@ -41,78 +61,62 @@ const Welcome = (props) => {
             "Link to a page or site",
             <WebsiteQR setText={setTextValue} setChanged={setQrChanged} />,
         ],
-        email: [
-            "Email",
-            "Preset an email",
-            <EmailQR setText={setTextValue} setChanged={setQrChanged} />,
-        ],
-        socialMedia: [
-            "Social Media",
-            "Share your profiles",
-            <SocialMediaQR setText={setTextValue} setChanged={setQrChanged} />,
-        ],
-        eBusinessCard: ["E-Biz Card", "The modern business card"],
-        poll: ["Poll", "Run a quick poll"],
-        reviews: ["Reviews", "Collect customer reviews"],
-        event: ["Event", "Promote an event"],
-        document: ["Document", "Share a PDF document"],
-        audio: ["Audio", "Share an sound file"],
-        video: ["Video", "Share a quick video"],
-        phone: [
-            "Phone",
-            "Set up an easy call",
-            <PhoneQR setText={setTextValue} setChanged={setQrChanged} />,
-        ],
-        sms: [
-            "SMS",
-            "Preset an SMS",
-            <SmsQR setText={setTextValue} setChanged={setQrChanged} />,
-        ],
-        text: [
-            "Text",
-            "Display a text message",
-            <TextQR setText={setTextValue} setChanged={setQrChanged} />,
-        ],
-        wifi: ["WiFi", "Share WiFi details"],
-        location: ["Location", "Share a map address"],
-        facebook: [
-            "Facebook",
-            "Facebook page/group",
-            <FacebookQR setText={setTextValue} setChanged={setQrChanged} />,
-        ],
-        instagram: [
-            "Instagram",
-            "Instagram account",
-            <InstagramQR setText={setTextValue} setChanged={setQrChanged} />,
-        ],
-        twitter: [
-            "Twitter",
-            "Twitter account",
-            <TwitterQR setText={setTextValue} setChanged={setQrChanged} />,
-        ],
-        youTube: [
-            "YouTube",
-            "YouTube video",
-            <YoutubeQR setText={setTextValue} setChanged={setQrChanged} />,
-        ],
-        bitcoin: ["Bitcoin", "Quick Bitcoin payments"],
-        ethereum: ["Ethereum", "Quick Ethereum payments"],
-    };
-
-    const handleDownload = () => {
-        const svgData = document.querySelector("#final-qr").outerHTML;
-        const svgBlob = new Blob([svgData], {
-            type: "image/svg+xml;charset=utf-8",
-        });
-        const svgUrl = URL.createObjectURL(svgBlob);
-        const downloadLink = document.createElement("a");
-        downloadLink.download = qrTitle.length
-            ? qrTitle + ".svg"
-            : "awesome-qr.svg";
-        document.querySelector("#final-qr").append(downloadLink);
-        downloadLink.href = svgUrl;
-        downloadLink.click();
-        downloadLink.remove();
+        // email: [
+        //     "Email",
+        //     "Preset an email",
+        //     <EmailQR setText={setTextValue} setChanged={setQrChanged} />,
+        // ],
+        // socialMedia: [
+        //     "Social Media",
+        //     "Share your profiles",
+        //     <SocialMediaQR setText={setTextValue} setChanged={setQrChanged} />,
+        // ],
+        // eBusinessCard: ["E-Biz Card", "The modern business card"],
+        // poll: ["Poll", "Run a quick poll"],
+        // reviews: ["Reviews", "Collect customer reviews"],
+        // event: ["Event", "Promote an event"],
+        // document: ["Document", "Share a PDF document"],
+        // audio: ["Audio", "Share an sound file"],
+        // video: ["Video", "Share a quick video"],
+        // phone: [
+        //     "Phone",
+        //     "Set up an easy call",
+        //     <PhoneQR setText={setTextValue} setChanged={setQrChanged} />,
+        // ],
+        // sms: [
+        //     "SMS",
+        //     "Preset an SMS",
+        //     <SmsQR setText={setTextValue} setChanged={setQrChanged} />,
+        // ],
+        // text: [
+        //     "Text",
+        //     "Display a text message",
+        //     <TextQR setText={setTextValue} setChanged={setQrChanged} />,
+        // ],
+        // wifi: ["WiFi", "Share WiFi details"],
+        // location: ["Location", "Share a map address"],
+        // facebook: [
+        //     "Facebook",
+        //     "Facebook page/group",
+        //     <FacebookQR setText={setTextValue} setChanged={setQrChanged} />,
+        // ],
+        // instagram: [
+        //     "Instagram",
+        //     "Instagram account",
+        //     <InstagramQR setText={setTextValue} setChanged={setQrChanged} />,
+        // ],
+        // twitter: [
+        //     "Twitter",
+        //     "Twitter account",
+        //     <TwitterQR setText={setTextValue} setChanged={setQrChanged} />,
+        // ],
+        // youTube: [
+        //     "YouTube",
+        //     "YouTube video",
+        //     <YoutubeQR setText={setTextValue} setChanged={setQrChanged} />,
+        // ],
+        // bitcoin: ["Bitcoin", "Quick Bitcoin payments"],
+        // ethereum: ["Ethereum", "Quick Ethereum payments"],
     };
 
     useEffect(() => {
@@ -165,9 +169,9 @@ const Welcome = (props) => {
                         Go on! Give it a go
                     </h3>
 
-                    <div className="pt-16 flex flex-row gap-8 min-h-qr-card w-full">
+                    <div className="py-16 px-8 flex md:flex-row flex-col md:items-stretch items-center gap-8 min-h-qr-card w-full">
                         <div className="p-8 flex flex-col grow bg-white rounded-3xl shadow-2xl">
-                            <div className="flex flex-row flex-wrap justify-start items-center content-end self-start transition-all">
+                            <div className="mb-4 pb-4 flex flex-row flex-wrap justify-start items-center content-end self-start border-b-2 border-b-stone-100 transition-all">
                                 {Object.keys(qrTypes).map((key, index) => {
                                     return (
                                         <div
@@ -179,30 +183,34 @@ const Welcome = (props) => {
                                         </div>
                                     );
                                 })}
-                                {qrOptionsOpen ? "" : null}
-                                <div
-                                    className="self-start cursor-pointer py-2 m-1"
-                                    onClick={() =>
-                                        setQrOptionsOpen(!qrOptionsOpen)
-                                    }
-                                >
-                                    <FaGripVertical
-                                        color="black"
-                                        size={24}
-                                        className="inline"
-                                    />
-                                    <p className="ml-2 inline text-black">
-                                        {qrOptionsOpen ? "less" : "more"}{" "}
-                                        options
-                                    </p>
-                                </div>
+
+                                <p className="ml-2 inline text-black italic">
+                                    more coming soon
+                                </p>
+
+                                {/*<div*/}
+                                {/*    className="self-start cursor-pointer py-2 m-1"*/}
+                                {/*    onClick={() =>*/}
+                                {/*        setQrOptionsOpen(!qrOptionsOpen)*/}
+                                {/*    }*/}
+                                {/*>*/}
+                                {/*    <FaGripVertical*/}
+                                {/*        color="black"*/}
+                                {/*        size={24}*/}
+                                {/*        className="inline"*/}
+                                {/*    />*/}
+                                {/*    <p className="ml-2 inline text-black">*/}
+                                {/*        {qrOptionsOpen ? "less" : "more"}{" "}*/}
+                                {/*        options*/}
+                                {/*    </p>*/}
+                                {/*</div>*/}
                             </div>
                             <div className="mx-auto flex flex-col grow justify-center w-full text-left">
                                 <label className="control-label">
                                     Enter QR Name (optional):
                                     <input
                                         type="text"
-                                        className="control-input"
+                                        className="block control-input"
                                         onChange={(el) => {
                                             setQrTitle(el.target.value);
                                         }}
@@ -223,13 +231,13 @@ const Welcome = (props) => {
                                             setQrChanged(false);
                                         }
                                     }}
-                                    className="mt-8 py-2.5 px-8 bg-qrmory-purple-500 w-full md:w-52 text-sm font-bold text-white rounded-3xl uppercase font-bold shadow-md shadow-hot-pink-700 hover:bg-hot-pink-300 hover:tracking-widest hover:shadow-lg hover:shadow-qrmory-purple-500 transition-all duration-300"
+                                    className="mt-8 py-2.5 px-8 bg-qrmory-purple-500 w-full md:w-52 text-sm font-bold text-white rounded-3xl uppercase font-bold hover:tracking-widest hover:shadow-lg hover:shadow-qrmory-purple-500 transition-all duration-300"
                                 >
                                     Generate QR
                                 </button>
                             </div>
                         </div>
-                        <div className="pt-8 pb-10 px-12 flex flex-col justify-between w-qr-preview bg-white rounded-3xl shadow-2xl text-center">
+                        <div className="pt-8 pb-10 px-10 flex flex-col justify-between w-qr-preview bg-white rounded-3xl shadow-2xl text-center">
                             <div className="">
                                 <h4 className="text-sm uppercase text-stone-500">
                                     Title
@@ -246,48 +254,103 @@ const Welcome = (props) => {
                                     value={qrValue}
                                     fgColor={qrChanged ? "#78716c" : "black"}
                                     size={180}
+                                    level="H"
                                 />
                             </div>
                             <button
-                                className="mx-auto py-2.5 px-4 w-full bg-hot-pink-500 rounded-full text-stone-50 uppercase font-bold shadow-md shadow-hot-pink-700 hover:bg-hot-pink-400 hover:text-stone-50 hover:shadow-lg hover:shadow-hot-pink-200 transition-all duration-300"
+                                className="mx-auto py-2.5 px-4 w-full bg-qrmory-purple-500 rounded-full text-white uppercase font-bold hover:tracking-widest hover:shadow-lg hover:shadow-qrmory-purple-500 transition-all duration-300"
                                 id="download-button"
-                                onClick={handleDownload}
+                                onClick={() => {
+                                    const svgData =
+                                        document.querySelector(
+                                            "#final-qr"
+                                        ).outerHTML;
+                                    DownloadSVG(svgData, qrTitle);
+                                }}
                                 disabled={qrChanged}
                             >
-                                Download .SVG
+                                Download SVG
                             </button>
-                            <div className="my-2 flex flex-row flex-nowrap justify-between items-center w-full">
-                                <button
-                                    className="py-2.5 px-4 text-stone-50 bg-hot-pink-500 rounded-full uppercase font-bold shadow-md shadow-hot-pink-700 hover:bg-hot-pink-400 hover:text-stone-50 hover:shadow-lg hover:shadow-hot-pink-200 transition-all duration-300"
-                                    id="download-button"
-                                    onClick={handleDownload}
-                                    disabled={qrChanged}
-                                >
-                                    .png
-                                </button>
+                            {/*<div className="my-2 flex flex-row flex-nowrap justify-between items-center w-full">*/}
+                            {/*    <button*/}
+                            {/*        className="py-2.5 px-4 text-stone-50 bg-hot-pink-500 rounded-full uppercase font-bold shadow-md shadow-hot-pink-700 hover:bg-hot-pink-400 hover:text-stone-50 hover:shadow-lg hover:shadow-hot-pink-200 transition-all duration-300"*/}
+                            {/*        id="download-button"*/}
+                            {/*        onClick={DownloadPNG}*/}
+                            {/*        disabled={qrChanged}*/}
+                            {/*    >*/}
+                            {/*        png*/}
+                            {/*    </button>*/}
 
-                                <button
-                                    className="py-2.5 px-4 text-stone-50 bg-hot-pink-500 rounded-full uppercase font-bold shadow-md shadow-hot-pink-700 hover:bg-hot-pink-400 hover:text-stone-50 hover:shadow-lg hover:shadow-hot-pink-200 transition-all duration-300"
-                                    id="download-button"
-                                    onClick={handleDownload}
-                                    disabled={qrChanged}
-                                >
-                                    .jpg
-                                </button>
+                            {/*    <button*/}
+                            {/*        className="py-2.5 px-4 text-stone-50 bg-hot-pink-500 rounded-full uppercase font-bold shadow-md shadow-hot-pink-700 hover:bg-hot-pink-400 hover:text-stone-50 hover:shadow-lg hover:shadow-hot-pink-200 transition-all duration-300"*/}
+                            {/*        id="download-button"*/}
+                            {/*        onClick={DownloadJPG}*/}
+                            {/*        disabled={qrChanged}*/}
+                            {/*    >*/}
+                            {/*        jpg*/}
+                            {/*    </button>*/}
 
-                                <button
-                                    className="py-2.5 px-4 text-stone-50 bg-hot-pink-500 rounded-full uppercase font-bold shadow-md shadow-hot-pink-700 hover:bg-hot-pink-400 hover:text-stone-50 hover:shadow-lg hover:shadow-hot-pink-200 transition-all duration-300"
-                                    id="download-button"
-                                    onClick={handleDownload}
-                                    disabled={qrChanged}
-                                >
-                                    .pdf*
-                                </button>
-                            </div>
+                            {/*    <button*/}
+                            {/*        className="py-2.5 px-4 text-stone-50 bg-hot-pink-500 rounded-full uppercase font-bold shadow-md shadow-hot-pink-700 hover:bg-hot-pink-400 hover:text-stone-50 hover:shadow-lg hover:shadow-hot-pink-200 transition-all duration-300"*/}
+                            {/*        id="download-button"*/}
+                            {/*        onClick={DownloadPDF}*/}
+                            {/*        disabled={qrChanged}*/}
+                            {/*    >*/}
+                            {/*        pdf**/}
+                            {/*    </button>*/}
+                            {/*</div>*/}
                         </div>
                     </div>
                 </div>
             </section>
+
+            {/*<section className="py-8 bg-stone-200 text-qrmory-purple-500 text-center">*/}
+            {/*    <div className="flex md:flex-row flex-col justify-evenly items-center w-full">*/}
+            {/*        <div className="">*/}
+            {/*            <p className="font-bold text-4xl">65,000</p>*/}
+            {/*            <p className="text-base uppercase">*/}
+            {/*                Wonderful Visitors*/}
+            {/*            </p>*/}
+            {/*        </div>*/}
+
+            {/*        <div className="">*/}
+            {/*            <p className="font-bold text-4xl">120,000</p>*/}
+            {/*            <p className="text-base uppercase">QR Codes Created</p>*/}
+            {/*        </div>*/}
+
+            {/*        <div className="">*/}
+            {/*            <p className="font-bold text-4xl">500</p>*/}
+            {/*            <p className="text-base uppercase">Awesome Arsenals</p>*/}
+            {/*        </div>*/}
+            {/*    </div>*/}
+            {/*</section>*/}
+
+            <p className="py-16 text-center text-base text-qrmory-purple-500 italic">
+                More coming soon
+            </p>
+
+            {/*<section className="py-16 px-8 bg-stone-200 text-white text-center">*/}
+            {/*    <div className="mx-auto py-20 px-10 flex md:flex-row flex-col justify-evenly items-center w-full max-w-main-card bg-qrmory-purple-500 rounded-3xl">*/}
+            {/*        <div className="">*/}
+            {/*            <p className="font-bold text-4xl">65,000</p>*/}
+            {/*            <p className="text-base uppercase">*/}
+            {/*                Wonderful Visitors*/}
+            {/*            </p>*/}
+            {/*        </div>*/}
+
+            {/*        <div className="">*/}
+            {/*            <p className="font-bold text-4xl">120,000</p>*/}
+            {/*            <p className="text-base uppercase">QR Codes Created</p>*/}
+            {/*        </div>*/}
+
+            {/*        <div className="">*/}
+            {/*            <p className="font-bold text-4xl">500</p>*/}
+            {/*            <p className="text-base uppercase">Awesome Arsenals</p>*/}
+            {/*        </div>*/}
+            {/*    </div>*/}
+            {/*</section>*/}
+
+            {/*<MyFooter />*/}
         </>
     );
 };
