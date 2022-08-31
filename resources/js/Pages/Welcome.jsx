@@ -168,19 +168,18 @@ const Welcome = (props) => {
                     <div className="pt-16 flex flex-row gap-8 h-qr-card w-full">
                         <div className="p-8 flex flex-col grow bg-white rounded-3xl shadow-2xl">
                             <div className="flex flex-row flex-wrap justify-start items-center content-end self-start transition-all">
-                                {qrOptionsOpen
-                                    ? Object.keys(qrTypes).map((key, index) => {
-                                          return (
-                                              <div
-                                                  className="cursor-pointer flex justify-center items-center py-2 px-5 m-1 rounded-full border-2 bg-white border-hot-pink-500 text-sm text-hot-pink-500 hover:bg-hot-pink-100 qr-selector transition-all duration-300"
-                                                  key={`${key}-${index}`}
-                                                  data-selector={key}
-                                              >
-                                                  {qrTypes[key][0]}
-                                              </div>
-                                          );
-                                      })
-                                    : null}
+                                {Object.keys(qrTypes).map((key, index) => {
+                                    return (
+                                        <div
+                                            className="cursor-pointer flex justify-center items-center py-2 px-5 m-1 rounded-full border-2 bg-white border-hot-pink-500 text-sm text-hot-pink-500 hover:bg-qrmory-purple-400 qr-selector transition-all duration-300"
+                                            key={qrTypes[key]}
+                                            data-selector={key}
+                                        >
+                                            {qrTypes[key][0]}
+                                        </div>
+                                    );
+                                })}
+                                {qrOptionsOpen ? "" : null}
                                 <div
                                     className="self-start cursor-pointer py-2 m-1"
                                     onClick={() =>
@@ -199,11 +198,11 @@ const Welcome = (props) => {
                                 </div>
                             </div>
                             <div className="mx-auto flex flex-col grow justify-center w-full text-left">
-                                <label className="text-qrmory-purple-500 mb-8">
+                                <label className="control-label">
                                     Enter QR Name (optional):
                                     <input
                                         type="text"
-                                        className="block w-full max-w-sm bg-transparent border-qrmory-purple-500 text-qrmory-purple-500 font-bold focus:bg-stone-300 transition-all duration-300"
+                                        className="control-input"
                                         onChange={(el) => {
                                             setQrTitle(el.target.value);
                                         }}
@@ -236,7 +235,7 @@ const Welcome = (props) => {
                                     Title
                                 </h4>
 
-                                <h5 className="text-basetext-qrmory-purple-500 font-bold">
+                                <h5 className="text-base text-qrmory-purple-500 font-bold">
                                     {qrTitle || null}
                                 </h5>
                             </div>

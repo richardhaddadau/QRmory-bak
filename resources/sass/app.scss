@@ -1,12 +1,12 @@
-$hot-pink-100: #FDD8D3;
-$hot-pink-200: #FBABA9;
-$hot-pink-300: #F47C84;
-$hot-pink-400: #E95A72;
-$hot-pink-500: #DB2857;
-$hot-pink-600: #BC1D56;
-$hot-pink-700: #9D1452;
-$hot-pink-800: #7F0C4B;
-$hot-pink-900: #690747;
+$qrmory-purple-100: #F0D0F7;
+$qrmory-purple-200: #DEA4F0;
+$qrmory-purple-300: #B66FD2;
+$qrmory-purple-400: #8444A6;
+$qrmory-purple-500: #49176B;
+$qrmory-purple-600: #39105C;
+$qrmory-purple-700: #2A0B4D;
+$qrmory-purple-800: #1E073E;
+$qrmory-purple-900: #150433;
 
 $stone-50: #fafaf9;
 $stone-100: #f5f5f4;
@@ -27,6 +27,28 @@ $stone-900: #1c1917;
     -webkit-text-stroke-color: white;
 }
 
+.control-label {
+    margin-bottom: 2rem;
+    color: $qrmory-purple-500;
+}
+
+.control-input {
+    margin-left: 1rem;
+    width: 100%;
+    max-width: 32rem;
+
+    background-color: transparent;
+    border-color: $qrmory-purple-500;
+
+    color: $qrmory-purple-500;
+    font-weight: bold;
+
+    transition: all 3ms ease;
+}
+
+.control-input:focus {
+    background-color: $stone-50;
+}
 
 input {
     border-width: 0px !important;
@@ -34,7 +56,7 @@ input {
 }
 
 .qr-selector.active {
-    background-color: $hot-pink-500 !important;
+    background-color: $qrmory-purple-500 !important;
 
     color: white;
 }
@@ -52,7 +74,7 @@ input {
 #selector-block-head.disabled,
 #selector-block-foot.disabled {
     cursor: initial;
-    color: $hot-pink-200 !important;
+    color: $qrmory-purple-200 !important;
 }
 
 #download-button:disabled {
