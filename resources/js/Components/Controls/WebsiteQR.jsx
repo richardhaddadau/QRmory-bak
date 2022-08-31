@@ -2,6 +2,8 @@ import React, { useState } from "react";
 
 const WebsiteQR = ({ setText, setChanged }) => {
     const [protocol, setProtocol] = useState("https");
+    const [isError, setIsError] = useState(false);
+    const [errorMessage, setErrorMessage] = useState();
 
     return (
         <>
@@ -11,65 +13,99 @@ const WebsiteQR = ({ setText, setChanged }) => {
                     <select
                         id="protocol-selector"
                         className="rounded-xl"
-                        onChange={(el) => setProtocol(el.target.value)}
+                        onChange={(el) => {
+                            const siteInput =
+                                document.getElementById("site-input");
+
+                            setText(el.target.value + "://" + siteInput.value);
+                            setChanged(true);
+                            setProtocol(el.target.value);
+                        }}
                     >
                         <option value="https">https://</option>
                         <option value="http">http://</option>
                     </select>
                     <input
+                        id="site-input"
                         type="text"
                         className="control-input"
-                        onChange={(el) => {
-                            const httpProtocol = "http://";
-                            const httpsProtocol = "https://";
+                        onKeyDown={(e) => {
+                            if (e.key === " ") {
+                                e.preventDefault();
+                            }
+                        }}
+                        onPaste={(el) => {
                             const protocolSelector =
                                 document.getElementById("protocol-selector");
 
                             let currentValue = el.target.value;
-                            let starting = currentValue.substring(0, 7);
-
                             let siteUrl;
 
                             try {
                                 siteUrl = new URL(currentValue);
                             } catch (e) {
-                                return false;
+                                try {
+                                    siteUrl = new URL("http://" + currentValue);
+                                } catch (e) {
+                                    setIsError(true);
+                                    setErrorMessage();
+                                    return false;
+                                }
                             }
 
                             let getProtocol = siteUrl.protocol.substring(
                                 0,
                                 siteUrl.protocol.length - 1
                             );
-                            let getSite = currentValue.substring(
-                                getProtocol.length + 2,
-                                currentValue.length
-                            );
+
+                            let getSite = siteUrl
+                                .toString()
+                                .substring(
+                                    getProtocol.length + 3,
+                                    siteUrl.toString().length
+                                );
 
                             protocolSelector.value = getProtocol;
                             setProtocol(getProtocol);
-                            currentValue = 
 
-                            if (starting === "https:/") {
-                                currentValue = currentValue.substring(
-                                    8,
-                                    currentValue.length
-                                );
-                            } else if (starting === "http://") {
-                                protocolSelector.value = "http";
-                                setProtocol("http");
-                                currentValue = currentValue.substring(
-                                    7,
-                                    currentValue.length
+                            el.target.value = getSite.toString();
+
+                            setText(getSite.toString());
+                            setChanged(true);
+                        }}
+                        onChange={(el) => {
+                            const protocolSelector =
+                                document.getElementById("protocol-selector");
+
+                            const httpsStarting = el.target.value.substring(
+                                0,
+                                8
+                            );
+                            const httpStarting = el.target.value.substring(
+                                0,
+                                7
+                            );
+
+                            if (
+                                httpsStarting === "https://" ||
+                                httpStarting === "http://"
+                            ) {
+                                setIsError(true);
+                                setErrorMessage(
+                                    `You don't need to type in a protocol (eg. http:// or https://).`
                                 );
                             }
 
-                            el.target.value = currentValue;
-
-                            setText(currentValue);
+                            setText(
+                                protocolSelector.value + "://" + el.target.value
+                            );
                             setChanged(true);
                         }}
                     />
                 </div>
+                <p className="text-sm italic text-rose-600">
+                    {isError ? errorMessage : null}
+                </p>
             </label>
         </>
     );
