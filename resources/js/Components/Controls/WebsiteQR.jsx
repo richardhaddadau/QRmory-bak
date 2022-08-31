@@ -86,6 +86,8 @@ const WebsiteQR = ({ setText, setChanged }) => {
                                 7
                             );
 
+                            let useSite;
+
                             if (
                                 httpsStarting === "https://" ||
                                 httpStarting === "http://"
@@ -94,13 +96,18 @@ const WebsiteQR = ({ setText, setChanged }) => {
                                 setErrorMessage(
                                     `You don't need to type in a protocol (eg. http:// or https://).`
                                 );
+
+                                useSite = el.target.value.substring(
+                                    el.target.value.indexOf("://") + 3,
+                                    el.target.value.length
+                                );
                             } else {
                                 setIsError(false);
+                                useSite = el.target.value;
                             }
 
-                            setText(
-                                protocolSelector.value + "://" + el.target.value
-                            );
+                            setText(protocolSelector.value + "://" + useSite);
+                            console.log(useSite);
                             setChanged(true);
                         }}
                     />
