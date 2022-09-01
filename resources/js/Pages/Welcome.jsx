@@ -350,7 +350,7 @@ const Welcome = (props) => {
             {/*    </div>*/}
             {/*</section>*/}
 
-            {/*<MyFooter />*/}
+            <MyFooter />
         </>
     );
 };
