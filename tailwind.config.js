@@ -50,6 +50,9 @@ module.exports = {
             backgroundPosition: {
                 hero: "center",
             },
+            borderWidth: {
+                1: "1px",
+            },
             fontFamily: {
                 sans: ["europa", ...defaultTheme.fontFamily.sans],
                 header: ["marydale", ...defaultTheme.fontFamily.sans],

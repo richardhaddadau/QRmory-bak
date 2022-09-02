@@ -27,6 +27,34 @@ $stone-900: #1c1917;
     -webkit-text-stroke-color: white;
 }
 
+.policy-document h3 {
+    margin-top: 2rem;
+
+    font-family: 'marydale', sans-serif;
+    font-size: 1.5rem;
+    font-weight: bold;
+    line-height: 2rem;
+    color: $qrmory-purple-500;
+}
+
+.policy-document h4 {
+    margin-top: 1.25rem;
+
+    font-size: 1.25rem;
+    font-weight: bold;
+    line-height: 1.5rem;
+
+    color: $qrmory-purple-500;
+}
+
+.policy-document p {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+
+    font-size: 1rem;
+    line-height: 1.5rem;
+}
+
 .control-label {
     margin-bottom: 2rem;
     color: $qrmory-purple-500;

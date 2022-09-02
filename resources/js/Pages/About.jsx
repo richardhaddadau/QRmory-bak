@@ -1,16 +1,8 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Head } from "@inertiajs/inertia-react";
 import Standard from "@/Layouts/Standard";
 
 const About = (props) => {
-    useEffect(() => {
-        const navItems = document.querySelectorAll(".nav-item");
-
-        setTimeout(() => {
-            navItems[2].classList.add("active");
-        }, 0);
-    }, []);
-
     return (
         <>
             <Head title="About" />

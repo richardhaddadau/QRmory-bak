@@ -20,13 +20,14 @@ const MyFooter = () => {
         support: ["Contact Support", "/contact"],
         privacy: ["Privacy Policy", "/privacy-policy"],
         terms: ["Terms + Conditions", "/terms-and-conditions"],
+        cookie: ["Cookie Policy", "/cookie-policy"],
     };
 
     return (
         <>
-            <footer className="py-16 text-qrmory-purple-500">
-                <div className="mx-auto flex md:flex-row flex-col justify-evenly items-stretch gap-4 w-full max-w-main-card">
-                    <article className="w-1/4">
+            <footer className="mx-auto my-8 py-8 px-4 w-full max-w-7xl border-t-1 border-qrmory-purple-200 text-qrmory-purple-500">
+                <div className="mx-auto flex md:flex-row flex-col md:justify-between justify-center items-stretch md:gap-4 gap-16 w-full md:text-left text-center">
+                    <article className="flex flex-col md:w-1/4 w-full md:items-start items-center">
                         <a href="/">
                             <Logo className="mb-2 w-32 fill-qrmory-purple-500" />
                         </a>
@@ -35,7 +36,7 @@ const MyFooter = () => {
                             quickly with QRmory.
                         </p>
                         <h4 className="mb-2 text-xl font-bold">Follow Us</h4>
-                        <div className="flex flex-row gap-2">
+                        <div className="flex flex-row gap-2 md:justify-start justify-center">
                             <a
                                 className="hover:scale-110 hover:text-qrmory-purple-700 transition-all duration-300"
                                 href="https://facebook.com/qrmory"
@@ -60,7 +61,7 @@ const MyFooter = () => {
                         </div>
                     </article>
 
-                    <article className="">
+                    <article className="md:w-1/5 w-full">
                         <h4 className="mb-4 font-bold text-xl">Quick Links</h4>
                         <ul>
                             {Object.keys(quickLinks).map((key, index) => (
@@ -76,7 +77,7 @@ const MyFooter = () => {
                         </ul>
                     </article>
 
-                    <article className="">
+                    <article className="md:w-1/5 w-full">
                         <h4 className="mb-4 font-bold text-xl">
                             Important Information
                         </h4>

@@ -32,6 +32,7 @@ import {
     DownloadPDF,
     DownloadJPG,
 } from "@/Helpers/DownloadQR";
+import Standard from "@/Layouts/Standard";
 
 const Welcome = (props) => {
     const randomTitles = [
@@ -152,205 +153,212 @@ const Welcome = (props) => {
 
     return (
         <>
-            <header className="main-hero flex flex-col justify-center items-center h-hero bg-hero text-white">
+            <Standard>
                 <NavBar />
-                <h1 className="font-header text-5xl hero-heading">
-                    Generate an <span>arsenal</span> of QR Codes
-                </h1>
-                <h3 className="mt-2 text-xl tracking-widest uppercase drop-shadow-lg">
-                    Be equipped for anything with QRmory
-                </h3>
-            </header>
 
-            <section className="bg-stone-200 text-qrmory-purple-500">
-                <div className="mx-auto py-24 text-center w-full max-w-7xl">
-                    <h2 className="font-header text-4.5xl">Start Creating</h2>
-                    <h3 className="text-xl uppercase drop-shadow-lg">
-                        Go on! Give it a go
-                    </h3>
+                <header className="main-hero flex flex-col justify-center items-center h-hero bg-hero text-white">
+                    <div className="w-full max-w-7xl text-center">
+                        <h1 className="font-header text-5xl hero-heading">
+                            Generate an <span>arsenal</span> of QR Codes
+                        </h1>
+                        <h3 className="mt-2 text-xl tracking-widest uppercase drop-shadow-lg">
+                            Be equipped for anything with QRmory
+                        </h3>
+                    </div>
+                </header>
 
-                    <div className="py-16 px-8 flex md:flex-row flex-col md:items-stretch items-center gap-8 min-h-qr-card w-full">
-                        <div className="p-8 flex flex-col grow bg-white rounded-3xl shadow-2xl">
-                            <div className="mb-4 pb-4 flex flex-row flex-wrap justify-start items-center content-end self-start border-b-2 border-b-stone-100 transition-all">
-                                {Object.keys(qrTypes).map((key, index) => {
-                                    return (
-                                        <div
-                                            className="cursor-pointer flex justify-center items-center py-2 px-5 m-1 rounded-full border-2 bg-white border-hot-pink-500 text-sm text-hot-pink-500 hover:bg-qrmory-purple-400 qr-selector transition-all duration-300"
-                                            key={qrTypes[key]}
-                                            data-selector={key}
-                                        >
-                                            {qrTypes[key][0]}
+                <main className="mx-auto px-4 w-full max-w-7xl">
+                    <section className="mx-auto py-24 text-center text-qrmory-purple-500">
+                        <h2 className="font-header text-4.5xl">
+                            Start Creating
+                        </h2>
+                        <h3 className="text-xl uppercase drop-shadow-lg">
+                            Go on! Give it a go
+                        </h3>
+
+                        <div className="py-16 flex md:flex-row flex-col md:items-stretch items-center gap-8 min-h-qr-card w-full">
+                            <div className="p-8 flex flex-col grow bg-white rounded-3xl shadow-2xl">
+                                <div className="mb-4 pb-4 flex flex-row flex-wrap justify-start items-center content-end self-start border-b-2 border-b-stone-100 transition-all">
+                                    {Object.keys(qrTypes).map((key, index) => {
+                                        return (
+                                            <div
+                                                className="cursor-pointer flex justify-center items-center py-2 px-5 m-1 rounded-full border-2 bg-white border-hot-pink-500 text-sm text-hot-pink-500 hover:bg-qrmory-purple-400 qr-selector transition-all duration-300"
+                                                key={qrTypes[key]}
+                                                data-selector={key}
+                                            >
+                                                {qrTypes[key][0]}
+                                            </div>
+                                        );
+                                    })}
+
+                                    <p className="ml-2 inline text-black italic">
+                                        more coming soon
+                                    </p>
+
+                                    {/*<div*/}
+                                    {/*    className="self-start cursor-pointer py-2 m-1"*/}
+                                    {/*    onClick={() =>*/}
+                                    {/*        setQrOptionsOpen(!qrOptionsOpen)*/}
+                                    {/*    }*/}
+                                    {/*>*/}
+                                    {/*    <FaGripVertical*/}
+                                    {/*        color="black"*/}
+                                    {/*        size={24}*/}
+                                    {/*        className="inline"*/}
+                                    {/*    />*/}
+                                    {/*    <p className="ml-2 inline text-black">*/}
+                                    {/*        {qrOptionsOpen ? "less" : "more"}{" "}*/}
+                                    {/*        options*/}
+                                    {/*    </p>*/}
+                                    {/*</div>*/}
+                                </div>
+                                <div className="mx-auto flex flex-col grow justify-center w-full text-left">
+                                    <label className="control-label">
+                                        Enter QR Name (optional):
+                                        <input
+                                            type="text"
+                                            className="block control-input"
+                                            onChange={(el) => {
+                                                setQrTitle(el.target.value);
+                                            }}
+                                            value={qrTitle}
+                                        />
+                                    </label>
+
+                                    <div className="w-full flex justify-center">
+                                        <div className="relative w-full">
+                                            {qrControl}
                                         </div>
-                                    );
-                                })}
-
-                                <p className="ml-2 inline text-black italic">
-                                    more coming soon
-                                </p>
-
-                                {/*<div*/}
-                                {/*    className="self-start cursor-pointer py-2 m-1"*/}
-                                {/*    onClick={() =>*/}
-                                {/*        setQrOptionsOpen(!qrOptionsOpen)*/}
-                                {/*    }*/}
-                                {/*>*/}
-                                {/*    <FaGripVertical*/}
-                                {/*        color="black"*/}
-                                {/*        size={24}*/}
-                                {/*        className="inline"*/}
-                                {/*    />*/}
-                                {/*    <p className="ml-2 inline text-black">*/}
-                                {/*        {qrOptionsOpen ? "less" : "more"}{" "}*/}
-                                {/*        options*/}
-                                {/*    </p>*/}
-                                {/*</div>*/}
-                            </div>
-                            <div className="mx-auto flex flex-col grow justify-center w-full text-left">
-                                <label className="control-label">
-                                    Enter QR Name (optional):
-                                    <input
-                                        type="text"
-                                        className="block control-input"
-                                        onChange={(el) => {
-                                            setQrTitle(el.target.value);
-                                        }}
-                                        value={qrTitle}
-                                    />
-                                </label>
-
-                                <div className="w-full flex justify-center">
-                                    <div className="relative w-full">
-                                        {qrControl}
                                     </div>
+
+                                    <button
+                                        onClick={() => {
+                                            if (textValue.length > 0) {
+                                                setQrValue(textValue);
+                                                setQrChanged(false);
+                                            }
+                                        }}
+                                        className="mt-8 py-2.5 px-8 bg-qrmory-purple-500 w-full md:w-52 text-sm font-bold text-white rounded-3xl uppercase font-bold hover:tracking-widest hover:shadow-lg hover:shadow-qrmory-purple-500 transition-all duration-300"
+                                    >
+                                        Generate QR
+                                    </button>
+                                </div>
+                            </div>
+                            <div className="pt-8 pb-10 px-10 flex flex-col justify-between w-qr-preview bg-white rounded-3xl shadow-2xl text-center">
+                                <div className="">
+                                    <h4 className="text-sm uppercase text-stone-500">
+                                        Title
+                                    </h4>
+
+                                    <h5 className="text-base text-qrmory-purple-500 font-bold">
+                                        {qrTitle || null}
+                                    </h5>
                                 </div>
 
-                                <button
-                                    onClick={() => {
-                                        if (textValue.length > 0) {
-                                            setQrValue(textValue);
-                                            setQrChanged(false);
+                                <div className="my-16 mx-auto text-gray-600 dark:text-gray-600 text-sm">
+                                    <QRCodeSVG
+                                        id="final-qr"
+                                        value={qrValue}
+                                        fgColor={
+                                            qrChanged ? "#78716c" : "black"
                                         }
+                                        size={180}
+                                        level="H"
+                                    />
+                                </div>
+                                <button
+                                    className="mx-auto py-2.5 px-4 w-full bg-qrmory-purple-500 rounded-full text-white uppercase font-bold hover:tracking-widest hover:shadow-lg hover:shadow-qrmory-purple-500 transition-all duration-300"
+                                    id="download-button"
+                                    onClick={() => {
+                                        const svgData =
+                                            document.querySelector(
+                                                "#final-qr"
+                                            ).outerHTML;
+                                        DownloadSVG(svgData, qrTitle);
                                     }}
-                                    className="mt-8 py-2.5 px-8 bg-qrmory-purple-500 w-full md:w-52 text-sm font-bold text-white rounded-3xl uppercase font-bold hover:tracking-widest hover:shadow-lg hover:shadow-qrmory-purple-500 transition-all duration-300"
+                                    disabled={qrChanged}
                                 >
-                                    Generate QR
+                                    Download SVG
                                 </button>
+                                {/*<div className="my-2 flex flex-row flex-nowrap justify-between items-center w-full">*/}
+                                {/*    <button*/}
+                                {/*        className="py-2.5 px-4 text-stone-50 bg-hot-pink-500 rounded-full uppercase font-bold shadow-md shadow-hot-pink-700 hover:bg-hot-pink-400 hover:text-stone-50 hover:shadow-lg hover:shadow-hot-pink-200 transition-all duration-300"*/}
+                                {/*        id="download-button"*/}
+                                {/*        onClick={DownloadPNG}*/}
+                                {/*        disabled={qrChanged}*/}
+                                {/*    >*/}
+                                {/*        png*/}
+                                {/*    </button>*/}
+
+                                {/*    <button*/}
+                                {/*        className="py-2.5 px-4 text-stone-50 bg-hot-pink-500 rounded-full uppercase font-bold shadow-md shadow-hot-pink-700 hover:bg-hot-pink-400 hover:text-stone-50 hover:shadow-lg hover:shadow-hot-pink-200 transition-all duration-300"*/}
+                                {/*        id="download-button"*/}
+                                {/*        onClick={DownloadJPG}*/}
+                                {/*        disabled={qrChanged}*/}
+                                {/*    >*/}
+                                {/*        jpg*/}
+                                {/*    </button>*/}
+
+                                {/*    <button*/}
+                                {/*        className="py-2.5 px-4 text-stone-50 bg-hot-pink-500 rounded-full uppercase font-bold shadow-md shadow-hot-pink-700 hover:bg-hot-pink-400 hover:text-stone-50 hover:shadow-lg hover:shadow-hot-pink-200 transition-all duration-300"*/}
+                                {/*        id="download-button"*/}
+                                {/*        onClick={DownloadPDF}*/}
+                                {/*        disabled={qrChanged}*/}
+                                {/*    >*/}
+                                {/*        pdf**/}
+                                {/*    </button>*/}
+                                {/*</div>*/}
                             </div>
                         </div>
-                        <div className="pt-8 pb-10 px-10 flex flex-col justify-between w-qr-preview bg-white rounded-3xl shadow-2xl text-center">
-                            <div className="">
-                                <h4 className="text-sm uppercase text-stone-500">
-                                    Title
-                                </h4>
+                    </section>
 
-                                <h5 className="text-base text-qrmory-purple-500 font-bold">
-                                    {qrTitle || null}
-                                </h5>
-                            </div>
+                    {/*<section className="py-8 bg-stone-200 text-qrmory-purple-500 text-center">*/}
+                    {/*    <div className="flex md:flex-row flex-col justify-evenly items-center w-full">*/}
+                    {/*        <div className="">*/}
+                    {/*            <p className="font-bold text-4xl">65,000</p>*/}
+                    {/*            <p className="text-base uppercase">*/}
+                    {/*                Wonderful Visitors*/}
+                    {/*            </p>*/}
+                    {/*        </div>*/}
 
-                            <div className="my-16 mx-auto text-gray-600 dark:text-gray-600 text-sm">
-                                <QRCodeSVG
-                                    id="final-qr"
-                                    value={qrValue}
-                                    fgColor={qrChanged ? "#78716c" : "black"}
-                                    size={180}
-                                    level="H"
-                                />
-                            </div>
-                            <button
-                                className="mx-auto py-2.5 px-4 w-full bg-qrmory-purple-500 rounded-full text-white uppercase font-bold hover:tracking-widest hover:shadow-lg hover:shadow-qrmory-purple-500 transition-all duration-300"
-                                id="download-button"
-                                onClick={() => {
-                                    const svgData =
-                                        document.querySelector(
-                                            "#final-qr"
-                                        ).outerHTML;
-                                    DownloadSVG(svgData, qrTitle);
-                                }}
-                                disabled={qrChanged}
-                            >
-                                Download SVG
-                            </button>
-                            {/*<div className="my-2 flex flex-row flex-nowrap justify-between items-center w-full">*/}
-                            {/*    <button*/}
-                            {/*        className="py-2.5 px-4 text-stone-50 bg-hot-pink-500 rounded-full uppercase font-bold shadow-md shadow-hot-pink-700 hover:bg-hot-pink-400 hover:text-stone-50 hover:shadow-lg hover:shadow-hot-pink-200 transition-all duration-300"*/}
-                            {/*        id="download-button"*/}
-                            {/*        onClick={DownloadPNG}*/}
-                            {/*        disabled={qrChanged}*/}
-                            {/*    >*/}
-                            {/*        png*/}
-                            {/*    </button>*/}
+                    {/*        <div className="">*/}
+                    {/*            <p className="font-bold text-4xl">120,000</p>*/}
+                    {/*            <p className="text-base uppercase">QR Codes Created</p>*/}
+                    {/*        </div>*/}
 
-                            {/*    <button*/}
-                            {/*        className="py-2.5 px-4 text-stone-50 bg-hot-pink-500 rounded-full uppercase font-bold shadow-md shadow-hot-pink-700 hover:bg-hot-pink-400 hover:text-stone-50 hover:shadow-lg hover:shadow-hot-pink-200 transition-all duration-300"*/}
-                            {/*        id="download-button"*/}
-                            {/*        onClick={DownloadJPG}*/}
-                            {/*        disabled={qrChanged}*/}
-                            {/*    >*/}
-                            {/*        jpg*/}
-                            {/*    </button>*/}
+                    {/*        <div className="">*/}
+                    {/*            <p className="font-bold text-4xl">500</p>*/}
+                    {/*            <p className="text-base uppercase">Awesome Arsenals</p>*/}
+                    {/*        </div>*/}
+                    {/*    </div>*/}
+                    {/*</section>*/}
 
-                            {/*    <button*/}
-                            {/*        className="py-2.5 px-4 text-stone-50 bg-hot-pink-500 rounded-full uppercase font-bold shadow-md shadow-hot-pink-700 hover:bg-hot-pink-400 hover:text-stone-50 hover:shadow-lg hover:shadow-hot-pink-200 transition-all duration-300"*/}
-                            {/*        id="download-button"*/}
-                            {/*        onClick={DownloadPDF}*/}
-                            {/*        disabled={qrChanged}*/}
-                            {/*    >*/}
-                            {/*        pdf**/}
-                            {/*    </button>*/}
-                            {/*</div>*/}
-                        </div>
-                    </div>
-                </div>
-            </section>
+                    <p className="py-16 text-center text-base text-qrmory-purple-500 italic">
+                        More coming soon
+                    </p>
 
-            {/*<section className="py-8 bg-stone-200 text-qrmory-purple-500 text-center">*/}
-            {/*    <div className="flex md:flex-row flex-col justify-evenly items-center w-full">*/}
-            {/*        <div className="">*/}
-            {/*            <p className="font-bold text-4xl">65,000</p>*/}
-            {/*            <p className="text-base uppercase">*/}
-            {/*                Wonderful Visitors*/}
-            {/*            </p>*/}
-            {/*        </div>*/}
+                    {/*<section className="py-16 px-8 bg-stone-200 text-white text-center">*/}
+                    {/*    <div className="mx-auto py-20 px-10 flex md:flex-row flex-col justify-evenly items-center w-full max-w-main-card bg-qrmory-purple-500 rounded-3xl">*/}
+                    {/*        <div className="">*/}
+                    {/*            <p className="font-bold text-4xl">65,000</p>*/}
+                    {/*            <p className="text-base uppercase">*/}
+                    {/*                Wonderful Visitors*/}
+                    {/*            </p>*/}
+                    {/*        </div>*/}
 
-            {/*        <div className="">*/}
-            {/*            <p className="font-bold text-4xl">120,000</p>*/}
-            {/*            <p className="text-base uppercase">QR Codes Created</p>*/}
-            {/*        </div>*/}
+                    {/*        <div className="">*/}
+                    {/*            <p className="font-bold text-4xl">120,000</p>*/}
+                    {/*            <p className="text-base uppercase">QR Codes Created</p>*/}
+                    {/*        </div>*/}
 
-            {/*        <div className="">*/}
-            {/*            <p className="font-bold text-4xl">500</p>*/}
-            {/*            <p className="text-base uppercase">Awesome Arsenals</p>*/}
-            {/*        </div>*/}
-            {/*    </div>*/}
-            {/*</section>*/}
-
-            <p className="py-16 text-center text-base text-qrmory-purple-500 italic">
-                More coming soon
-            </p>
-
-            {/*<section className="py-16 px-8 bg-stone-200 text-white text-center">*/}
-            {/*    <div className="mx-auto py-20 px-10 flex md:flex-row flex-col justify-evenly items-center w-full max-w-main-card bg-qrmory-purple-500 rounded-3xl">*/}
-            {/*        <div className="">*/}
-            {/*            <p className="font-bold text-4xl">65,000</p>*/}
-            {/*            <p className="text-base uppercase">*/}
-            {/*                Wonderful Visitors*/}
-            {/*            </p>*/}
-            {/*        </div>*/}
-
-            {/*        <div className="">*/}
-            {/*            <p className="font-bold text-4xl">120,000</p>*/}
-            {/*            <p className="text-base uppercase">QR Codes Created</p>*/}
-            {/*        </div>*/}
-
-            {/*        <div className="">*/}
-            {/*            <p className="font-bold text-4xl">500</p>*/}
-            {/*            <p className="text-base uppercase">Awesome Arsenals</p>*/}
-            {/*        </div>*/}
-            {/*    </div>*/}
-            {/*</section>*/}
-
-            <MyFooter />
+                    {/*        <div className="">*/}
+                    {/*            <p className="font-bold text-4xl">500</p>*/}
+                    {/*            <p className="text-base uppercase">Awesome Arsenals</p>*/}
+                    {/*        </div>*/}
+                    {/*    </div>*/}
+                    {/*</section>*/}
+                </main>
+            </Standard>
         </>
     );
 };
