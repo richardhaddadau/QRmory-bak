@@ -96,11 +96,11 @@ const Welcome = (props) => {
         // ],
         // wifi: ["WiFi", "Share WiFi details"],
         // location: ["Location", "Share a map address"],
-        // facebook: [
-        //     "Facebook",
-        //     "Facebook page/group",
-        //     <FacebookQR setText={setTextValue} setChanged={setQrChanged} />,
-        // ],
+        facebook: [
+            "Facebook",
+            "Facebook page/group",
+            <FacebookQR setText={setTextValue} setChanged={setQrChanged} />,
+        ],
         // instagram: [
         //     "Instagram",
         //     "Instagram account",
@@ -123,32 +123,35 @@ const Welcome = (props) => {
     useEffect(() => {
         const qrSelectors = document.querySelectorAll(".qr-selector");
 
-        setTimeout(() => {
-            qrSelectors[0].classList.add("active");
-            setQrControl(qrTypes["website"][2]);
+        setTimeout(() => {}, 0);
 
-            if (qrSelectors.length > 0) {
-                for (const selector of qrSelectors) {
-                    selector.addEventListener("click", () => {
-                        if (!selector.classList.contains("active")) {
-                            setTextValue("");
+        for (const item of qrSelectors) {
+            item.classList.remove("active");
+        }
 
-                            for (const item of qrSelectors) {
-                                item.classList.remove("active");
-                            }
+        qrSelectors[0].classList.add("active");
 
-                            selector.classList.add("active");
+        setQrControl(qrTypes["website"][2]);
 
-                            const selectorIndex =
-                                selector.getAttribute("data-selector");
-                            setQrControl(qrTypes[selectorIndex][2]);
-                        }
+        if (qrSelectors.length > 0) {
+            for (const selector of qrSelectors) {
+                selector.addEventListener("click", () => {
+                    const selectorIndex =
+                        selector.getAttribute("data-selector");
 
-                        setQrChanged(true);
-                    });
-                }
+                    setTextValue("");
+
+                    for (const item of qrSelectors) {
+                        item.classList.remove("active");
+                    }
+
+                    selector.classList.add("active");
+
+                    setQrControl(qrTypes[selectorIndex][2]);
+                    setQrChanged(true);
+                });
             }
-        }, 0);
+        }
     }, []);
 
     return (
@@ -157,7 +160,7 @@ const Welcome = (props) => {
                 <NavBar />
 
                 <header className="main-hero flex flex-col justify-center items-center h-hero bg-hero text-white">
-                    <div className="w-full max-w-7xl text-center">
+                    <div className="px-6 w-full max-w-7xl text-center">
                         <h1 className="font-header text-5xl hero-heading">
                             Generate an <span>arsenal</span> of QR Codes
                         </h1>
@@ -167,7 +170,7 @@ const Welcome = (props) => {
                     </div>
                 </header>
 
-                <main className="mx-auto px-4 w-full max-w-7xl">
+                <main className="mx-auto px-6 w-full max-w-7xl">
                     <section className="mx-auto py-24 text-center text-qrmory-purple-500">
                         <h2 className="font-header text-4.5xl">
                             Start Creating
@@ -176,13 +179,13 @@ const Welcome = (props) => {
                             Go on! Give it a go
                         </h3>
 
-                        <div className="py-16 flex md:flex-row flex-col md:items-stretch items-center gap-8 min-h-qr-card w-full">
+                        <div className="py-16 flex md:flex-row flex-col md:items-stretch items-center gap-6 min-h-qr-card w-full">
                             <div className="p-8 flex flex-col grow bg-white rounded-3xl shadow-2xl">
                                 <div className="mb-4 pb-4 flex flex-row flex-wrap justify-start items-center content-end self-start border-b-2 border-b-stone-100 transition-all">
                                     {Object.keys(qrTypes).map((key, index) => {
                                         return (
                                             <div
-                                                className="cursor-pointer flex justify-center items-center py-2 px-5 m-1 rounded-full border-2 bg-white border-hot-pink-500 text-sm text-hot-pink-500 hover:bg-qrmory-purple-400 qr-selector transition-all duration-300"
+                                                className="cursor-pointer flex justify-center items-center py-2 px-5 m-1 rounded-full border-2 bg-white border-hot-pink-500 text-sm text-hot-pink-500 hover:bg-qrmory-purple-200 qr-selector transition-all duration-300"
                                                 key={qrTypes[key]}
                                                 data-selector={key}
                                             >
