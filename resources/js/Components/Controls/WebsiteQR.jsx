@@ -9,7 +9,7 @@ const WebsiteQR = ({ setText, setChanged }) => {
         <>
             <label className="control-label">
                 Enter Website:
-                <div>
+                <div className="flex flex-row flex-nowrap">
                     <select
                         id="protocol-selector"
                         className="mr-2 mt-1 rounded-xl"

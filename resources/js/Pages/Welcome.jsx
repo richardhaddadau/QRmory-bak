@@ -101,16 +101,16 @@ const Welcome = (props) => {
             "Facebook page/group",
             <FacebookQR setText={setTextValue} setChanged={setQrChanged} />,
         ],
-        // instagram: [
-        //     "Instagram",
-        //     "Instagram account",
-        //     <InstagramQR setText={setTextValue} setChanged={setQrChanged} />,
-        // ],
-        // twitter: [
-        //     "Twitter",
-        //     "Twitter account",
-        //     <TwitterQR setText={setTextValue} setChanged={setQrChanged} />,
-        // ],
+        instagram: [
+            "Instagram",
+            "Instagram account",
+            <InstagramQR setText={setTextValue} setChanged={setQrChanged} />,
+        ],
+        twitter: [
+            "Twitter",
+            "Twitter account",
+            <TwitterQR setText={setTextValue} setChanged={setQrChanged} />,
+        ],
         // youTube: [
         //     "YouTube",
         //     "YouTube video",
@@ -261,6 +261,7 @@ const Welcome = (props) => {
                                 <div className="my-16 mx-auto text-gray-600 dark:text-gray-600 text-sm">
                                     <QRCodeSVG
                                         id="final-qr"
+                                        renderAs="svg"
                                         value={qrValue}
                                         fgColor={
                                             qrChanged ? "#78716c" : "black"
