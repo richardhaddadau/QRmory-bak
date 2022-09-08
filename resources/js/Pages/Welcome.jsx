@@ -62,6 +62,26 @@ const Welcome = (props) => {
             "Link to a page or site",
             <WebsiteQR setText={setTextValue} setChanged={setQrChanged} />,
         ],
+        facebook: [
+            "Facebook",
+            "Facebook page/group",
+            <FacebookQR setText={setTextValue} setChanged={setQrChanged} />,
+        ],
+        instagram: [
+            "Instagram",
+            "Instagram account",
+            <InstagramQR setText={setTextValue} setChanged={setQrChanged} />,
+        ],
+        twitter: [
+            "Twitter",
+            "Twitter account",
+            <TwitterQR setText={setTextValue} setChanged={setQrChanged} />,
+        ],
+        youTube: [
+            "YouTube",
+            "YouTube video",
+            <YoutubeQR setText={setTextValue} setChanged={setQrChanged} />,
+        ],
         // email: [
         //     "Email",
         //     "Preset an email",
@@ -89,33 +109,13 @@ const Welcome = (props) => {
         //     "Preset an SMS",
         //     <SmsQR setText={setTextValue} setChanged={setQrChanged} />,
         // ],
-        // text: [
-        //     "Text",
-        //     "Display a text message",
-        //     <TextQR setText={setTextValue} setChanged={setQrChanged} />,
-        // ],
+        text: [
+            "Text",
+            "Display a text message",
+            <TextQR setText={setTextValue} setChanged={setQrChanged} />,
+        ],
         // wifi: ["WiFi", "Share WiFi details"],
         // location: ["Location", "Share a map address"],
-        facebook: [
-            "Facebook",
-            "Facebook page/group",
-            <FacebookQR setText={setTextValue} setChanged={setQrChanged} />,
-        ],
-        instagram: [
-            "Instagram",
-            "Instagram account",
-            <InstagramQR setText={setTextValue} setChanged={setQrChanged} />,
-        ],
-        twitter: [
-            "Twitter",
-            "Twitter account",
-            <TwitterQR setText={setTextValue} setChanged={setQrChanged} />,
-        ],
-        // youTube: [
-        //     "YouTube",
-        //     "YouTube video",
-        //     <YoutubeQR setText={setTextValue} setChanged={setQrChanged} />,
-        // ],
         // bitcoin: ["Bitcoin", "Quick Bitcoin payments"],
         // ethereum: ["Ethereum", "Quick Ethereum payments"],
     };
@@ -148,6 +148,7 @@ const Welcome = (props) => {
                     selector.classList.add("active");
 
                     setQrControl(qrTypes[selectorIndex][2]);
+                    setTextValue("");
                     setQrChanged(true);
                 });
             }
@@ -179,13 +180,13 @@ const Welcome = (props) => {
                             Go on! Give it a go
                         </h3>
 
-                        <div className="py-16 flex md:flex-row flex-col md:items-stretch items-center gap-6 min-h-qr-card w-full">
+                        <div className="py-16 flex lg:flex-row flex-col lg:items-stretch items-center gap-6 min-h-qr-card w-full">
                             <div className="p-8 flex flex-col grow bg-white rounded-3xl shadow-2xl">
                                 <div className="mb-4 pb-4 flex flex-row flex-wrap justify-start items-center content-end self-start border-b-2 border-b-stone-100 transition-all">
                                     {Object.keys(qrTypes).map((key, index) => {
                                         return (
                                             <div
-                                                className="cursor-pointer flex justify-center items-center py-2 px-5 m-1 rounded-full border-2 bg-white border-hot-pink-500 text-sm text-hot-pink-500 hover:bg-qrmory-purple-200 qr-selector transition-all duration-300"
+                                                className="cursor-pointer flex justify-center items-center py-2 px-5 m-1 rounded-full border-2 bg-white border-hot-pink-500 text-sm hover:bg-qrmory-purple-400 hover:text-qrmory-purple-200 qr-selector transition-all duration-300"
                                                 key={qrTypes[key]}
                                                 data-selector={key}
                                             >

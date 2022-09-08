@@ -2,38 +2,60 @@ import React, { useState } from "react";
 
 const YoutubeQR = ({ setText, setChanged }) => {
     // States
-    const [youTubeURL, setYouTubeURL] = useState("https://www.youtube.com/");
+    const [urlType, setUrlType] = useState("video");
+    const [youTubeURL, setYouTubeURL] = useState(
+        "https://www.youtube.com/watch?v="
+    );
 
     return (
         <>
-            {/*<input*/}
-            {/*    type="radio"*/}
-            {/*    value="Use Username"*/}
-            {/*    name="youtubeType"*/}
-            {/*    onChange={(el) => {*/}
-            {/*        setYouTubeURL("https://www.youtube.com/");*/}
-            {/*    }}*/}
-            {/*/>*/}
-            {/*<input*/}
-            {/*    type="radio"*/}
-            {/*    value="Use Username"*/}
-            {/*    name="youtubeType"*/}
-            {/*    onChange={() => {*/}
-            {/*        setYouTubeURL("https://www.youtube.com/watch?v=");*/}
-            {/*    }}*/}
-            {/*/>*/}
-
-            <label className="text-stone-500">
+            <label className="control-label">
                 Enter YouTube detail:
-                <div className="flex flex-row flex-nowrap">
-                    <p className="pt-2 text-stone-700 font-bold text-lg">
+                <div className="flex lg:flex-row flex-col flex-nowrap">
+                    <select
+                        id="protocol-selector"
+                        className="mr-2 mt-1 rounded-xl"
+                        onChange={(el) => {
+                            const youtubeInput =
+                                document.getElementById("youtube-input").value;
+
+                            if (el.target.value === "video") {
+                                setYouTubeURL(
+                                    "https://www.youtube.com/watch?v="
+                                );
+                            } else {
+                                setYouTubeURL("https://www.youtube.com/");
+                            }
+
+                            if (youtubeInput) {
+                                setText(youTubeURL + youtubeInput);
+                            } else {
+                                setText("");
+                            }
+
+                            setChanged(true);
+                        }}
+                    >
+                        <option value="video">Video</option>
+                        <option value="username">Username</option>
+                    </select>
+                    <p className="pt-2 text-qrmory-purple-500 font-bold text-lg">
                         {youTubeURL}
                     </p>
                     <input
+                        id="youtube-input"
                         type="text"
-                        className="w-full text-hot-pink-500 font-bold bg-transparent border-stone-500 focus:bg-stone-300 transition-all duration-300"
+                        className={
+                            "control-input " +
+                            (urlType === "video" ? "shortest" : "")
+                        }
                         onChange={(el) => {
-                            setText(`${youTubeURL}${el.target.value}`);
+                            if (el.target.value) {
+                                setText(`${youTubeURL}${el.target.value}`);
+                            } else {
+                                setText("");
+                            }
+
                             setChanged(true);
                         }}
                     />

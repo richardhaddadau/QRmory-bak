@@ -6,7 +6,7 @@ const FacebookQR = ({ setText, setChanged }) => {
             <label className="control-label">
                 Enter Facebook Username:
                 <div className="flex flex-row flex-nowrap">
-                    <p className="pt-2 text-qrmory-purple-500 font-bold text-lg">
+                    <p className="pt-2 text-qrmory-purple-400 font-bold text-lg">
                         https://facebook.com/
                     </p>
                     <input

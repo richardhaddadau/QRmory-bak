@@ -5,11 +5,11 @@ import Label from "@/Components/Label";
 const TextQR = ({ setText, setChanged }) => {
     return (
         <>
-            <label className="text-stone-500 mb-8">
+            <label className="control-label">
                 Enter Text Message:
                 <input
                     type="text"
-                    className="w-full text-hot-pink-500 font-bold bg-transparent border-stone-500 focus:bg-stone-300 transition-all duration-300"
+                    className="control-input"
                     onChange={(el) => {
                         setText(el.target.value);
                         setChanged(true);

@@ -57,7 +57,7 @@ $stone-900: #1c1917;
 
 .control-label {
     margin-bottom: 2rem;
-    color: $qrmory-purple-500;
+    color: $qrmory-purple-400;
 }
 
 .control-input {
@@ -65,12 +65,27 @@ $stone-900: #1c1917;
     max-width: 32rem;
 
     background-color: transparent;
-    border-color: $qrmory-purple-500;
+    border-color: $qrmory-purple-400 !important;
 
     color: $qrmory-purple-500;
     font-weight: bold;
 
     transition: all 3ms ease;
+}
+
+.control-input.short {
+    margin-left: 10px;
+    max-width: 24rem;
+}
+
+.control-input.shorter {
+    margin-left: 10px;
+    max-width: 18rem;
+}
+
+.control-input.shortest {
+    margin-left: 10px;
+    max-width: 12rem;
 }
 
 .control-input:focus {
@@ -82,10 +97,15 @@ input {
     border-bottom-width: 1px !important;
 }
 
+.qr-selector {
+    transition-property: color, background-color !important;
+    transition-duration:  1s, 0.3s !important;
+    transition-timing-function: ease, ease !important;
+}
+
 .qr-selector.active {
     background-color: $qrmory-purple-500 !important;
-
-    color: white;
+    color: white !important;
 }
 
 .qr-selector.active #selector-descriptor {

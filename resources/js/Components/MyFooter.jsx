@@ -11,7 +11,7 @@ const MyFooter = () => {
     // Constants
     const quickLinks = {
         // about: ["About", "/about"],
-        features: ["Features", "/features"],
+        // features: ["Features", "/features"],
         // pricing: ["Pricing", "/pricing"],
         // blog: ["Blog", "/blog"],
     };
@@ -25,7 +25,7 @@ const MyFooter = () => {
 
     return (
         <>
-            <footer className="mx-auto my-8 py-8 px-4 w-full max-w-7xl border-t-1 border-qrmory-purple-200 text-qrmory-purple-500">
+            <footer className="mx-auto my-8 py-8 px-8 w-full max-w-7xl border-t-1 border-qrmory-purple-200 text-qrmory-purple-500">
                 <div className="mx-auto flex md:flex-row flex-col md:justify-between justify-center items-stretch md:gap-4 gap-16 w-full md:text-left text-center">
                     <article className="flex flex-col md:w-1/4 w-full md:items-start items-center">
                         <a href="/">
@@ -61,21 +61,21 @@ const MyFooter = () => {
                         </div>
                     </article>
 
-                    <article className="md:w-1/5 w-full">
-                        <h4 className="mb-4 font-bold text-xl">Quick Links</h4>
-                        <ul>
-                            {Object.keys(quickLinks).map((key, index) => (
-                                <li className="my-2" key={key}>
-                                    <a
-                                        className="text-base hover:font-bold transition-all duration-300"
-                                        href={quickLinks[key][1]}
-                                    >
-                                        {quickLinks[key][0]}
-                                    </a>
-                                </li>
-                            ))}
-                        </ul>
-                    </article>
+                    {/*<article className="md:w-1/5 w-full">*/}
+                    {/*    <h4 className="mb-4 font-bold text-xl">Quick Links</h4>*/}
+                    {/*    <ul>*/}
+                    {/*        {Object.keys(quickLinks).map((key, index) => (*/}
+                    {/*            <li className="my-2" key={key}>*/}
+                    {/*                <a*/}
+                    {/*                    className="text-base hover:font-bold transition-all duration-300"*/}
+                    {/*                    href={quickLinks[key][1]}*/}
+                    {/*                >*/}
+                    {/*                    {quickLinks[key][0]}*/}
+                    {/*                </a>*/}
+                    {/*            </li>*/}
+                    {/*        ))}*/}
+                    {/*    </ul>*/}
+                    {/*</article>*/}
 
                     <article className="md:w-1/5 w-full">
                         <h4 className="mb-4 font-bold text-xl">
