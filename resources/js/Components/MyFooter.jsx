@@ -10,10 +10,10 @@ import Logo from "@/Components/Logo";
 const MyFooter = () => {
     // Constants
     const quickLinks = {
-        about: ["About", "/about"],
+        // about: ["About", "/about"],
         features: ["Features", "/features"],
-        pricing: ["Pricing", "/pricing"],
-        blog: ["Blog", "/blog"],
+        // pricing: ["Pricing", "/pricing"],
+        // blog: ["Blog", "/blog"],
     };
 
     const importantLinks = {
