@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 
 import NavBar from "@/Components/NavBar";
 import QRCodeSVG from "qrcode.react";
+import d3ToPng from "d3-svg-to-png";
 
 import AudioQR from "@/Components/Controls/AudioQR";
 import BitcoinQR from "@/Components/Controls/BitcoinQR";
@@ -285,34 +286,33 @@ const Welcome = (props) => {
                                 >
                                     Download SVG
                                 </button>
-                                {/*<div className="my-2 flex flex-row flex-nowrap justify-between items-center w-full">*/}
-                                {/*    <button*/}
-                                {/*        className="py-2.5 px-4 text-stone-50 bg-hot-pink-500 rounded-full uppercase font-bold shadow-md shadow-hot-pink-700 hover:bg-hot-pink-400 hover:text-stone-50 hover:shadow-lg hover:shadow-hot-pink-200 transition-all duration-300"*/}
-                                {/*        id="download-button"*/}
-                                {/*        onClick={DownloadPNG}*/}
-                                {/*        disabled={qrChanged}*/}
-                                {/*    >*/}
-                                {/*        png*/}
-                                {/*    </button>*/}
+                                <div className="my-2 flex flex-row flex-nowrap gap-2 items-center w-full">
+                                    <button
+                                        className="py-2.5 px-4 grow bg-qrmory-purple-500 rounded-full text-white uppercase font-bold hover:tracking-widest hover:shadow-lg hover:shadow-qrmory-purple-500 transition-all duration-300"
+                                        id="download-button"
+                                        onClick={() => {
+                                            d3ToPng('#final-qr', qrTitle, {
+                                                format: 'png'
+                                            }).then(r => console.log(r))
+                                        }}
+                                        disabled={qrChanged}
+                                    >
+                                        png
+                                    </button>
 
-                                {/*    <button*/}
-                                {/*        className="py-2.5 px-4 text-stone-50 bg-hot-pink-500 rounded-full uppercase font-bold shadow-md shadow-hot-pink-700 hover:bg-hot-pink-400 hover:text-stone-50 hover:shadow-lg hover:shadow-hot-pink-200 transition-all duration-300"*/}
-                                {/*        id="download-button"*/}
-                                {/*        onClick={DownloadJPG}*/}
-                                {/*        disabled={qrChanged}*/}
-                                {/*    >*/}
-                                {/*        jpg*/}
-                                {/*    </button>*/}
-
-                                {/*    <button*/}
-                                {/*        className="py-2.5 px-4 text-stone-50 bg-hot-pink-500 rounded-full uppercase font-bold shadow-md shadow-hot-pink-700 hover:bg-hot-pink-400 hover:text-stone-50 hover:shadow-lg hover:shadow-hot-pink-200 transition-all duration-300"*/}
-                                {/*        id="download-button"*/}
-                                {/*        onClick={DownloadPDF}*/}
-                                {/*        disabled={qrChanged}*/}
-                                {/*    >*/}
-                                {/*        pdf**/}
-                                {/*    </button>*/}
-                                {/*</div>*/}
+                                    <button
+                                        className="py-2.5 px-4 grow bg-qrmory-purple-500 rounded-full text-white uppercase font-bold hover:tracking-widest hover:shadow-lg hover:shadow-qrmory-purple-500 transition-all duration-300"
+                                        id="download-button"
+                                        onClick={() => {
+                                            d3ToPng('#final-qr', qrTitle, {
+                                                format: 'jpg'
+                                            }).then(r => console.log(r))
+                                        }}
+                                        disabled={qrChanged}
+                                    >
+                                        jpg
+                                    </button>
+                                </div>
                             </div>
                         </div>
                     </section>
