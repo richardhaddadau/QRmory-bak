@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 
 import NavBar from "@/Components/NavBar";
+import { faunaDriver } from "@/Helpers/FaunaDriver";
+
 import QRCodeSVG from "qrcode.react";
 import d3ToPng from "d3-svg-to-png";
 
@@ -34,6 +36,7 @@ import {
     DownloadJPG,
 } from "@/Helpers/DownloadQR";
 import Standard from "@/Layouts/Standard";
+import EBusinessCardView from "@/Components/Previews/EBusinessCardView";
 
 const Welcome = (props) => {
     const randomTitles = [
@@ -54,47 +57,73 @@ const Welcome = (props) => {
     );
     const [textValue, setTextValue] = useState("");
     const [qrControl, setQrControl] = useState(null);
-    const [qrOptionsOpen, setQrOptionsOpen] = useState(false);
+    const [qrLevel, setQrLevel] = useState("M");
     const [qrChanged, setQrChanged] = useState(true);
+    const [showFlip, setShowFlip] = useState(false);
+    const [showPreview, setShowPreview] = useState(null);
 
     const qrTypes = {
         website: [
             "Website",
             "Link to a page or site",
             <WebsiteQR setText={setTextValue} setChanged={setQrChanged} />,
+            false,
         ],
         facebook: [
             "Facebook",
             "Facebook page/group",
             <FacebookQR setText={setTextValue} setChanged={setQrChanged} />,
+            false,
         ],
         instagram: [
             "Instagram",
             "Instagram account",
             <InstagramQR setText={setTextValue} setChanged={setQrChanged} />,
+            false,
         ],
         twitter: [
             "Twitter",
             "Twitter account",
             <TwitterQR setText={setTextValue} setChanged={setQrChanged} />,
+            false,
         ],
         youTube: [
             "YouTube",
             "YouTube video",
             <YoutubeQR setText={setTextValue} setChanged={setQrChanged} />,
+            false,
         ],
-        // email: [
-        //     "Email",
-        //     "Preset an email",
-        //     <EmailQR setText={setTextValue} setChanged={setQrChanged} />,
-        // ],
+        eBusinessCard: [
+            "E-Business Card",
+            "The modern business card",
+            <EBusinessCardQR
+                setText={setTextValue}
+                setChanged={setQrChanged}
+            />,
+            true,
+            <EBusinessCardView
+                getValue={qrValue}
+                getChanged={qrChanged}
+                getLevel={qrLevel}
+            />,
+        ],
+        poll: [
+            "Poll",
+            "Run a quick poll",
+            <PollQR setText={setTextValue} setChanged={setQrChanged} />,
+            true,
+        ],
+        email: [
+            "Email",
+            "Preset an email",
+            <EmailQR setText={setTextValue} setChanged={setQrChanged} />,
+            false,
+        ],
         // socialMedia: [
         //     "Social Media",
         //     "Share your profiles",
         //     <SocialMediaQR setText={setTextValue} setChanged={setQrChanged} />,
         // ],
-        // eBusinessCard: ["E-Biz Card", "The modern business card"],
-        // poll: ["Poll", "Run a quick poll"],
         // reviews: ["Reviews", "Collect customer reviews"],
         // event: ["Event", "Promote an event"],
         // document: ["Document", "Share a PDF document"],
@@ -114,6 +143,7 @@ const Welcome = (props) => {
             "Text",
             "Display a text message",
             <TextQR setText={setTextValue} setChanged={setQrChanged} />,
+            false,
         ],
         // wifi: ["WiFi", "Share WiFi details"],
         // location: ["Location", "Share a map address"],
@@ -121,8 +151,13 @@ const Welcome = (props) => {
         // ethereum: ["Ethereum", "Quick Ethereum payments"],
     };
 
-    useEffect(() => {
+    useEffect(async () => {
         const qrSelectors = document.querySelectorAll(".qr-selector");
+        const links = await faunaDriver.GetLinks();
+
+        await links["data"].map((item) => {
+            console.log(item["data"]["short_url"]);
+        });
 
         setTimeout(() => {}, 0);
 
@@ -151,6 +186,13 @@ const Welcome = (props) => {
                     setQrControl(qrTypes[selectorIndex][2]);
                     setTextValue("");
                     setQrChanged(true);
+                    setShowFlip(qrTypes[selectorIndex][3]);
+
+                    setShowPreview(
+                        qrTypes[selectorIndex][4]
+                            ? qrTypes[selectorIndex][4]
+                            : null
+                    );
                 });
             }
         }
@@ -181,7 +223,7 @@ const Welcome = (props) => {
                             Go on! Give it a go
                         </h3>
 
-                        <div className="py-16 flex lg:flex-row flex-col lg:items-stretch items-center gap-6 min-h-qr-card w-full">
+                        <div className="py-16 flex lg:flex-row flex-col lg:items-start items-center gap-6 min-h-qr-card w-full">
                             <div className="p-8 flex flex-col grow bg-white rounded-3xl shadow-2xl">
                                 <div className="mb-4 pb-4 flex flex-row flex-wrap justify-start items-center content-end self-start border-b-2 border-b-stone-100 transition-all">
                                     {Object.keys(qrTypes).map((key, index) => {
@@ -249,69 +291,122 @@ const Welcome = (props) => {
                                     </button>
                                 </div>
                             </div>
-                            <div className="pt-8 pb-10 px-10 flex flex-col justify-between w-qr-preview bg-white rounded-3xl shadow-2xl text-center">
-                                <div className="">
-                                    <h4 className="text-sm uppercase text-stone-500">
-                                        Title
-                                    </h4>
+                            <div className="relative">
+                                {showFlip ? (
+                                    <div
+                                        id="flip"
+                                        className="cursor-pointer py-0.5 px-3 absolute top-4 right-4 bg-white hover:bg-qrmory-purple-500 border border-qrmory-purple-500 text-qrmory-purple-500 hover:text-white rounded-full z-50 transition-all duration-300"
+                                        onClick={(el) => {
+                                            const mainCard =
+                                                document.querySelector(
+                                                    "#mainCard"
+                                                );
 
-                                    <h5 className="text-base text-qrmory-purple-500 font-bold">
-                                        {qrTitle || null}
-                                    </h5>
-                                </div>
-
-                                <div className="my-16 mx-auto text-gray-600 dark:text-gray-600 text-sm">
-                                    <QRCodeSVG
-                                        id="final-qr"
-                                        renderAs="svg"
-                                        value={qrValue}
-                                        fgColor={
-                                            qrChanged ? "#78716c" : "black"
-                                        }
-                                        size={180}
-                                        level="H"
-                                    />
-                                </div>
-                                <button
-                                    className="mx-auto py-2.5 px-4 w-full bg-qrmory-purple-500 rounded-full text-white uppercase font-bold hover:tracking-widest hover:shadow-lg hover:shadow-qrmory-purple-500 transition-all duration-300"
-                                    id="download-button"
-                                    onClick={() => {
-                                        const svgData =
-                                            document.querySelector(
-                                                "#final-qr"
-                                            ).outerHTML;
-                                        DownloadSVG(svgData, qrTitle);
-                                    }}
-                                    disabled={qrChanged}
+                                            mainCard.classList.toggle(
+                                                "flipOver"
+                                            );
+                                        }}
+                                    >
+                                        Flip
+                                    </div>
+                                ) : null}
+                                <div
+                                    id="mainCard"
+                                    className=" transition-all duration-500"
                                 >
-                                    Download SVG
-                                </button>
-                                <div className="my-2 flex flex-row flex-nowrap gap-2 items-center w-full">
-                                    <button
-                                        className="py-2.5 px-4 grow bg-qrmory-purple-500 rounded-full text-white uppercase font-bold hover:tracking-widest hover:shadow-lg hover:shadow-qrmory-purple-500 transition-all duration-300"
-                                        id="download-button"
-                                        onClick={() => {
-                                            d3ToPng('#final-qr', qrTitle, {
-                                                format: 'png'
-                                            }).then(r => console.log(r))
-                                        }}
-                                        disabled={qrChanged}
+                                    <div
+                                        id="frontCard"
+                                        className="py-8 px-10 relative flex flex-col justify-between w-qr-preview bg-white rounded-3xl shadow-2xl text-center transition-all duration-300"
                                     >
-                                        png
-                                    </button>
+                                        <div className="">
+                                            <h4 className="text-sm uppercase text-stone-500">
+                                                Title
+                                            </h4>
 
-                                    <button
-                                        className="py-2.5 px-4 grow bg-qrmory-purple-500 rounded-full text-white uppercase font-bold hover:tracking-widest hover:shadow-lg hover:shadow-qrmory-purple-500 transition-all duration-300"
-                                        id="download-button"
-                                        onClick={() => {
-                                            d3ToPng('#final-qr', qrTitle, {
-                                                format: 'jpg'
-                                            }).then(r => console.log(r))
-                                        }}
-                                        disabled={qrChanged}
+                                            <h5 className="text-base text-qrmory-purple-500 font-bold">
+                                                {qrTitle || null}
+                                            </h5>
+                                        </div>
+
+                                        <div className="my-16 mx-auto text-gray-600 dark:text-gray-600 text-sm">
+                                            <QRCodeSVG
+                                                id="final-qr"
+                                                renderAs="svg"
+                                                value={qrValue}
+                                                fgColor={
+                                                    qrChanged
+                                                        ? "#78716c"
+                                                        : "black"
+                                                }
+                                                size={180}
+                                                level={qrLevel} // L (Low), M (Medium), Q (Quartile), H (High)
+                                            />
+                                        </div>
+                                        <div className="flex flex-col">
+                                            <button
+                                                className="mx-auto py-2.5 px-4 w-full bg-qrmory-purple-500 rounded-full text-white uppercase font-bold hover:tracking-widest hover:shadow-lg hover:shadow-qrmory-purple-500 transition-all duration-300"
+                                                id="download-button"
+                                                onClick={() => {
+                                                    const svgData =
+                                                        document.querySelector(
+                                                            "#final-qr"
+                                                        ).outerHTML;
+                                                    DownloadSVG(
+                                                        svgData,
+                                                        qrTitle
+                                                    );
+                                                }}
+                                                disabled={qrChanged}
+                                            >
+                                                Download SVG
+                                            </button>
+                                            <div className="my-2 flex flex-row flex-nowrap gap-2 items-center w-full">
+                                                <button
+                                                    className="py-2.5 px-4 grow bg-qrmory-purple-500 rounded-full text-white uppercase font-bold hover:tracking-widest hover:shadow-lg hover:shadow-qrmory-purple-500 transition-all duration-300"
+                                                    id="download-button"
+                                                    onClick={() => {
+                                                        d3ToPng(
+                                                            "#final-qr",
+                                                            qrTitle,
+                                                            {
+                                                                format: "png",
+                                                            }
+                                                        ).then((r) =>
+                                                            console.log(r)
+                                                        );
+                                                    }}
+                                                    disabled={qrChanged}
+                                                >
+                                                    png
+                                                </button>
+
+                                                <button
+                                                    className="py-2.5 px-4 grow bg-qrmory-purple-500 rounded-full text-white uppercase font-bold hover:tracking-widest hover:shadow-lg hover:shadow-qrmory-purple-500 transition-all duration-300"
+                                                    id="download-button"
+                                                    onClick={() => {
+                                                        d3ToPng(
+                                                            "#final-qr",
+                                                            qrTitle,
+                                                            {
+                                                                format: "jpg",
+                                                            }
+                                                        ).then((r) =>
+                                                            console.log(r)
+                                                        );
+                                                    }}
+                                                    disabled={qrChanged}
+                                                >
+                                                    jpg
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div
+                                        id="backCard"
+                                        className="py-8 px-10 absolute top-0 left-0 h-full flex flex-col justify-between w-qr-preview bg-white rounded-3xl shadow-2xl text-center transition-all duration-300"
                                     >
-                                        jpg
-                                    </button>
+                                        {showPreview}
+                                    </div>
                                 </div>
                             </div>
                         </div>
