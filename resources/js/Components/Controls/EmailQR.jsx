@@ -13,12 +13,12 @@ const EmailQR = ({ setText, setChanged }) => {
 
     return (
         <>
-            <div className="mb-8">
-                <label className="text-stone-500">
+            <div className="mx-auto flex flex-col grow justify-center w-full text-left">
+                <label className="control-label">
                     Enter email address to send to:
                     <input
                         type="text"
-                        className="w-full text-hot-pink-500 font-bold bg-transparent border-stone-500 focus:bg-stone-300 transition-all duration-300"
+                        className="control-input"
                         onChange={(el) => {
                             setEmailTo(el.target.value);
                             updateEmail();
@@ -27,12 +27,12 @@ const EmailQR = ({ setText, setChanged }) => {
                 </label>
             </div>
 
-            <div className="mb-8">
-                <label className="text-stone-500">
+            <div className="mx-auto flex flex-col grow justify-center w-full text-left">
+                <label className="control-label">
                     Enter email subject:
                     <input
                         type="text"
-                        className="w-full text-hot-pink-500 font-bold bg-transparent border-stone-500 focus:bg-stone-300 transition-all duration-300"
+                        className="control-input"
                         onChange={(el) => {
                             setEmailSubject(el.target.value);
                             updateEmail();
@@ -41,14 +41,18 @@ const EmailQR = ({ setText, setChanged }) => {
                 </label>
             </div>
 
-            <div className="mb-8">
-                <label className="text-stone-500">
+            <div className="mx-auto flex flex-col grow justify-center w-full text-left">
+                <label className="control-label">
                     Enter email message:
                     <textarea
-                        className="w-full text-hot-pink-500 font-bold bg-transparent border-stone-500 focus:bg-stone-300 transition-all duration-300 resize-none"
+                        className="control-textarea"
+                        rows={4}
                         onChange={(el) => {
-                            setEmailBody(el.target.value);
+                            setEmailBody(
+                                el.target.value.replaceAll("\n", "%0D0A")
+                            );
                             updateEmail();
+                            console.log(emailSubject);
                         }}
                     />
                 </label>
