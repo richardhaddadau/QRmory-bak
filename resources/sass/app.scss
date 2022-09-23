@@ -73,6 +73,24 @@ $stone-900: #1c1917;
     transition: all 3ms ease;
 }
 
+.control-textarea {
+    display: block;
+
+    width: 100%;
+
+    background-color: transparent;
+    border-width: 0;
+    border-bottom-width: 1px;
+    border-color: $qrmory-purple-400 !important;
+
+    resize: none;
+
+    color: $qrmory-purple-500;
+    font-weight: bold;
+
+    transition: all 3ms ease;
+}
+
 .control-input.short {
     margin-left: 10px;
     max-width: 24rem;
@@ -127,4 +145,20 @@ input {
 #download-button:disabled {
     background-color: $stone-500 !important;
     box-shadow: none;
+}
+
+#mainCard {
+    transform-style: preserve-3d;
+}
+
+#frontCard, #backCard {
+    backface-visibility: hidden;
+}
+
+#backCard {
+    transform: rotateY(180deg);
+}
+
+.flipOver {
+    transform: rotateY(180deg);
 }

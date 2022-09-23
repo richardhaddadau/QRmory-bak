@@ -2,7 +2,7 @@ import React from "react";
 import Input from "@/Components/Input";
 import Label from "@/Components/Label";
 
-const PollQR = ({ setText }) => {
+const PollQR = ({ setText, setChanged }) => {
     return (
         <div className="w-full max-w-md mx-auto flex justify-center">
             <div className="relative w-full">
