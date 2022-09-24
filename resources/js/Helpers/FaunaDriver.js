@@ -22,6 +22,20 @@ class FaunaDriver {
         });
     }
 
+    GenerateNewLink = async (temporary) => {
+        await this.client.query(
+            q.Create(q.Collection("links"), {
+                data: {
+                    short_url: "",
+                    long_url: "",
+                    clicks: 0,
+                    temporary: temporary,
+                    deleted: false,
+                },
+            })
+        );
+    };
+
     GetLinks = async () => {
         let links = [];
 
@@ -37,6 +51,23 @@ class FaunaDriver {
             });
 
         return links;
+    };
+
+    GetLinkByShortUrl = async (searchUrl) => {
+        let found = [];
+
+        await this.client
+            .query(
+                q.Map(
+                    q.Paginate(q.Match(q.Index("link_by_shorturl"), searchUrl)),
+                    q.Lambda("X", q.Get(q.Var("X")))
+                )
+            )
+            .then((res) => {
+                found = res;
+            });
+
+        return found;
     };
 }
 
