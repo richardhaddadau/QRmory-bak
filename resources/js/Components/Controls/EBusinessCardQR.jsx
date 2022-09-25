@@ -6,13 +6,18 @@ import { faunaDriver } from "@/Helpers/FaunaDriver";
 const EBusinessCardQR = ({ setText, setChanged }) => {
     // States
     const [isLoading, setIsLoading] = useState(false);
+    const [temporaryLink, setTemporaryLink] = useState(
+        "https://comprss.it/..."
+    );
 
     useEffect(async () => {
         setIsLoading(true);
 
         const found = await faunaDriver.GetLinkByShortUrl("test");
         await console.log(found["data"].length);
+        const newLink = await faunaDriver.GenerateNewLink(true, true);
 
+        setTemporaryLink(newLink);
         setIsLoading(false);
     }, []);
 
@@ -30,8 +35,7 @@ const EBusinessCardQR = ({ setText, setChanged }) => {
             </label>
             <article className="mt-8 w-full text-qrmory-purple-400">
                 <div className="">
-                    Temporary Url:{" "}
-                    {isLoading ? "..." : "https://comprss.it/test"}
+                    Temporary Url: {isLoading ? "..." : temporaryLink}
                 </div>
                 <div className="opacity-70 italic">
                     (will be confirmed once you generate the QR Code)
