@@ -19,7 +19,7 @@ class CompressIt {
         // Constants
         const urlLength = tryLength;
         const possibleChars =
-            "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+            "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
         const possibleCharsLength = possibleChars.length;
 
         while (currentDiv > 0) {
@@ -51,7 +51,7 @@ class CompressIt {
             }
         }
 
-        return compressedSite.substring(0, urlLength);
+        this.shortUrl = compressedSite;
     };
 }
 
