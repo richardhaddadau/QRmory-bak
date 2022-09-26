@@ -10,11 +10,10 @@ class CompressIt {
         if (!givenRef) return undefined;
 
         let compressedSite = "";
+        let optimisedCompressedSite = "";
         let compressedArray = [];
         let currentDiv = givenRef;
         let remainder = 0;
-
-        //341970588152103508
 
         // Constants
         const urlLength = tryLength;
@@ -32,26 +31,35 @@ class CompressIt {
             compressedSite += possibleChars[item];
         }
 
+        // Push to optimisedCompressedSite
+        optimisedCompressedSite = compressedSite.slice();
+
         if (compressedSite.length > urlLength) {
-            compressedSite = compressedSite.substring(
-                compressedSite - urlLength,
+            optimisedCompressedSite = optimisedCompressedSite.substring(
+                compressedSite.length - urlLength,
                 compressedSite.length
             );
         } else if (compressedSite.length < urlLength) {
             // Analytics Point: should keep record of how many document references fell under the urlLength
             // If a lot, perhaps find a more stable filler than random chars
 
+            let extraChars = "";
+
             for (
                 let count = 0;
                 count < compressedSite.length - urlLength;
                 count++
             ) {
-                compressedSite +=
+                extraChars +=
                     possibleChars[Math.random() * possibleCharsLength];
             }
+
+            optimisedCompressedSite += possibleChars.slice();
         }
 
-        this.shortUrl = compressedSite;
+        console.log(`Optimised: ${optimisedCompressedSite}`);
+
+        this.shortUrl = optimisedCompressedSite;
     };
 }
 
