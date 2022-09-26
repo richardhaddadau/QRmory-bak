@@ -1,13 +1,28 @@
+import { faunaDriver } from "@/Helpers/FaunaDriver";
+
 class CompressIt {
     constructor(value) {
-        this.shortUrl = "";
-        this.longUrl = value;
+        this.slug = "";
+        this.link = value;
         this.title = "";
         this.clicks = 0;
     }
 
-    Compress = (givenRef, tryLength) => {
+    Compress = async (givenRef, tryLength = 7) => {
         if (!givenRef) return undefined;
+
+        // Check if short link already exists
+        // const currentLinks = await faunaDriver.GetLinks();
+        // const currentLinksArray = [];
+        // const currentShortLinksArray = [];
+        //
+        // // Feed arrays with current links available
+        // currentLinks["data"].map((item) => {
+        //     currentLinksArray.push(item["data"]);
+        //     currentShortLinksArray.push(item["data"]["short_url"]);
+        // });
+        //
+        // currentShortLinksArray.includes("xxx");
 
         let compressedSite = "";
         let optimisedCompressedSite = "";
@@ -57,9 +72,7 @@ class CompressIt {
             optimisedCompressedSite += possibleChars.slice();
         }
 
-        console.log(`Optimised: ${optimisedCompressedSite}`);
-
-        this.shortUrl = optimisedCompressedSite;
+        this.slug = optimisedCompressedSite;
     };
 }
 

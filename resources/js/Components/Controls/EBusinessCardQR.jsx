@@ -6,17 +6,17 @@ import { faunaDriver } from "@/Helpers/FaunaDriver";
 const EBusinessCardQR = ({ setText, setChanged }) => {
     // States
     const [isLoading, setIsLoading] = useState(false);
-    const [temporaryLink, setTemporaryLink] = useState(
-        "https://comprss.it/..."
-    );
+    const [temporaryLink, setTemporaryLink] = useState([
+        "https://qrmory.com/visit/...",
+        0,
+    ]);
 
     useEffect(async () => {
         setIsLoading(true);
 
-        const found = await faunaDriver.GetLinkByShortUrl("test");
         const newLink = await faunaDriver.GenerateNewLink(true, true);
-
         setTemporaryLink(newLink);
+
         setIsLoading(false);
     }, []);
 
@@ -33,11 +33,20 @@ const EBusinessCardQR = ({ setText, setChanged }) => {
                 />
             </label>
             <article className="mt-8 w-full text-qrmory-purple-400">
-                <div className="">
-                    Temporary Url: {isLoading ? "..." : temporaryLink}
-                </div>
+                {isLoading ? (
+                    <p className="italic">Generating temporary link...</p>
+                ) : (
+                    <a
+                        href={temporaryLink[0]}
+                        data-ref={temporaryLink[1]}
+                        target="_blank"
+                    >
+                        {temporaryLink[0]}
+                    </a>
+                )}
                 <div className="opacity-70 italic">
-                    (will be confirmed once you generate the QR Code)
+                    (This temporary link will be confirmed once you generate the
+                    QR Code)
                 </div>
             </article>
         </>

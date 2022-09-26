@@ -2,7 +2,7 @@ import faunadb from "faunadb";
 import { comprssed } from "@/Helpers/CompressIt";
 
 const q = faunadb.query;
-const faunaKey = "fnAExEoXzbACVOkVYjGRJqAl_ompChQbamP_CB--";
+const faunaKey = "fnAExbq_mWACUgZ5pciRNfJzpTn24fAliKPYnQc5";
 
 class FaunaDriver {
     constructor(token) {
@@ -24,21 +24,19 @@ class FaunaDriver {
     }
 
     GenerateNewLink = async (temporary, sendBack) => {
+        let newRef;
         const getNow = Date.now();
         const newLink = comprssed;
-        newLink.Compress(getNow, 7);
-        newLink.longUrl = `https://qrmory.com/${newLink.shortUrl}`;
-
-        console.log(getNow);
-        console.log(newLink.shortUrl);
-        console.log(newLink.longUrl);
+        await newLink.Compress(getNow, 8);
+        newLink.link = `https://qrmory.com/visit/${newLink.slug}`;
 
         await this.client
             .query(
                 q.Create(q.Collection("links"), {
                     data: {
-                        short_url: newLink.shortUrl,
-                        long_url: newLink.longUrl,
+                        slug: newLink.slug,
+                        link: newLink.link,
+                        title: newLink.title,
                         clicks: 0,
                         temporary: temporary,
                         deleted: false,
@@ -46,24 +44,21 @@ class FaunaDriver {
                 })
             )
             .then(async (res) => {
-                const newRef = res["ref"]["value"]["id"];
-                newLink.Compress(newRef, 7);
-                newLink.longUrl = `https://qrmory.com/${newLink.shortUrl}`;
-
-                console.log(newLink.shortUrl);
-                console.log(newLink.longUrl);
+                newRef = res["ref"]["value"]["id"];
+                await newLink.Compress(newRef, 8);
+                newLink.link = `https://qrmory.com/visit/${newLink.slug}`;
 
                 await this.client.query(
                     q.Update(q.Ref(q.Collection("links"), newRef), {
                         data: {
-                            short_url: newLink.shortUrl,
-                            long_url: newLink.longUrl,
+                            slug: newLink.slug,
+                            link: newLink.link,
                         },
                     })
                 );
             });
 
-        return sendBack ? `https://comprss.it/${newLink.shortUrl}` : null;
+        return sendBack ? [newLink.link, newRef] : null;
     };
 
     GetLinks = async () => {
@@ -83,13 +78,13 @@ class FaunaDriver {
         return links;
     };
 
-    GetLinkByShortUrl = async (searchUrl) => {
+    GetLinkBySlug = async (searchUrl) => {
         let found = [];
 
         await this.client
             .query(
                 q.Map(
-                    q.Paginate(q.Match(q.Index("link_by_shorturl"), searchUrl)),
+                    q.Paginate(q.Match(q.Index("link_by_slug"), searchUrl)),
                     q.Lambda("X", q.Get(q.Var("X")))
                 )
             )
