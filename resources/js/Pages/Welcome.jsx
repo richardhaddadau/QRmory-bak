@@ -37,6 +37,7 @@ import {
 } from "@/Helpers/DownloadQR";
 import Standard from "@/Layouts/Standard";
 import EBusinessCardView from "@/Components/Previews/EBusinessCardView";
+import { Head } from "@inertiajs/inertia-react";
 
 const Welcome = (props) => {
     const randomTitles = [
@@ -198,6 +199,7 @@ const Welcome = (props) => {
 
     return (
         <>
+            <Head title="Welcome" />
             <Standard>
                 <NavBar />
 

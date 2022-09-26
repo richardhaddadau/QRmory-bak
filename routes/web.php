@@ -58,6 +58,10 @@ Route::get('/cookie-policy', function () {
     return Inertia::render('CookiePolicy');
 });
 
+Route::get('/visit/{slug}', function ($slug) {
+    return Inertia::render('Visit', [$slug]);
+});
+
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
