@@ -156,10 +156,8 @@ const Welcome = (props) => {
         const links = await faunaDriver.GetLinks();
 
         await links["data"].map((item) => {
-            console.log(item["data"]["short_url"]);
+            // console.log(item["data"]["short_url"]);
         });
-
-        setTimeout(() => {}, 0);
 
         for (const item of qrSelectors) {
             item.classList.remove("active");

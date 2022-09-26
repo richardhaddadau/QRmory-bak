@@ -14,7 +14,6 @@ const EBusinessCardQR = ({ setText, setChanged }) => {
         setIsLoading(true);
 
         const found = await faunaDriver.GetLinkByShortUrl("test");
-        await console.log(found["data"].length);
         const newLink = await faunaDriver.GenerateNewLink(true, true);
 
         setTemporaryLink(newLink);

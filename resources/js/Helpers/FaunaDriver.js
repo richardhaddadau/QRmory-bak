@@ -22,18 +22,48 @@ class FaunaDriver {
         });
     }
 
-    GenerateNewLink = async (temporary) => {
-        await this.client.query(
-            q.Create(q.Collection("links"), {
-                data: {
-                    short_url: "",
-                    long_url: "",
-                    clicks: 0,
-                    temporary: temporary,
-                    deleted: false,
-                },
-            })
-        );
+    GenerateNewLink = async (temporary, sendBack) => {
+        console.log("hello");
+        // const getNow = Date.now();
+        // const newLink = comprssed;
+        // newLink.Compress(getNow, 7);
+        // newLink.longUrl = `https://qrmory.com/${newLink.shortUrl}`;
+        //
+        // console.log(getNow);
+        // console.log(newLink.shortUrl);
+        // console.log(newLink.longUrl);
+        //
+        // await this.client
+        //     .query(
+        //         q.Create(q.Collection("links"), {
+        //             data: {
+        //                 short_url: newLink.shortUrl,
+        //                 long_url: newLink.longUrl,
+        //                 clicks: 0,
+        //                 temporary: temporary,
+        //                 deleted: false,
+        //             },
+        //         })
+        //     )
+        //     .then(async (res) => {
+        //         const newRef = res["ref"]["value"]["id"];
+        //         newLink.Compress(newRef);
+        //         newLink.longUrl = `https://qrmory.com/${newLink.shortUrl}`;
+        //
+        //         console.log(newLink.shortUrl);
+        //         console.log(newLink.longUrl);
+        //
+        //         await this.client.query(
+        //             q.Update(q.Ref(q.Collection("links"), newRef), {
+        //                 data: {
+        //                     short_url: newLink.shortUrl,
+        //                     long_url: newLink.longUrl,
+        //                 },
+        //             })
+        //         );
+        //     });
+        //
+        // return sendBack ? `https://comprss.it/${newLink.shortUrl}` : null;
     };
 
     GetLinks = async () => {
