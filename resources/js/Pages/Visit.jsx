@@ -8,7 +8,9 @@ const Visit = (props) => {
         const checkLink = await fauna.GetLinkBySlug(props[0]);
 
         // Check if slug exists
-        console.log(checkLink["data"].length > 0 ? "Woohoo" : "boooooo");
+        console.log(
+            checkLink["data"].length > 0 ? checkLink["data"] : "boooooo"
+        );
     }, []);
 
     return (
