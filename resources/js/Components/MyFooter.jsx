@@ -35,30 +35,30 @@ const MyFooter = () => {
                             Build an arsenal of great QR Codes simply and
                             quickly with QRmory.
                         </p>
-                        <h4 className="mb-2 text-xl font-bold">Follow Us</h4>
-                        <div className="flex flex-row gap-2 md:justify-start justify-center">
-                            <a
-                                className="hover:scale-110 hover:text-qrmory-purple-700 transition-all duration-300"
-                                href="https://facebook.com/qrmory"
-                                target="_blank"
-                            >
-                                <FaFacebookSquare size={30} />
-                            </a>
-                            <a
-                                className="hover:scale-110 hover:text-qrmory-purple-700 transition-all duration-300"
-                                href="https://twitter.com/qrmory"
-                                target="_blank"
-                            >
-                                <FaTwitterSquare size={30} />
-                            </a>
-                            <a
-                                className="hover:scale-110 hover:text-qrmory-purple-700 transition-all duration-300"
-                                href="https://instagram.com/qrmory"
-                                target="_blank"
-                            >
-                                <FaInstagramSquare size={30} />
-                            </a>
-                        </div>
+                        {/*<h4 className="mb-2 text-xl font-bold">Follow Us</h4>*/}
+                        {/*<div className="flex flex-row gap-2 md:justify-start justify-center">*/}
+                        {/*    <a*/}
+                        {/*        className="hover:scale-110 hover:text-qrmory-purple-700 transition-all duration-300"*/}
+                        {/*        href="https://facebook.com/qrmory"*/}
+                        {/*        target="_blank"*/}
+                        {/*    >*/}
+                        {/*        <FaFacebookSquare size={30} />*/}
+                        {/*    </a>*/}
+                        {/*    <a*/}
+                        {/*        className="hover:scale-110 hover:text-qrmory-purple-700 transition-all duration-300"*/}
+                        {/*        href="https://twitter.com/qrmory"*/}
+                        {/*        target="_blank"*/}
+                        {/*    >*/}
+                        {/*        <FaTwitterSquare size={30} />*/}
+                        {/*    </a>*/}
+                        {/*    <a*/}
+                        {/*        className="hover:scale-110 hover:text-qrmory-purple-700 transition-all duration-300"*/}
+                        {/*        href="https://instagram.com/qrmory"*/}
+                        {/*        target="_blank"*/}
+                        {/*    >*/}
+                        {/*        <FaInstagramSquare size={30} />*/}
+                        {/*    </a>*/}
+                        {/*</div>*/}
                     </article>
 
                     {/*<article className="md:w-1/5 w-full">*/}
