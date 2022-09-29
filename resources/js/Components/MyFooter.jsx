@@ -17,10 +17,10 @@ const MyFooter = () => {
     };
 
     const importantLinks = {
-        support: ["Contact Support", "/contact"],
-        privacy: ["Privacy Policy", "/privacy-policy"],
-        terms: ["Terms + Conditions", "/terms-and-conditions"],
-        cookie: ["Cookie Policy", "/cookie-policy"],
+        support: ["Contact Support", route("contact")],
+        privacy: ["Privacy Policy", route("privacy")],
+        terms: ["Terms + Conditions", route("terms")],
+        cookie: ["Cookie Policy", route("cookie")],
     };
 
     return (

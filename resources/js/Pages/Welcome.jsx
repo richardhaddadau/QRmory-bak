@@ -124,8 +124,6 @@ const Welcome = (props) => {
     useEffect(() => {
         const qrSelectors = document.querySelectorAll(".qr-selector");
 
-        setTimeout(() => {}, 0);
-
         for (const item of qrSelectors) {
             item.classList.remove("active");
         }
@@ -159,7 +157,7 @@ const Welcome = (props) => {
     return (
         <>
             <Standard>
-                <NavBar />
+                <NavBar className={"text-white"} props={props} />
 
                 <header className="main-hero flex flex-col justify-center items-center h-hero bg-hero text-white">
                     <div className="px-6 w-full max-w-7xl text-center">
@@ -291,9 +289,9 @@ const Welcome = (props) => {
                                         className="py-2.5 px-4 grow bg-qrmory-purple-500 rounded-full text-white uppercase font-bold hover:tracking-widest hover:shadow-lg hover:shadow-qrmory-purple-500 transition-all duration-300"
                                         id="download-button"
                                         onClick={() => {
-                                            d3ToPng('#final-qr', qrTitle, {
-                                                format: 'png'
-                                            }).then(r => console.log(r))
+                                            d3ToPng("#final-qr", qrTitle, {
+                                                format: "png",
+                                            }).then((r) => console.log(r));
                                         }}
                                         disabled={qrChanged}
                                     >
@@ -304,9 +302,9 @@ const Welcome = (props) => {
                                         className="py-2.5 px-4 grow bg-qrmory-purple-500 rounded-full text-white uppercase font-bold hover:tracking-widest hover:shadow-lg hover:shadow-qrmory-purple-500 transition-all duration-300"
                                         id="download-button"
                                         onClick={() => {
-                                            d3ToPng('#final-qr', qrTitle, {
-                                                format: 'jpg'
-                                            }).then(r => console.log(r))
+                                            d3ToPng("#final-qr", qrTitle, {
+                                                format: "jpg",
+                                            }).then((r) => console.log(r));
                                         }}
                                         disabled={qrChanged}
                                     >
