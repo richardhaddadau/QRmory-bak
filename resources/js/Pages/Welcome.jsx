@@ -159,7 +159,7 @@ const Welcome = (props) => {
     return (
         <>
             <Standard>
-                <NavBar />
+                <NavBar logoColour="#49176B" />
 
                 <header className="main-hero flex flex-col justify-center items-center h-hero bg-white text-qrmory-purple-500">
                     <div className="px-6 w-full max-w-7xl text-center">

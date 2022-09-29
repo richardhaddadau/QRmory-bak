@@ -1,6 +1,6 @@
 import React from "react";
 
-const Logo = ({ className }) => {
+const Logo = ({ className = "", logoColour = "white" }) => {
     return (
         <svg
             version="1.1"
@@ -9,7 +9,7 @@ const Logo = ({ className }) => {
             y="0px"
             viewBox="0 0 248.6 94.9"
             className={className}
-            fill="#49176B"
+            fill={logoColour}
         >
             <g>
                 <g>
