@@ -9,7 +9,7 @@ const Logo = ({ className }) => {
             y="0px"
             viewBox="0 0 248.6 94.9"
             className={className}
-            fill="white"
+            fill="#49176B"
         >
             <g>
                 <g>
