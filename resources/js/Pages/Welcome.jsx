@@ -159,7 +159,7 @@ const Welcome = (props) => {
             <Standard>
                 <NavBar className={"text-white"} props={props} />
 
-                <header className="main-hero flex flex-col justify-center items-center h-hero bg-hero text-white">
+                <header className="main-hero flex flex-col justify-center items-center h-hero bg-white text-qrmory-purple-500">
                     <div className="px-6 w-full max-w-7xl text-center">
                         <h1 className="font-header text-5xl hero-heading">
                             Generate an <span>arsenal</span> of QR Codes
@@ -167,6 +167,23 @@ const Welcome = (props) => {
                         <h3 className="mt-2 text-xl tracking-widest uppercase drop-shadow-lg">
                             Be equipped for anything with QRmory
                         </h3>
+                        <div className="mt-16 flex flex-row justify-center gap-4">
+                            <button
+                                className="py-3 px-6 bg-qrmory-purple-500 rounded text-white font-bold hover:translate-x-1 hover:-translate-y-1 transition-all duration-300"
+                                onClick={() => {
+                                    window.scrollTo({
+                                        top: document.querySelector("main")
+                                            .offsetTop,
+                                        behavior: "smooth",
+                                    });
+                                }}
+                            >
+                                Start Creating
+                            </button>
+                            <button className="py-3 px-6 border border-qrmory-purple-500 rounded text-qrmory-purple-500 font-bold hover:translate-x-1 hover:-translate-y-1 transition-all duration-300">
+                                Learn More
+                            </button>
+                        </div>
                     </div>
                 </header>
 
@@ -180,7 +197,7 @@ const Welcome = (props) => {
                         </h3>
 
                         <div className="py-16 flex lg:flex-row flex-col lg:items-stretch items-center gap-6 min-h-qr-card w-full">
-                            <div className="p-8 flex flex-col grow bg-white rounded-3xl shadow-2xl">
+                            <div className="p-8 flex flex-col grow bg-white rounded-3xl shadow-xl shadow-stone-100">
                                 <div className="mb-4 pb-4 flex flex-row flex-wrap justify-start items-center content-end self-start border-b-2 border-b-stone-100 transition-all">
                                     {Object.keys(qrTypes).map((key, index) => {
                                         return (
@@ -247,7 +264,7 @@ const Welcome = (props) => {
                                     </button>
                                 </div>
                             </div>
-                            <div className="pt-8 pb-10 px-10 flex flex-col justify-between w-qr-preview bg-white rounded-3xl shadow-2xl text-center">
+                            <div className="pt-8 pb-10 px-10 flex flex-col justify-between w-qr-preview bg-white rounded-3xl shadow-xl shadow-stone-100 text-center">
                                 <div className="">
                                     <h4 className="text-sm uppercase text-stone-500">
                                         Title
