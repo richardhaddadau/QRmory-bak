@@ -99,7 +99,7 @@ input {
 
 .qr-selector {
     transition-property: color, background-color !important;
-    transition-duration:  1s, 0.3s !important;
+    transition-duration:  0.45s, 0.2s !important;
     transition-timing-function: ease, ease !important;
 }
 
@@ -125,6 +125,6 @@ input {
 }
 
 #download-button:disabled {
-    background-color: $stone-500 !important;
+    //background-color: $stone-500 !important;
     box-shadow: none;
 }

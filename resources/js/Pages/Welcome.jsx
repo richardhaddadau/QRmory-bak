@@ -158,7 +158,7 @@ const Welcome = (props) => {
         <>
             <Standard>
                 <NavBar
-                    className={"text-white"}
+                    className={"text-qrmory-purple-500"}
                     props={props}
                     logoColour="#49176B"
                 />
@@ -206,7 +206,7 @@ const Welcome = (props) => {
                                     {Object.keys(qrTypes).map((key, index) => {
                                         return (
                                             <div
-                                                className="cursor-pointer flex justify-center items-center py-2 px-5 m-1 rounded-full border-2 bg-white border-hot-pink-500 text-sm hover:bg-qrmory-purple-400 hover:text-qrmory-purple-200 qr-selector transition-all duration-300"
+                                                className="cursor-pointer flex justify-center items-center py-2 px-5 m-1 rounded border bg-white border-qrmory-purple-500 text-sm hover:bg-qrmory-purple-500 hover:text-qrmory-purple-200 qr-selector"
                                                 key={qrTypes[key]}
                                                 data-selector={key}
                                             >
@@ -256,13 +256,13 @@ const Welcome = (props) => {
                                     </div>
 
                                     <button
+                                        className="mt-8 py-2.5 px-8 border border-qrmory-purple-500 bg-white hover:bg-qrmory-purple-500 w-full md:w-44 text-sm font-medium text-qrmory-purple-500 hover:text-white rounded uppercase font-semibold hover:translate-x-1 hover:-translate-y-1 transition-all duration-300"
                                         onClick={() => {
                                             if (textValue.length > 0) {
                                                 setQrValue(textValue);
                                                 setQrChanged(false);
                                             }
                                         }}
-                                        className="mt-8 py-2.5 px-8 bg-qrmory-purple-500 w-full md:w-52 text-sm font-bold text-white rounded-3xl uppercase font-bold hover:tracking-widest hover:shadow-lg hover:shadow-qrmory-purple-500 transition-all duration-300"
                                     >
                                         Generate QR
                                     </button>
@@ -292,7 +292,7 @@ const Welcome = (props) => {
                                     />
                                 </div>
                                 <button
-                                    className="mx-auto py-2.5 px-4 w-full bg-qrmory-purple-500 rounded-full text-white uppercase font-bold hover:tracking-widest hover:shadow-lg hover:shadow-qrmory-purple-500 transition-all duration-300"
+                                    className="cursor-pointer mx-auto py-2.5 px-4 w-full border border-qrmory-purple-500 bg-white hover:bg-qrmory-purple-500 rounded text-qrmory-purple-500 hover:text-white tracking-widest uppercase font-bold hover:translate-x-1 hover:-translate-y-1 transition-all duration-300"
                                     id="download-button"
                                     onClick={() => {
                                         const svgData =
@@ -307,7 +307,7 @@ const Welcome = (props) => {
                                 </button>
                                 <div className="my-2 flex flex-row flex-nowrap gap-2 items-center w-full">
                                     <button
-                                        className="py-2.5 px-4 grow bg-qrmory-purple-500 rounded-full text-white uppercase font-bold hover:tracking-widest hover:shadow-lg hover:shadow-qrmory-purple-500 transition-all duration-300"
+                                        className="cursor-pointer py-2.5 px-4 grow border border-qrmory-purple-500 bg-white hover:bg-qrmory-purple-500 rounded text-qrmory-purple-500 hover:text-white uppercase font-medium tracking-widest hover:translate-x-1 hover:-translate-y-1 transition-all duration-300"
                                         id="download-button"
                                         onClick={() => {
                                             d3ToPng("#final-qr", qrTitle, {
@@ -320,7 +320,7 @@ const Welcome = (props) => {
                                     </button>
 
                                     <button
-                                        className="py-2.5 px-4 grow bg-qrmory-purple-500 rounded-full text-white uppercase font-bold hover:tracking-widest hover:shadow-lg hover:shadow-qrmory-purple-500 transition-all duration-300"
+                                        className="cursor-pointer py-2.5 px-4 grow border border-qrmory-purple-500 bg-white hover:bg-qrmory-purple-500 rounded text-qrmory-purple-500 hover:text-white uppercase font-medium tracking-widest hover:translate-x-1 hover:-translate-y-1 transition-all duration-300"
                                         id="download-button"
                                         onClick={() => {
                                             d3ToPng("#final-qr", qrTitle, {
