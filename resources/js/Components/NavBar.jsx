@@ -30,21 +30,21 @@ const NavBar = ({
                         </a>
                     </section>
                     <section className="flex flex-row items-center col-span-6">
-                        <Navigation />
+                        {/*<Navigation />*/}
                     </section>
-                    <section className="flex flex-row items-center justify-end col-span-3">
-                        {props.auth.user ? (
-                            <NavBarAction
-                                value="Dashboard"
-                                destination={route("dashboard")}
-                            />
-                        ) : (
-                            <NavBarAction
-                                value="Login"
-                                destination={route("login")}
-                            />
-                        )}
-                    </section>
+                    {/*<section className="flex flex-row items-center justify-end col-span-3">*/}
+                    {/*    {props.auth.user ? (*/}
+                    {/*        <NavBarAction*/}
+                    {/*            value="Dashboard"*/}
+                    {/*            destination={route("dashboard")}*/}
+                    {/*        />*/}
+                    {/*    ) : (*/}
+                    {/*        <NavBarAction*/}
+                    {/*            value="Login"*/}
+                    {/*            destination={route("login")}*/}
+                    {/*        />*/}
+                    {/*    )}*/}
+                    {/*</section>*/}
                 </div>
             </nav>
         </>
