@@ -11,6 +11,7 @@ const PrivacyPolicy = (props) => {
                 <NavBar
                     className={"bg-qrmory-purple-500 text-white"}
                     absolute={false}
+                    props={props}
                 />
 
                 <main className="mx-auto py-8 px-4 w-full max-w-7xl policy-document">

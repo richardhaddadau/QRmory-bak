@@ -4,10 +4,11 @@ import { Link } from "@inertiajs/inertia-react";
 const Navigation = (props) => {
     // Constants
     const navItems = {
-        about: ["About", "/about"],
-        features: ["Features", "/features"],
-        pricing: ["Pricing", "/pricing"],
-        blog: ["Blog", "/blog"],
+        home: ["Home", route("home")],
+        // about: ["About", "/about"],
+        // features: ["Features", "/features"],
+        // pricing: ["Pricing", "/pricing"],
+        // blog: ["Blog", "/blog"],
     };
 
     return (

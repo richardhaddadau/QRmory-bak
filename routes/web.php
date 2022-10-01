@@ -20,43 +20,67 @@ Route::get('/', function () {
         'canLogin' => Route::has('login'),
         'canRegister' => Route::has('register'),
     ]);
-});
+})->name('home');
 
 Route::get('/about', function () {
-    return Inertia::render('About');
-});
+    return Inertia::render('About', [
+        'canLogin' => Route::has('login'),
+        'canRegister' => Route::has('register'),
+    ]);
+})->name('about');
 
 Route::get('/my-codes', function () {
     return Inertia::render('MyCodes');
-});
+})->name('my-codes');
 
 Route::get('/features', function () {
-    return Inertia::render('Features');
-});
+    return Inertia::render('Features', [
+        'canLogin' => Route::has('login'),
+        'canRegister' => Route::has('register'),
+    ]);
+})->name('features');
 
 Route::get('/blog', function () {
-    return Inertia::render('Blog');
-});
+    return Inertia::render('Blog', [
+        'canLogin' => Route::has('login'),
+        'canRegister' => Route::has('register'),
+    ]);
+})->name('blog');
 
 Route::get('/pricing', function () {
-    return Inertia::render('Pricing');
-});
+    return Inertia::render('Pricing', [
+        'canLogin' => Route::has('login'),
+        'canRegister' => Route::has('register'),
+    ]);
+})->name('pricing');
 
 Route::get('/contact', function () {
-    return Inertia::render('Contact');
-});
+    return Inertia::render('Contact', [
+        'canLogin' => Route::has('login'),
+        'canRegister' => Route::has('register'),
+    ]);
+})->name('contact');
 
 Route::get('/privacy-policy', function () {
-    return Inertia::render('PrivacyPolicy');
-});
+    return Inertia::render('PrivacyPolicy', [
+        'canLogin' => Route::has('login'),
+        'canRegister' => Route::has('register'),
+    ]);
+})->name('privacy');
 
 Route::get('/terms-and-conditions', function () {
-    return Inertia::render('TermsAndConditions');
-});
+    return Inertia::render('TermsAndConditions', [
+        'canLogin' => Route::has('login'),
+        'canRegister' => Route::has('register'),
+    ]);
+})->name('terms');
 
 Route::get('/cookie-policy', function () {
-    return Inertia::render('CookiePolicy');
-});
+    return Inertia::render('CookiePolicy', [
+        'canLogin' => Route::has('login'),
+        'canRegister' => Route::has('register'),
+    ]);
+})->name('cookie');
 
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
