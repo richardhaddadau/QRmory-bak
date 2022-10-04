@@ -27,12 +27,7 @@ import WifiQR from "@/Components/Controls/WifiQR";
 import YoutubeQR from "@/Components/Controls/YoutubeQR";
 import MyFooter from "@/Components/MyFooter";
 
-import {
-    DownloadSVG,
-    DownloadPNG,
-    DownloadPDF,
-    DownloadJPG,
-} from "@/Helpers/DownloadQR";
+import { DownloadSVG } from "@/Helpers/DownloadQR";
 import Standard from "@/Layouts/Standard";
 
 const Welcome = (props) => {

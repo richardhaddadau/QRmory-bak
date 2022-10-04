@@ -15,7 +15,12 @@ const Pricing = (props) => {
         <>
             <Head title="Pricing" />
             <Standard>
-                <div className="relative pt-8 pb-12 flex items-center justify-center col-span-10 h-full w-full bg-stone-100 rounded-3xl"></div>
+                <div className="relative pt-8 pb-12 flex items-center justify-center col-span-10 h-full w-full bg-stone-100 rounded-3xl">
+                    <a href="https://buy.stripe.com/test_cN25kV0sb1pi58I9AA">
+                        Test
+                    </a>
+                </div>
+                <p>{import.meta.env.VITE_FAUNA_KEY}</p>
             </Standard>
         </>
     );

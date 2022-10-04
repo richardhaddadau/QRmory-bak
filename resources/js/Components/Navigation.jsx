@@ -7,7 +7,7 @@ const Navigation = (props) => {
         home: ["Home", route("home")],
         // about: ["About", "/about"],
         // features: ["Features", "/features"],
-        // pricing: ["Pricing", "/pricing"],
+        pricing: ["Pricing", "/pricing"],
         // blog: ["Blog", "/blog"],
     };
 
