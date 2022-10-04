@@ -2,7 +2,7 @@ import faunadb from "faunadb";
 import { comprssed } from "@/Helpers/CompressIt";
 
 const q = faunadb.query;
-const faunaKey = "fnAExbq_mWACUgZ5pciRNfJzpTn24fAliKPYnQc5";
+const faunaKey = import.meta.env.VITE_FAUNA_KEY;
 
 class FaunaDriver {
     constructor(token) {
