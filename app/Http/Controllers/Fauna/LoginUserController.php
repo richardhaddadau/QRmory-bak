@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Fauna;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
+use Inertia\Inertia;
 
 class LoginUserController extends Controller
 {
@@ -18,13 +20,16 @@ class LoginUserController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Display the login view.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Inertia\Response
      */
     public function create()
     {
-        //
+        return Inertia::render('Auth/Login', [
+            'canResetPassword' => Route::has('password.request'),
+            'status' => session('status'),
+        ]);
     }
 
     /**

@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Fauna;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rules;
+use Inertia\Inertia;
 
 class RegisterUserController extends Controller
 {
@@ -18,13 +20,13 @@ class RegisterUserController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Display the registration view.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Inertia\Response
      */
     public function create()
     {
-        //
+        return Inertia::render('Auth/Register');
     }
 
     /**
@@ -35,7 +37,13 @@ class RegisterUserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255',
+            'password' => ['required', Rules\Password::defaults()],
+        ]);
+
+        dd($request->only('name', 'email', 'password'));
     }
 
     /**
