@@ -39,10 +39,17 @@ const NavBar = ({
                                 destination={route("dashboard")}
                             />
                         ) : (
-                            <NavBarAction
-                                value="Login"
-                                destination={route("login")}
-                            />
+                            <section className="flex flex-row items-center justify-end gap-2">
+                                <NavBarAction
+                                    value="Login"
+                                    destination={route("login")}
+                                />
+
+                                <NavBarAction
+                                    value="Register"
+                                    destination={route("register")}
+                                />
+                            </section>
                         )}
                     </section>
                 </div>
