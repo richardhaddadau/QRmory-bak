@@ -1,5 +1,5 @@
 import faunadb from "faunadb";
-import { comprssed } from "@/Helpers/CompressIt";
+import { comprssed } from "@/Helpers/ComprssIt";
 
 const q = faunadb.query;
 const faunaKey = import.meta.env.VITE_FAUNA_KEY;
@@ -23,12 +23,93 @@ class FaunaDriver {
         });
     }
 
+    GetUsers = async () => {
+        let users = [];
+
+        await this.client
+            .query(
+                q.Map(
+                    q.Paginate(q.Match(q.Index("all_users"))),
+                    q.Lambda("X", q.Get(q.Var("X")))
+                )
+            )
+            .then((res) => {
+                users = res;
+            });
+
+        return users;
+    };
+
+    GetUserByEmail = async (email) => {
+        let user;
+
+        await this.client
+            .query(
+                q.Map(
+                    q.Paginate(q.Match(q.Index("users_by_email"), email)),
+                    q.Lambda("X", q.Get(q.Var("X")))
+                )
+            )
+            .then((res) => (user = res["data"]));
+
+        return user.length > 0 ? user : false;
+    };
+
     RegisterNewUsers = async (newUserObject) => {
         const newName = newUserObject.name;
         const newEmail = newUserObject.email;
         const newPassword = newUserObject.password;
 
-        console.log(newName);
+        let userFound = false;
+
+        let users = await this.GetUsers();
+        for (let user of users["data"]) {
+            if (newEmail === user["data"]["email"]) {
+                userFound = true;
+            }
+        }
+
+        if (!userFound) {
+            await this.client
+                .query(
+                    q.Create(q.Collection("users"), {
+                        credentials: {
+                            password: newPassword,
+                        },
+                        data: {
+                            email: newEmail,
+                            name: newName,
+                        },
+                    })
+                )
+                .catch((e) => {
+                    return false;
+                });
+
+            return true;
+        } else {
+            return false;
+        }
+    };
+
+    LoginUser = async (userObject) => {
+        const userEmail = userObject.email;
+        const userPassword = userObject.password;
+
+        const user = await this.GetUserByEmail(userEmail);
+
+        if (user) {
+            const ref = user[0]["ref"]["value"]["id"];
+
+            await this.client
+                .query(
+                    q.Login(q.Ref(q.Collection("users"), ref), {
+                        password: userPassword,
+                    })
+                )
+                .then((res) => console.log(res))
+                .catch((e) => false);
+        }
     };
 
     GenerateNewLink = async (temporary, sendBack) => {
