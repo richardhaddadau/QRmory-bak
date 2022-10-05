@@ -23,6 +23,14 @@ class FaunaDriver {
         });
     }
 
+    RegisterNewUsers = async (newUserObject) => {
+        const newName = newUserObject.name;
+        const newEmail = newUserObject.email;
+        const newPassword = newUserObject.password;
+
+        console.log(newName);
+    };
+
     GenerateNewLink = async (temporary, sendBack) => {
         let newRef;
         const getNow = Date.now();

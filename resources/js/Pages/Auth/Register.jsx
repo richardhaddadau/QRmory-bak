@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
-import Button from "@/Components/Button";
 import Guest from "@/Layouts/Guest";
-// import Input from "@/Components/Input";
-import InputError from "@/Components/InputError";
 import Label from "@/Components/Label";
+import InputError from "@/Components/InputError";
 import { Head, Link, useForm } from "@inertiajs/inertia-react";
 import { FaCheck, FaEye, FaEyeSlash, FaTimes } from "react-icons/all";
 
-export default function Register() {
+import { faunaDriver } from "@/Helpers/FaunaDriver";
+
+const Register = () => {
     const { data, setData, post, processing, errors, reset } = useForm({
         name: "",
         email: "",
@@ -38,15 +38,7 @@ export default function Register() {
         }
     };
 
-    const togglePassword = () => {
-        if (passwordType === "password") {
-            setPasswordType("text");
-        } else {
-            setPasswordType("password");
-        }
-    };
-
-    const submit = (e) => {
+    const submit = async (e) => {
         e.preventDefault();
 
         if (
@@ -58,7 +50,8 @@ export default function Register() {
             passwordOneLetter &&
             passwordCapitalLetter
         ) {
-            post(route("register"));
+            const newFauna = faunaDriver;
+            await newFauna.RegisterNewUsers(data);
         }
     };
 
@@ -112,9 +105,9 @@ export default function Register() {
                         required
                     />
 
-                    <div className="mt-2 text-sm">
-                        <p>Passwords must include:</p>
-                        <ul className="">
+                    <div className="mt-4 text-sm">
+                        <p>For better security, passwords must include:</p>
+                        <ul className="mt-2 flex flex-col gap-2">
                             <li className="flex flex-row items-center gap-2">
                                 {passwordOneLetter ? (
                                     <FaCheck color="green" />
@@ -173,4 +166,6 @@ export default function Register() {
             </div>
         </Guest>
     );
-}
+};
+
+export default Register;
