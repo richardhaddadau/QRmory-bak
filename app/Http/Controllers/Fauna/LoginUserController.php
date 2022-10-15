@@ -16,7 +16,7 @@ class LoginUserController extends Controller
      */
     public function index()
     {
-        //
+
     }
 
     /**
@@ -40,7 +40,7 @@ class LoginUserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        dd('hello');
     }
 
     /**
