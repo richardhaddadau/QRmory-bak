@@ -43,7 +43,6 @@ const Welcome = (props) => {
         "QRmory Code",
         "My New QR Code",
         "QR Codes are fun",
-        "Na-na-na-na-na-na-na-na-QRmory man",
         "I Love QRmory",
     ];
 
