@@ -46,9 +46,16 @@ export default function Login({ status, canResetPassword }) {
         if (data.email && data.password) {
             setProcessing(true);
             const user = await fauna.LoginUser(data);
+
+            console.log("Trying");
+            console.log(user);
+            console.log("Tried");
+            await fauna.LogOut();
+            console.log("Logged out");
         }
 
         setProcessing(false);
+        // post(route("login"));
     };
 
     return (
@@ -66,12 +73,14 @@ export default function Login({ status, canResetPassword }) {
                     <Label forInput="email" value="Email" />
 
                     <input
-                        type="text"
+                        type="email"
                         name="email"
                         value={data.email}
                         className="mt-1 block w-full control-input"
                         autoComplete="username"
                         onChange={onHandleChange}
+                        title="Remember to fill out your email address"
+                        required
                     />
 
                     {/*<InputError message={errors.email} className="mt-2" />*/}
@@ -88,11 +97,14 @@ export default function Login({ status, canResetPassword }) {
                             className="mt-1 block w-full control-input"
                             autoComplete="current-password"
                             onChange={onHandleChange}
+                            title="Please enter your password"
+                            required
                         />
 
                         <button
                             className="ml-2 p-3 rounded border border-qrmory-purple-500 bg-white hover:bg-qrmory-purple-500 text-qrmory-purple-500 hover:text-white hover:translate-x-1 hover:-translate-y-1 transition-all duration-300"
                             onClick={togglePassword}
+                            type="button"
                         >
                             {passwordType === "password" ? (
                                 <FaEye />
@@ -138,6 +150,7 @@ export default function Login({ status, canResetPassword }) {
                                   " hover:-translate-y-1")
                         }
                         disabled={processing}
+                        type="submit"
                     >
                         {processing ? (
                             <p className="flex flex-row">
