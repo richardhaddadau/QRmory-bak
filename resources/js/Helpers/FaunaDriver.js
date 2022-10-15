@@ -23,6 +23,19 @@ class FaunaDriver {
         });
     }
 
+    handleError = (value) => {
+        console.error(
+            "Error: [%s] %s: %s",
+            value.name,
+            value.message,
+            value.errors()[0].description
+        );
+    };
+
+    GetSecret = () => {
+        return this.client;
+    };
+
     GetUsers = async () => {
         let users = [];
 
@@ -35,6 +48,10 @@ class FaunaDriver {
             )
             .then((res) => {
                 users = res;
+            })
+            .catch((err) => {
+                this.handleError(err);
+                return false;
             });
 
         return users;
@@ -50,7 +67,11 @@ class FaunaDriver {
                     q.Lambda("X", q.Get(q.Var("X")))
                 )
             )
-            .then((res) => (user = res["data"]));
+            .then((res) => (user = res["data"]))
+            .catch((err) => {
+                this.handleError(err);
+                return false;
+            });
 
         return user.length > 0 ? user : false;
     };
@@ -82,7 +103,8 @@ class FaunaDriver {
                         },
                     })
                 )
-                .catch((e) => {
+                .catch((err) => {
+                    this.handleError(err);
                     return false;
                 });
 
@@ -93,10 +115,15 @@ class FaunaDriver {
     };
 
     LoginUser = async (userObject) => {
+        if (!userObject.email) return undefined;
+        if (!userObject.password) return undefined;
+
         const userEmail = userObject.email;
         const userPassword = userObject.password;
 
         const user = await this.GetUserByEmail(userEmail);
+
+        let loggedInUser = {};
 
         if (user) {
             const ref = user[0]["ref"]["value"]["id"];
@@ -107,9 +134,76 @@ class FaunaDriver {
                         password: userPassword,
                     })
                 )
-                .then((res) => console.log(res))
-                .catch((e) => false);
+                .then((res) => {
+                    loggedInUser = {
+                        secret: res["secret"],
+                    };
+
+                    if (res) {
+                        this.client = new faunadb.Client({
+                            headers: this.headers,
+                            domain: this.domain,
+                            port: this.port,
+                            scheme: this.scheme,
+                            secret: loggedInUser.secret,
+                        });
+                    }
+
+                    return loggedInUser.secret;
+                })
+                .catch((err) => {
+                    this.handleError(err);
+                    return false;
+                });
         }
+    };
+
+    LogOut = async () => {
+        await this.client
+            .query(q.Logout(true))
+            .then((res) => console.log(res))
+            .catch((err) => {
+                this.handleError(err);
+                return false;
+            });
+    };
+
+    // {
+    //     "ref": {
+    //         "@ref": {
+    //             "id": "345075506061771348",
+    //             "collection": {
+    //                 "@ref": {
+    //                     "id": "tokens"
+    //                 }
+    //             }
+    //         }
+    //     },
+    //     "ts": 1665348497365000,
+    //     "instance": {
+    //         "@ref": {
+    //             "id": "344692163671491154",
+    //             "collection": {
+    //                 "@ref": {
+    //                     "id": "users",
+    //                     "collection": {
+    //                         "@ref": {
+    //                             "id": "collections"
+    //                         }
+    //                     }
+    //                 }
+    //             }
+    //         }
+    //     },
+    //     "secret": "fnEEyfRYL4ACVATFuroucApSzOGyi4J0IOl4eQK0zTMwD_zTaQo"
+    // }
+
+    GetCurrentUser = async () => {
+        let thisUser;
+
+        await this.client
+            .query(q.CurrentIdentity)
+            .then((res) => console.log(res));
     };
 
     GenerateNewLink = async (temporary, sendBack) => {
@@ -145,6 +239,10 @@ class FaunaDriver {
                         },
                     })
                 );
+            })
+            .catch((err) => {
+                this.handleError(err);
+                return false;
             });
 
         return sendBack ? [newLink.link, newRef] : null;
@@ -162,6 +260,10 @@ class FaunaDriver {
             )
             .then((res) => {
                 links = res;
+            })
+            .catch((err) => {
+                this.handleError(err);
+                return false;
             });
 
         return links;
@@ -179,6 +281,10 @@ class FaunaDriver {
             )
             .then((res) => {
                 found = res;
+            })
+            .catch((err) => {
+                this.handleError(err);
+                return false;
             });
 
         return found;
