@@ -195,7 +195,7 @@ class FaunaDriver {
     //             }
     //         }
     //     },
-    //     "secret": "fnEEyfRYL4ACVATFuroucApSzOGyi4J0IOl4eQK0zTMwD_zTaQo"
+    //     "secret": ""
     // }
 
     GetCurrentUser = async () => {
