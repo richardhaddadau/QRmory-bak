@@ -24,10 +24,14 @@
         "vite": "^3.0.9"
     },
     "dependencies": {
+        "@emotion/react": "^11.10.4",
+        "@emotion/styled": "^11.10.4",
+        "@mui/icons-material": "^5.10.9",
+        "@mui/material": "^5.10.9",
         "d3-svg-to-png": "^0.1.8",
         "esbuild": "^0.15.5",
         "faunadb": "^4.7.0",
         "qrcode.react": "^3.1.0",
-        "react-icons": "^4.4.0"
+        "react-icons": "^4.6.0"
     }
 }
