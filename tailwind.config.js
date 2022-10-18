@@ -30,6 +30,7 @@ module.exports = {
                 "qr-card": "660px",
             },
             width: {
+                15: "3.85rem",
                 "qr-preview": "350px",
             },
             minHeight: {
