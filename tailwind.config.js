@@ -11,6 +11,10 @@ module.exports = {
 
     theme: {
         extend: {
+            screens: {
+                xs: { min: "0", max: "475px" },
+                sm: { min: "476px" },
+            },
             colors: {
                 "qrmory-purple-100": "#F0D0F7",
                 "qrmory-purple-200": "#DEA4F0",
