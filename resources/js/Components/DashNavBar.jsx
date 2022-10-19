@@ -1,6 +1,7 @@
 import React from "react";
 import ShortLogo from "@/Components/ShortLogo";
 import NavBarAction from "@/Components/NavBarAction";
+import { FaPowerOff } from "react-icons/all";
 
 const DashNavBar = ({ props }) => {
     return (
@@ -13,14 +14,16 @@ const DashNavBar = ({ props }) => {
                 </section>
 
                 <section className="flex flex-row items-center justify-end col-span-3">
-                    <NavBarAction
-                        value="Dashboard"
-                        destination={route("dashboard")}
+                    {/* TODO: Action Logout */}
+                    <FaPowerOff
+                        color={"white"}
+                        size={24}
+                        className="cursor-pointer hidden xs:flex"
                     />
-
                     <NavBarAction
                         value="Logout"
                         destination={route("dashboard")}
+                        className="flex xs:hidden"
                     />
                 </section>
             </nav>
