@@ -7,7 +7,7 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import CircularProgress from "@mui/material/CircularProgress";
-import { FaPencilAlt, FaSave, FaTimes } from "react-icons/all";
+import { FaPencilAlt, FaSave, FaTimes, FaTrash } from "react-icons/all";
 import { Skeleton } from "@mui/material";
 
 const QRCard = ({
@@ -51,13 +51,13 @@ const QRCard = ({
                         <h3 className="text-stone-500">{type}</h3>
                     </div>
                     {editLoading ? (
-                        <CircularProgress size={20} color={"inherit"} />
+                        <CircularProgress size={22} color={"inherit"} />
                     ) : openEdit ? (
-                        <div className="flex flex-row flex-nowrap gap-2">
+                        <div className="flex flex-row flex-nowrap gap-4">
                             <FaTimes
                                 className="cursor-pointer text-stone-400 hover:text-red-700 transition-all duration-300"
                                 title="Cancel Editing"
-                                size={20}
+                                size={22}
                                 onClick={() => {
                                     changed
                                         ? setOpenAlert(true)
@@ -67,7 +67,7 @@ const QRCard = ({
                             <FaSave
                                 className="cursor-pointer text-stone-400 hover:text-qrmory-purple-500 transition-all duration-300"
                                 title="Save Changes"
-                                size={20}
+                                size={22}
                                 onClick={() => {
                                     // TODO: Save Changes
                                     setChanged(false);
@@ -80,6 +80,7 @@ const QRCard = ({
                         <FaPencilAlt
                             className="cursor-pointer text-stone-400 hover:text-qrmory-purple-500 transition-all duration-300"
                             title="Edit Code"
+                            size={20}
                             onClick={loadEdit}
                         />
                     )}
@@ -95,23 +96,35 @@ const QRCard = ({
                 </div>
                 <div
                     className={
-                        "py-2 flex flex-row items-center justify-between border-t-1" +
+                        "pl-2.5 pr-3 py-4 flex flex-row items-center justify-between bg-qrmory-purple-500 border-t-1" +
+                        " text-white" +
                         (openEdit
                             ? " block transition-all duration-300"
                             : " hidden transition-all duration-300")
                     }
                 >
                     {editLoading ? (
-                        <div className="flex flex-col w-full">
-                            <Skeleton height={30} width={50} />
-                            <Skeleton height={30} width={"100%"} />
-                            <Skeleton height={20} width={"80%"} />
+                        <div className="-mt-3 flex flex-col w-full">
+                            <Skeleton
+                                sx={{ bgcolor: "#8444A6" }}
+                                height={60}
+                                width={"100%"}
+                            />
+                            <Skeleton
+                                sx={{ bgcolor: "#8444A6" }}
+                                height={20}
+                                width={100}
+                            />
                         </div>
                     ) : (
                         <div className="flex flex-col w-full text-left">
                             {/* TODO: Load card data */}
-                            <input type="text" value="Sample" />
-                            <span className="pt-1 pb-2 text-sm italic">
+                            <input
+                                type="text"
+                                value="Sample"
+                                className="bg-qrmory-purple-400 border-qrmory-purple-400 shadow-lg"
+                            />
+                            <span className="pt-1 text-sm italic text-qrmory-purple-300">
                                 Enter a website
                             </span>
                         </div>
@@ -125,7 +138,7 @@ const QRCard = ({
                         className="cursor-pointer text-stone-400 hover:text-red-700 transition-all duration-300"
                         title="Delete Code"
                     >
-                        <DeleteIcon fontSize={"medium"} />
+                        <FaTrash size={20} />
                     </div>
                 </div>
             </article>
