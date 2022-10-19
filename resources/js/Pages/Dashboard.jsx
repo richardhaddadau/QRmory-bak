@@ -4,6 +4,7 @@ import { Head } from "@inertiajs/inertia-react";
 import DashNavBar from "@/Components/DashNavBar";
 import {
     FaChartPie,
+    FaClipboardList,
     FaPlusCircle,
     FaThLarge,
     FaToolbox,
@@ -65,13 +66,13 @@ export default function Dashboard(props) {
             <div className="flex flex-col h-screen overflow-hidden">
                 <DashNavBar props={props} />
 
-                <main className="flex flex-row h-full w-full overflow-hidden">
-                    <nav className="flex flex-col justify-between h-full w-15 md:w-max bg-white transition-all duration-300">
-                        <div className="flex flex-col">
+                <main className="flex flex-col sm:flex-row h-full w-full overflow-hidden">
+                    <nav className="flex flex-row sm:flex-col justify-between h-16 sm:h-full w:full sm:w-15 md:w-max bg-white transition-all duration-300">
+                        <div className="flex flex-row sm:flex-col xs:justify-evenly w-full">
                             {Object.keys(sideNav).map((item) => {
                                 return (
                                     <div
-                                        className="cursor-pointer flex w-44 items-center bg-white hover:bg-qrmory-purple-500 text-qrmory-purple-500 hover:text-white transition-all duration-300"
+                                        className="cursor-pointer flex sm:grow sm:w-44 items-center xs:justify-center bg-white hover:bg-qrmory-purple-500 text-qrmory-purple-500 hover:text-white transition-all duration-300"
                                         onClick={() => {
                                             setSelectedComponent(
                                                 sideNav[item]["component"]
@@ -83,14 +84,19 @@ export default function Dashboard(props) {
                                         <div className="flex items-center justify-center w-16 h-20">
                                             {sideNav[item]["icon"]}
                                         </div>
-                                        <span className="text-lg font-bold">
+                                        <span className="hidden sm:block text-lg font-bold">
                                             {sideNav[item]["title"]}
                                         </span>
                                     </div>
                                 );
                             })}
+                            <div className="hidden xs:flex cursor-pointer flex sm:grow sm:w-44 items-center xs:justify-center bg-white hover:bg-qrmory-purple-500 text-qrmory-purple-500 hover:text-white transition-all duration-300">
+                                <div className="flex items-center justify-center w-16 h-20">
+                                    <FaClipboardList size={30} />
+                                </div>
+                            </div>
                         </div>
-                        <div className="cursor-pointer px-3 flex flex-col justify-center h-20 bg-white hover:bg-qrmory-purple-500 text-qrmory-purple-500 hover:text-white transition-all duration-300">
+                        <div className="cursor-pointer px-3 hidden sm:flex flex-col justify-center h-20 bg-white hover:bg-qrmory-purple-500 text-qrmory-purple-500 hover:text-white transition-all duration-300">
                             <div className="hidden md:flex flex-row gap-1 items-center justify-between w-full">
                                 <span>Codes:</span>
                                 <div className="flex flex-col md:flex-row items-center text-base font-bold">
@@ -99,7 +105,7 @@ export default function Dashboard(props) {
                                     <span>2500</span>
                                 </div>
                             </div>
-                            <div className="flex md:hidden flex-col items-center justify-center w-full">
+                            <div className="flex flex-col items-center justify-center w-full">
                                 <span>Quota</span>
                             </div>
                             <span className="text-sm text-right italic">
