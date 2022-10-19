@@ -207,7 +207,7 @@ const Welcome = (props) => {
                                     {Object.keys(qrTypes).map((key, index) => {
                                         return (
                                             <div
-                                                className="cursor-pointer flex justify-center items-center py-2 px-5 m-1 rounded border bg-white border-qrmory-purple-500 text-sm hover:bg-qrmory-purple-500 hover:text-qrmory-purple-200 qr-selector"
+                                                className="cursor-pointer flex justify-center items-center py-2 px-5 m-1 rounded border bg-white border-qrmory-purple-500 text-sm hover:bg-qrmory-purple-500 hover:text-qrmory-purple-200 qr-selector home"
                                                 key={qrTypes[key]}
                                                 data-selector={key}
                                             >

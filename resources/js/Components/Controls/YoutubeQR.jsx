@@ -11,7 +11,7 @@ const YoutubeQR = ({ setText, setChanged }) => {
         <>
             <label className="control-label">
                 Enter YouTube detail:
-                <div className="flex lg:flex-row flex-col flex-nowrap">
+                <div className="flex flex-col xl:flex-row flex-nowrap">
                     <select
                         id="protocol-selector"
                         className="mr-2 mt-1 rounded-xl"

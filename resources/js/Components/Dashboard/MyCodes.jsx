@@ -8,8 +8,10 @@ const MyCodes = () => {
     const [loading, setLoading] = useState(true);
     const [codeList, setCodeList] = useState([]);
 
-    const handleExpandClick = () => {
-        setExpanded(!expanded);
+    const unsavedChanges = (index, value) => {
+        codeList[index] = value;
+
+        console.log(codeList);
     };
 
     const data = [
@@ -44,9 +46,19 @@ const MyCodes = () => {
                         </>
                     ) : (
                         <>
-                            {data.map((item) => (
-                                <QRCard title={item[0]} type={item[1]} />
-                            ))}
+                            {data.map((item, index) => {
+                                codeList[index] = false;
+
+                                return (
+                                    <QRCard
+                                        title={item[0]}
+                                        type={item[1]}
+                                        cardIndex={index}
+                                        unsavedChanges={unsavedChanges}
+                                        key={index}
+                                    />
+                                );
+                            })}
                         </>
                     )}
                 </section>

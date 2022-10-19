@@ -4,7 +4,6 @@ import { Head } from "@inertiajs/inertia-react";
 import DashNavBar from "@/Components/DashNavBar";
 import {
     FaChartPie,
-    FaClone,
     FaPlusCircle,
     FaThLarge,
     FaToolbox,
@@ -91,8 +90,8 @@ export default function Dashboard(props) {
                                 );
                             })}
                         </div>
-                        <div className="cursor-pointer px-2 flex flex-col md:flex-row justify-center h-20 bg-white hover:bg-qrmory-purple-500 text-qrmory-purple-500 hover:text-white transition-all duration-300">
-                            <div className="hidden md:flex flex-row gap-1 items-center justify-start w-full">
+                        <div className="cursor-pointer px-3 flex flex-col justify-center h-20 bg-white hover:bg-qrmory-purple-500 text-qrmory-purple-500 hover:text-white transition-all duration-300">
+                            <div className="hidden md:flex flex-row gap-1 items-center justify-between w-full">
                                 <span>Codes:</span>
                                 <div className="flex flex-col md:flex-row items-center text-base font-bold">
                                     <span>2500</span>
@@ -103,6 +102,9 @@ export default function Dashboard(props) {
                             <div className="flex md:hidden flex-col items-center justify-center w-full">
                                 <span>Quota</span>
                             </div>
+                            <span className="text-sm text-right italic">
+                                Get More
+                            </span>
                         </div>
                     </nav>
 
