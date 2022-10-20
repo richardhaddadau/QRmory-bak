@@ -2,34 +2,44 @@ import React, { useEffect, useState } from "react";
 import QRCard from "@/Components/Dashboard/QRCard";
 import SkeletonCard from "@/Components/Dashboard/SkeletonCard";
 
-const MyCodes = () => {
+const MyCodes = (props) => {
     // States
     const [expanded, setExpanded] = useState(false);
     const [loading, setLoading] = useState(true);
     const [codeList, setCodeList] = useState([]);
+    const [myCodesData, setMyCodesData] = useState([]);
 
     const unsavedChanges = (index, value) => {
         codeList[index] = value;
-
-        console.log(codeList);
     };
 
-    const data = [
-        ["First Code", "Audio", true],
-        ["Second Code", "Twitter", true],
-        ["Third Code", "Facebook", false],
-        ["Fourth Code", "Website", false],
-        ["Fifth Code", "Website", false],
-        ["Sixth Code", "Video", false],
-        ["Seventh Code", "Poll", true],
-        ["Eighth Code", "Email", false],
-        ["Ninth Code", "Website", true],
-    ];
+    let dummyData = [];
 
     useEffect(() => {
-        setTimeout(() => {
+        if (props.data.length > 0) {
+            setMyCodesData(props.data);
             setLoading(false);
-        }, 3000);
+
+            // TODO: Check if data has changed and sync
+        } else {
+            // TODO: Load codes data
+            dummyData = [
+                ["First Code", "Audio", "01 March, 2022"],
+                ["Second Code", "Twitter", "17 September, 2022"],
+                ["Third Code", "Facebook", "11 August, 2022"],
+                ["Fourth Code", "Website", "19 July, 2022"],
+                ["Fifth Code", "Website", "10 July, 2022"],
+                ["Sixth Code", "Video", "13 October, 2022"],
+                ["Seventh Code", "Poll", "28 September, 2022"],
+            ];
+
+            props.setData(dummyData);
+            setMyCodesData(dummyData);
+
+            setTimeout(() => {
+                setLoading(false);
+            }, 3000);
+        }
     }, []);
 
     return (
@@ -46,7 +56,7 @@ const MyCodes = () => {
                         </>
                     ) : (
                         <>
-                            {data.map((item, index) => {
+                            {myCodesData.map((item, index) => {
                                 codeList[index] = false;
 
                                 return (
