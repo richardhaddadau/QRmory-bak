@@ -96,7 +96,7 @@ const Register = (props) => {
 
     return (
         <Guest>
-            <Head title="Register" />
+            <Head title="Sign up for free" />
 
             <form onSubmit={submit}>
                 <div>
@@ -236,7 +236,7 @@ const Register = (props) => {
                                 Please Wait...
                             </p>
                         ) : (
-                            "Register"
+                            "Sign Up"
                         )}
                     </button>
                 </div>

@@ -41,30 +41,28 @@ const NavBar = ({
                         <Navigation />
                     </section>
                     <section className="flex flex-row items-center justify-end col-span-3">
-                        <NavBarAction
-                            value="Dashboard"
-                            destination={route("dashboard")}
-                        />
-
-                        <NavBarAction
-                            value="Logout"
-                            destination={route("dashboard")}
-                        />
-
                         {props.auth.user ? (
-                            <NavBarAction
-                                value="Dashboard"
-                                destination={route("dashboard")}
-                            />
+                            <section className="flex flex-row items-center justify-end gap-2">
+                                {props.auth.user ? "" : ""}
+                                <NavBarAction
+                                    value="Dashboard"
+                                    destination={route("dashboard")}
+                                />
+
+                                <NavBarAction
+                                    value="Sign Out"
+                                    destination={route("dashboard")}
+                                />
+                            </section>
                         ) : (
                             <section className="flex flex-row items-center justify-end gap-2">
                                 <NavBarAction
-                                    value="Login"
+                                    value="Sign In"
                                     destination={route("login")}
                                 />
 
                                 <NavBarAction
-                                    value="Register"
+                                    value="Sign Up"
                                     destination={route("register")}
                                 />
                             </section>
