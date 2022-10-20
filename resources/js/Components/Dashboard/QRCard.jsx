@@ -9,6 +9,7 @@ import DialogTitle from "@mui/material/DialogTitle";
 import CircularProgress from "@mui/material/CircularProgress";
 import { FaPencilAlt, FaSave, FaTimes, FaTrash } from "react-icons/all";
 import { Skeleton } from "@mui/material";
+import { useForm } from "@inertiajs/inertia-react";
 
 const QRCard = ({
     title = "Untitled",
@@ -16,10 +17,14 @@ const QRCard = ({
     cardIndex,
     unsavedChanges,
 }) => {
+    // States
     const [openEdit, setOpenEdit] = useState(false);
     const [changed, setChanged] = useState(false);
     const [openAlert, setOpenAlert] = useState(false);
     const [editLoading, setEditLoading] = useState(false);
+
+    // TODO: Edit Fields will be different depending on the type of QR Code it is
+    const { editFieldsValue, setEditFieldsValue } = useForm({});
 
     const handleSave = () => {
         setOpenEdit(false);
@@ -34,6 +39,10 @@ const QRCard = ({
         setTimeout(() => {
             setEditLoading(false);
         }, 1500);
+    };
+
+    const onHandleChange = (event) => {
+        setEditFieldsValue(event.target.name, event.target.value);
     };
 
     const toggleAlert = () => {
@@ -85,11 +94,11 @@ const QRCard = ({
                         />
                     )}
                 </div>
-                <div className="mt-1 mb-4 text-left text-sm italic hover:translate-x-1 hover:-translate-y-1 transition-all duration-300">
+                <div className="mt-1 mb-4 text-left text-sm italic transition-all duration-300">
                     {/* TODO: Load card compressed link */}
                     <a
                         href="https://qrmory.com/visit/asdasd"
-                        className="p-1 pr-2 hover:bg-qrmory-purple-500 hover:text-white"
+                        className="py-1 hover:pl-1 pr-2 hover:bg-qrmory-purple-500 hover:text-white transition-all duration-300"
                     >
                         https://qrmory.com/visit/asdasd
                     </a>
@@ -123,6 +132,7 @@ const QRCard = ({
                                 type="text"
                                 value="Sample"
                                 className="bg-qrmory-purple-400 border-qrmory-purple-400 shadow-lg"
+                                onChange={onHandleChange}
                             />
                             <span className="pt-1 text-sm italic text-qrmory-purple-300">
                                 Enter a website
