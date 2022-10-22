@@ -1,42 +1,36 @@
 import React, { useEffect, useState } from "react";
 
+// QRmory Libraries
+import Standard from "@/Layouts/Standard";
 import NavBar from "@/Components/NavBar";
 import QRCodeSVG from "qrcode.react";
-import d3ToPng from "d3-svg-to-png";
-
-import AudioQR from "@/Components/Controls/AudioQR";
-import BitcoinQR from "@/Components/Controls/BitcoinQR";
-import DocumentQR from "@/Components/Controls/DocumentQR";
-import EBusinessCardQR from "@/Components/Controls/EBusinessCardQR";
-import EmailQR from "@/Components/Controls/EmailQR";
-import EthereumQR from "@/Components/Controls/EthereumQR";
-import EventQR from "@/Components/Controls/EventQR";
-import FacebookQR from "@/Components/Controls/FacebookQR";
-import InstagramQR from "@/Components/Controls/InstagramQR";
-import LocationQR from "@/Components/Controls/LocationQR";
-import PhoneQR from "@/Components/Controls/PhoneQR";
-import PollQR from "@/Components/Controls/PollQR";
-import ReviewsQR from "@/Components/Controls/ReviewsQR";
-import SmsQR from "@/Components/Controls/SmsQR";
-import SocialMediaQR from "@/Components/Controls/SocialMediaQR";
-import TextQR from "@/Components/Controls/TextQR";
-import TwitterQR from "@/Components/Controls/TwitterQR";
-import VideoQR from "@/Components/Controls/VideoQR";
-import WebsiteQR from "@/Components/Controls/WebsiteQR";
-import WifiQR from "@/Components/Controls/WifiQR";
-import YoutubeQR from "@/Components/Controls/YoutubeQR";
 import MyFooter from "@/Components/MyFooter";
 
-import {
-    DownloadSVG,
-    DownloadPNG,
-    DownloadPDF,
-    DownloadJPG,
-} from "@/Helpers/DownloadQR";
-import Standard from "@/Layouts/Standard";
-import DashNavBar from "@/Components/DashNavBar";
+// Download Libraries
+import { DownloadSVG } from "@/Helpers/DownloadQR";
+import d3ToPng from "d3-svg-to-png";
 
+// QR Control Types
+import FacebookQR from "@/Components/Controls/FacebookQR";
+import InstagramQR from "@/Components/Controls/InstagramQR";
+import TextQR from "@/Components/Controls/TextQR";
+import TwitterQR from "@/Components/Controls/TwitterQR";
+import WebsiteQR from "@/Components/Controls/WebsiteQR";
+import YoutubeQR from "@/Components/Controls/YoutubeQR";
+
+// Main Component
 const Welcome = (props) => {
+    // States
+    const [qrValue, setQrValue] = useState("Welcome to QRmory!");
+    const [textValue, setTextValue] = useState("");
+    const [qrControl, setQrControl] = useState(null);
+    const [qrOptionsOpen, setQrOptionsOpen] = useState(false);
+    const [qrChanged, setQrChanged] = useState(true);
+    const [qrTitle, setQrTitle] = useState("Made with QRmory");
+    // const [qrTitle, setQrTitle] = useState(
+    //     randomTitles[Math.floor(Math.random() * randomTitles.length)]
+    // );
+
     const randomTitles = [
         "New QRmory Code",
         "Made with QRmory",
@@ -46,16 +40,6 @@ const Welcome = (props) => {
         "QR Codes are fun",
         "I Love QRmory",
     ];
-
-    // States
-    const [qrValue, setQrValue] = useState("Welcome to QRmory!");
-    const [qrTitle, setQrTitle] = useState(
-        randomTitles[Math.floor(Math.random() * randomTitles.length)]
-    );
-    const [textValue, setTextValue] = useState("");
-    const [qrControl, setQrControl] = useState(null);
-    const [qrOptionsOpen, setQrOptionsOpen] = useState(false);
-    const [qrChanged, setQrChanged] = useState(true);
 
     const qrTypes = {
         website: [
@@ -120,6 +104,8 @@ const Welcome = (props) => {
         // bitcoin: ["Bitcoin", "Quick Bitcoin payments"],
         // ethereum: ["Ethereum", "Quick Ethereum payments"],
     };
+
+    const loginWithData = () => {};
 
     useEffect(() => {
         const qrSelectors = document.querySelectorAll(".qr-selector");
@@ -202,7 +188,7 @@ const Welcome = (props) => {
                         </h3>
 
                         <div className="py-16 flex lg:flex-row flex-col lg:items-stretch items-center gap-6 min-h-qr-card w-full">
-                            <div className="p-8 flex flex-col grow bg-white rounded-3xl shadow-xl shadow-stone-100">
+                            <div className="p-8 flex flex-col items-start justify-between grow gap-2 bg-white rounded-3xl shadow-xl shadow-stone-100">
                                 <div className="mb-4 pb-4 flex flex-row flex-wrap justify-start items-center content-end self-start border-b-2 border-b-stone-100 transition-all">
                                     {Object.keys(qrTypes).map((key, index) => {
                                         return (
@@ -268,6 +254,12 @@ const Welcome = (props) => {
                                         Generate QR
                                     </button>
                                 </div>
+                                <a
+                                    href={route("login")}
+                                    className="p-0.5 hover:pl-1 pr-2 italic hover:text-white hover:bg-qrmory-purple-500 hover:-translate-y-1 hover:translate-x-1 transition-all duration-300"
+                                >
+                                    Create a free account to save your QR Codes
+                                </a>
                             </div>
                             <div className="pt-8 pb-10 px-10 flex flex-col justify-between w-qr-preview bg-white rounded-3xl shadow-xl shadow-stone-100 text-center">
                                 <div className="">
