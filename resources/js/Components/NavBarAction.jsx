@@ -8,8 +8,8 @@ const NavBarAction = ({
     return (
         <a
             className={
-                "py-1 px-4 border-qrmory-purple-500 bg-white hover:bg-qrmory-purple-500 border rounded" +
-                " tracking-widest uppercase text-sm text-qrmory-purple-500 hover:text-white font-medium" +
+                "py-1 px-4 hover:bg-qrmory-purple-500 border rounded" +
+                " uppercase text-sm text-qrmory-purple-500 hover:text-white hover:font-medium" +
                 " hover:translate-x-1 hover:-translate-y-1 transition-all duration-300 " +
                 className
             }
