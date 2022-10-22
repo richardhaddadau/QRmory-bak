@@ -188,12 +188,12 @@ const Welcome = (props) => {
                         </h3>
 
                         <div className="py-16 flex lg:flex-row flex-col lg:items-stretch items-center gap-6 min-h-qr-card w-full">
-                            <div className="p-8 flex flex-col items-start justify-between grow gap-2 bg-white rounded-3xl shadow-xl shadow-stone-100">
+                            <div className="p-8 flex flex-col grow bg-white rounded-3xl shadow-xl shadow-stone-300">
                                 <div className="mb-4 pb-4 flex flex-row flex-wrap justify-start items-center content-end self-start border-b-2 border-b-stone-100 transition-all">
                                     {Object.keys(qrTypes).map((key, index) => {
                                         return (
                                             <div
-                                                className="cursor-pointer flex justify-center items-center py-2 px-5 m-1 rounded border bg-white border-qrmory-purple-500 text-sm hover:bg-qrmory-purple-500 hover:text-qrmory-purple-200 qr-selector home"
+                                                className="cursor-pointer flex justify-center items-center py-2 px-5 m-1 rounded border bg-white border-qrmory-purple-500 text-sm hover:bg-qrmory-purple-500 hover:text-qrmory-purple-200 qr-selector"
                                                 key={qrTypes[key]}
                                                 data-selector={key}
                                             >
@@ -254,14 +254,8 @@ const Welcome = (props) => {
                                         Generate QR
                                     </button>
                                 </div>
-                                <a
-                                    href={route("login")}
-                                    className="p-0.5 hover:pl-1 pr-2 italic hover:text-white hover:bg-qrmory-purple-500 hover:-translate-y-1 hover:translate-x-1 transition-all duration-300"
-                                >
-                                    Create a free account to save your QR Codes
-                                </a>
                             </div>
-                            <div className="pt-8 pb-10 px-10 flex flex-col justify-between w-qr-preview bg-white rounded-3xl shadow-xl shadow-stone-100 text-center">
+                            <div className="pt-8 pb-10 px-10 flex flex-col justify-between w-qr-preview bg-white rounded-3xl shadow-xl shadow-stone-300 text-center">
                                 <div className="">
                                     <h4 className="text-sm uppercase text-stone-500">
                                         Title
@@ -281,11 +275,19 @@ const Welcome = (props) => {
                                             qrChanged ? "#78716c" : "black"
                                         }
                                         size={180}
-                                        level="H"
+                                        level="M"
                                     />
                                 </div>
                                 <button
-                                    className="cursor-pointer mx-auto py-2.5 px-4 w-full border border-qrmory-purple-500 bg-white hover:bg-qrmory-purple-500 rounded text-qrmory-purple-500 hover:text-white tracking-widest uppercase font-bold hover:translate-x-1 hover:-translate-y-1 transition-all duration-300"
+                                    className={
+                                        "mx-auto py-2.5 px-4 grow w-full rounded uppercase font-bold transition-all" +
+                                        " duration-300" +
+                                        (qrChanged
+                                            ? " bg-stone-300 text-white"
+                                            : " cursor-pointer bg-white hover:bg-qrmory-purple-500 border" +
+                                              " border-qrmory-purple-500 text-qrmory-purple-500 hover:text-white" +
+                                              " hover:-translate-y-1 hover:translate-x-1")
+                                    }
                                     id="download-button"
                                     onClick={() => {
                                         const svgData =
@@ -300,7 +302,15 @@ const Welcome = (props) => {
                                 </button>
                                 <div className="my-2 flex flex-row flex-nowrap gap-2 items-center w-full">
                                     <button
-                                        className="cursor-pointer py-2.5 px-4 grow border border-qrmory-purple-500 bg-white hover:bg-qrmory-purple-500 rounded text-qrmory-purple-500 hover:text-white uppercase font-medium tracking-widest hover:translate-x-1 hover:-translate-y-1 transition-all duration-300"
+                                        className={
+                                            "py-2.5 px-4 grow rounded uppercase font-bold transition-all" +
+                                            " duration-300" +
+                                            (qrChanged
+                                                ? " bg-stone-300 text-white"
+                                                : " cursor-pointer bg-white hover:bg-qrmory-purple-500 border" +
+                                                  " border-qrmory-purple-500 text-qrmory-purple-500 hover:text-white" +
+                                                  " hover:-translate-y-1 hover:translate-x-1")
+                                        }
                                         id="download-button"
                                         onClick={() => {
                                             d3ToPng("#final-qr", qrTitle, {
@@ -313,7 +323,15 @@ const Welcome = (props) => {
                                     </button>
 
                                     <button
-                                        className="cursor-pointer py-2.5 px-4 grow border border-qrmory-purple-500 bg-white hover:bg-qrmory-purple-500 rounded text-qrmory-purple-500 hover:text-white uppercase font-medium tracking-widest hover:translate-x-1 hover:-translate-y-1 transition-all duration-300"
+                                        className={
+                                            "py-2.5 px-4 grow rounded uppercase font-bold transition-all" +
+                                            " duration-300" +
+                                            (qrChanged
+                                                ? " bg-stone-300 text-white"
+                                                : " cursor-pointer bg-white hover:bg-qrmory-purple-500 border" +
+                                                  " border-qrmory-purple-500 text-qrmory-purple-500 hover:text-white" +
+                                                  " hover:-translate-y-1 hover:translate-x-1")
+                                        }
                                         id="download-button"
                                         onClick={() => {
                                             d3ToPng("#final-qr", qrTitle, {
