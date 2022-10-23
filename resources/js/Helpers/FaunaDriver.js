@@ -4,6 +4,21 @@ import { comprssed } from "@/Helpers/ComprssIt";
 const q = faunadb.query;
 const faunaKey = import.meta.env.VITE_FAUNA_KEY;
 
+const config = {
+    free_user_quota: 10,
+};
+
+const rateLimitConfig = {
+    login: {
+        calls: 3, // Login will reset this
+        perSeconds: 0,
+    },
+    register: {
+        calls: 10, // 10 Users Per 10 Minutes
+        perSeconds: 10 * 1000,
+    },
+};
+
 class FaunaDriver {
     constructor(token) {
         this.headers = {
@@ -32,8 +47,41 @@ class FaunaDriver {
         );
     };
 
-    GetSecret = () => {
-        return this.client;
+    GetRateLimitingConfig = (process) => {
+        const config = rateLimitConfig[process];
+
+        if (config) {
+            return config;
+        } else {
+            throw new Error(
+                `No rate limiting configuration defined for ${process}.`
+            );
+        }
+    };
+
+    GetAllRateLimiting = async () => {};
+
+    GetRateLimitingByIP = async (ipValue) => {
+        let result;
+
+        await this.client
+            .query(
+                q.Map(
+                    q.Paginate(
+                        q.Match(q.Index("rate_limiting_by_ip"), ipValue)
+                    ),
+                    q.Lambda("X", q.Get(q.Var("X")))
+                )
+            )
+            .then((res) => {
+                result = res["data"];
+            })
+            .catch((err) => {
+                this.handleError(err);
+                return false;
+            });
+
+        return result ? result : false;
     };
 
     GetUsers = async () => {
@@ -100,6 +148,9 @@ class FaunaDriver {
                         data: {
                             email: newEmail,
                             name: newName,
+                            user_level: 0,
+                            codes_used: 0,
+                            codes_quota: config.free_user_quota,
                         },
                     })
                 )
@@ -158,16 +209,6 @@ class FaunaDriver {
         }
     };
 
-    LogOut = async () => {
-        await this.client
-            .query(q.Logout(true))
-            .then((res) => console.log(res))
-            .catch((err) => {
-                this.handleError(err);
-                return false;
-            });
-    };
-
     // {
     //     "ref": {
     //         "@ref": {
@@ -197,6 +238,16 @@ class FaunaDriver {
     //     },
     //     "secret": ""
     // }
+
+    LogOut = async () => {
+        await this.client
+            .query(q.Logout(true))
+            .then((res) => console.log(res))
+            .catch((err) => {
+                this.handleError(err);
+                return false;
+            });
+    };
 
     GetCurrentUser = async () => {
         let thisUser;
