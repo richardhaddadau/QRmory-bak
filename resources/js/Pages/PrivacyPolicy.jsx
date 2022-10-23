@@ -9,13 +9,13 @@ const PrivacyPolicy = (props) => {
             <Head title="Privacy Policy" />
             <Standard>
                 <NavBar
-                    className={"bg-qrmory-purple-500 text-white"}
+                    className={"bg-qrmory-purple-800 text-white"}
                     absolute={false}
                     props={props}
                 />
 
                 <main className="mx-auto py-8 px-4 w-full max-w-7xl policy-document">
-                    <h2 className="mb-4 font-header text-4.5xl">
+                    <h2 className="mb-4 font-header text-4.5xl text-qrmory-purple-800">
                         Privacy Policy
                     </h2>
                     <p>

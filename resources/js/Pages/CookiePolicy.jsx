@@ -15,7 +15,7 @@ const CookiePolicy = (props) => {
                 />
 
                 <main className="mx-auto py-8 px-4 w-full max-w-7xl policy-document">
-                    <h2 className="mb-4 font-header text-4.5xl">
+                    <h2 className="mb-4 font-header text-4.5xl text-qrmory-purple-800">
                         Cookie Policy
                     </h2>
                     <p>

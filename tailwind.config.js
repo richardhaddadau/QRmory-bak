@@ -30,7 +30,7 @@ module.exports = {
                 4.5: "18px",
             },
             height: {
-                hero: "650px",
+                hero: "850px",
                 "qr-card": "660px",
             },
             width: {

@@ -57,13 +57,14 @@ const NavBar = ({
                         ) : (
                             <section className="flex flex-row items-center justify-end gap-2">
                                 <NavBarAction
-                                    value="Sign In"
-                                    destination={route("login")}
+                                    value="Create a Free Account"
+                                    destination={route("register")}
+                                    className="bg-qrmory-purple-300 hover:bg-qrmory-purple-400 text-qrmory-purple-900 hover:text-white font-medium border-qrmory-purple-300 shadow-lg shadow-qrmory-purple-900 hover:translate-x-1 hover:-translate-y-1"
                                 />
 
                                 <NavBarAction
-                                    value="Sign Up"
-                                    destination={route("register")}
+                                    value="Sign In"
+                                    destination={route("login")}
                                 />
                             </section>
                         )}

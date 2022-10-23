@@ -146,21 +146,21 @@ const Welcome = (props) => {
                 <NavBar
                     className={"text-qrmory-purple-500"}
                     props={props}
-                    logoColour="#49176B"
+                    logoColour="white"
                 />
 
-                <header className="main-hero flex flex-col justify-center items-center h-hero bg-white text-qrmory-purple-500">
+                <header className="main-hero flex flex-col justify-center items-center h-hero bg-qrmory-purple-800 text-white">
                     <div className="px-6 w-full max-w-7xl text-center">
                         <h1 className="font-header text-5xl hero-heading">
                             Generate an <span>arsenal</span> of QR Codes
                         </h1>
-                        <h3 className="mt-2 text-xl tracking-widest uppercase drop-shadow-lg">
+                        <h3 className="mt-2 text-2xl tracking-widest drop-shadow-lg">
                             Be equipped for anything with QRmory
                         </h3>
 
                         <div className="mt-16 flex flex-row justify-center gap-4">
                             <button
-                                className="py-3 px-6 bg-qrmory-purple-500 rounded text-white font-bold hover:translate-x-1 hover:-translate-y-1 transition-all duration-300"
+                                className="py-3 px-6 bg-white hover:bg-qrmory-purple-400 rounded text-qrmory-purple-800 hover:text-white font-bold shadow-lg shadow-qrmory-purple-900 hover:shadow-xl hover:translate-x-1 hover:-translate-y-1 transition-all duration-300"
                                 onClick={() => {
                                     window.scrollTo({
                                         top: document.querySelector("main")
@@ -171,7 +171,7 @@ const Welcome = (props) => {
                             >
                                 Start Creating
                             </button>
-                            <button className="py-3 px-6 border border-qrmory-purple-500 rounded text-qrmory-purple-500 font-bold hover:translate-x-1 hover:-translate-y-1 transition-all duration-300">
+                            <button className="py-3 px-6 border border-white hover:border-qrmory-purple-400 hover:bg-qrmory-purple-400 rounded text-white font-bold hover:translate-x-1 hover:-translate-y-1 transition-all duration-300">
                                 Learn More
                             </button>
                         </div>
@@ -179,11 +179,11 @@ const Welcome = (props) => {
                 </header>
 
                 <main className="mx-auto px-6 w-full max-w-7xl">
-                    <section className="mx-auto py-24 text-center text-qrmory-purple-500">
+                    <section className="mx-auto py-24 text-center text-qrmory-purple-800">
                         <h2 className="font-header text-4.5xl">
                             Start Creating
                         </h2>
-                        <h3 className="text-xl uppercase drop-shadow-lg">
+                        <h3 className="text-xl uppercase">
                             Go on! Give it a go
                         </h3>
 
@@ -193,7 +193,7 @@ const Welcome = (props) => {
                                     {Object.keys(qrTypes).map((key, index) => {
                                         return (
                                             <div
-                                                className="cursor-pointer flex justify-center items-center py-2 px-5 m-1 rounded border bg-white border-qrmory-purple-500 text-sm hover:bg-qrmory-purple-500 hover:text-qrmory-purple-200 qr-selector"
+                                                className="py-2 px-5 cursor-pointer flex justify-center items-center m-1 rounded border bg-white border-qrmory-purple-500 hover:border-qrmory-purple-400 text-sm hover:bg-qrmory-purple-400 hover:text-white qr-selector transition-all duration-300"
                                                 key={qrTypes[key]}
                                                 data-selector={key}
                                             >
@@ -243,7 +243,7 @@ const Welcome = (props) => {
                                     </div>
 
                                     <button
-                                        className="mt-8 py-2.5 px-8 border border-qrmory-purple-500 bg-white hover:bg-qrmory-purple-500 w-full md:w-44 text-sm font-medium text-qrmory-purple-500 hover:text-white rounded uppercase font-semibold hover:translate-x-1 hover:-translate-y-1 transition-all duration-300"
+                                        className="mt-8 py-2.5 px-8 border border-qrmory-purple-800 hover:border-qrmory-purple-400 bg-white hover:bg-qrmory-purple-400 w-full md:w-44 text-sm font-medium text-qrmory-purple-800 hover:text-white rounded uppercase font-semibold hover:translate-x-1 hover:-translate-y-1 transition-all duration-300"
                                         onClick={() => {
                                             if (textValue.length > 0) {
                                                 setQrValue(textValue);
@@ -261,7 +261,7 @@ const Welcome = (props) => {
                                         Title
                                     </h4>
 
-                                    <h5 className="text-base text-qrmory-purple-500 font-bold">
+                                    <h5 className="text-base text-qrmory-purple-800 font-bold">
                                         {qrTitle || null}
                                     </h5>
                                 </div>
@@ -272,7 +272,7 @@ const Welcome = (props) => {
                                         renderAs="svg"
                                         value={qrValue}
                                         fgColor={
-                                            qrChanged ? "#78716c" : "black"
+                                            qrChanged ? "#78716c" : "#1E073E"
                                         }
                                         size={180}
                                         level="M"
@@ -284,8 +284,8 @@ const Welcome = (props) => {
                                         " duration-300" +
                                         (qrChanged
                                             ? " bg-stone-300 text-white"
-                                            : " cursor-pointer bg-white hover:bg-qrmory-purple-500 border" +
-                                              " border-qrmory-purple-500 text-qrmory-purple-500 hover:text-white" +
+                                            : " cursor-pointer bg-white hover:bg-qrmory-purple-400 border" +
+                                              " border-qrmory-purple-800 text-qrmory-purple-800 hover:text-white" +
                                               " hover:-translate-y-1 hover:translate-x-1")
                                     }
                                     id="download-button"
@@ -307,8 +307,8 @@ const Welcome = (props) => {
                                             " duration-300" +
                                             (qrChanged
                                                 ? " bg-stone-300 text-white"
-                                                : " cursor-pointer bg-white hover:bg-qrmory-purple-500 border" +
-                                                  " border-qrmory-purple-500 text-qrmory-purple-500 hover:text-white" +
+                                                : " cursor-pointer bg-white hover:bg-qrmory-purple-400 border" +
+                                                  " border-qrmory-purple-500 text-qrmory-purple-800 hover:text-white" +
                                                   " hover:-translate-y-1 hover:translate-x-1")
                                         }
                                         id="download-button"
@@ -328,8 +328,8 @@ const Welcome = (props) => {
                                             " duration-300" +
                                             (qrChanged
                                                 ? " bg-stone-300 text-white"
-                                                : " cursor-pointer bg-white hover:bg-qrmory-purple-500 border" +
-                                                  " border-qrmory-purple-500 text-qrmory-purple-500 hover:text-white" +
+                                                : " cursor-pointer bg-white hover:bg-qrmory-purple-400 border" +
+                                                  " border-qrmory-purple-500 text-qrmory-purple-800 hover:text-white" +
                                                   " hover:-translate-y-1 hover:translate-x-1")
                                         }
                                         id="download-button"
@@ -368,7 +368,7 @@ const Welcome = (props) => {
                     {/*    </div>*/}
                     {/*</section>*/}
 
-                    <p className="py-16 text-center text-base text-qrmory-purple-500 italic">
+                    <p className="py-16 text-center text-base text-qrmory-purple-800 italic">
                         More coming soon
                     </p>
 

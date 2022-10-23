@@ -8,7 +8,7 @@ export default function Guest({ children }) {
         <div className="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-gray-100">
             <div>
                 <Link href="/">
-                    <Logo className="w-32 h-32 fill-current text-qrmory-purple-500" />
+                    <Logo className="w-32 h-32 fill-current text-qrmory-purple-800" />
                 </Link>
             </div>
 

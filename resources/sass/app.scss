@@ -24,7 +24,7 @@ $stone-900: #1c1917;
     color: transparent;
 
     -webkit-text-stroke-width: 1px;
-    -webkit-text-stroke-color: $qrmory-purple-500;
+    -webkit-text-stroke-color: white;
 }
 
 .policy-document h3 {
@@ -34,7 +34,7 @@ $stone-900: #1c1917;
     font-size: 1.5rem;
     font-weight: bold;
     line-height: 2rem;
-    color: $qrmory-purple-500;
+    color: $qrmory-purple-800;
 }
 
 .policy-document h4 {
@@ -44,7 +44,7 @@ $stone-900: #1c1917;
     font-weight: bold;
     line-height: 1.5rem;
 
-    color: $qrmory-purple-500;
+    color: $qrmory-purple-800;
 }
 
 .policy-document p {
@@ -57,7 +57,7 @@ $stone-900: #1c1917;
 
 .control-label {
     margin-bottom: 2rem;
-    color: $qrmory-purple-400;
+    color: $stone-600;
 }
 
 .control-input {
@@ -65,9 +65,9 @@ $stone-900: #1c1917;
     max-width: 32rem;
 
     background-color: transparent;
-    border-color: $qrmory-purple-400 !important;
+    border-color: $stone-400 !important;
 
-    color: $qrmory-purple-500;
+    color: $qrmory-purple-800;
     font-weight: bold;
 
     transition: all 3ms ease;
@@ -104,8 +104,10 @@ input {
 }
 
 .qr-selector.active {
-    background-color: $qrmory-purple-500 !important;
+    background-color: $qrmory-purple-800 !important;
     color: white !important;
+
+    box-shadow: 0 12px 20px -5px $qrmory-purple-600;
 }
 
 .qr-selector.active #selector-descriptor {

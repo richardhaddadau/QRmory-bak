@@ -8,9 +8,9 @@ const NavBarAction = ({
     return (
         <a
             className={
-                "py-1 px-4 hover:bg-qrmory-purple-500 border rounded" +
-                " uppercase text-sm text-qrmory-purple-500 hover:text-white hover:font-medium" +
-                " hover:translate-x-1 hover:-translate-y-1 transition-all duration-300 " +
+                "py-1.5 px-4 hover:bg-qrmory-purple-400 rounded" +
+                " uppercase text-sm text-white hover:font-medium" +
+                " transition-all duration-300 " +
                 className
             }
             href={destination}
