@@ -6,6 +6,7 @@ import {
     FaTwitterSquare,
 } from "react-icons/all";
 import Logo from "@/Components/Logo";
+import FullLogo from "@/Components/FullLogo";
 
 const MyFooter = () => {
     // Constants
@@ -29,7 +30,7 @@ const MyFooter = () => {
                 <div className="mx-auto flex md:flex-row flex-col md:justify-between justify-center items-stretch md:gap-4 gap-16 w-full md:text-left text-center">
                     <article className="flex flex-col md:w-1/4 w-full md:items-start items-center">
                         <a href="/">
-                            <Logo className="mb-2 w-32 fill-qrmory-purple-800" />
+                            <FullLogo className="mb-2 w-24 fill-qrmory-purple-800" />
                         </a>
                         <p className="mb-8 text-base">
                             Build an arsenal of great QR Codes simply and
