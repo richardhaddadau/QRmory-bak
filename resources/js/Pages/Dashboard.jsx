@@ -50,7 +50,11 @@ export default function Dashboard(props) {
 
     return (
         <>
-            <Head title="Dashboard" />
+            <Head>
+                <title>Dashboard</title>
+                {/* TODO: Fill out description */}
+                <meta name="description" content="" />
+            </Head>
 
             <div className="flex flex-col h-screen overflow-hidden">
                 <DashNavBar props={props} />

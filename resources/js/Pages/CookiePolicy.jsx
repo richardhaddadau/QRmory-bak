@@ -6,7 +6,11 @@ import Standard from "@/Layouts/Standard";
 const CookiePolicy = (props) => {
     return (
         <>
-            <Head title="Cookie Policy" />
+            <Head>
+                <title>Cookie Policy</title>
+                <meta name="description" content="" />
+            </Head>
+
             <Standard>
                 <NavBar
                     className={"bg-qrmory-purple-500 text-white"}

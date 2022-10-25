@@ -106,7 +106,11 @@ const Register = (props) => {
 
     return (
         <Guest>
-            <Head title="Sign up for free" />
+            <Head>
+                <title>Create a free QRmory account</title>
+                {/* TODO: Fill out description */}
+                <meta name="description" content="" />
+            </Head>
 
             <form onSubmit={submit}>
                 <div>

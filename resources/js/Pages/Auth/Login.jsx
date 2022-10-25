@@ -70,7 +70,6 @@ export default function Login({ status, canResetPassword }) {
             if (user) {
                 console.log(user);
                 setProcessing(false);
-                post(route("login"));
                 return true;
             } else {
                 setIsError([
@@ -86,7 +85,11 @@ export default function Login({ status, canResetPassword }) {
 
     return (
         <Guest>
-            <Head title="Sign in" />
+            <Head>
+                <title>Sign in</title>
+                {/* TODO: Fill out description */}
+                <meta name="description" content="" />
+            </Head>
 
             {status && (
                 <div className="mb-4 font-medium text-sm text-green-600">
